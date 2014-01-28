@@ -5,5 +5,12 @@ def auto_migrate():
 	with warn_only():
 		local('python manage.py schemamigration rockit.foundation.core --auto')	
 
+def build():
+	migrate('rockit.foundation.core')
+	local('python manage.py test')
+
+def migrate(app):
+	local('python manage.py migrate ' + app)
+
 def setup(environment):
 	local('pip install -r requirements/' + environment)
