@@ -1,5 +1,8 @@
 # Specifies all common dependencies
 
 Django==1.6.1
-south==0.8.4
-fabric==1.8.1
+Fabric==1.8.1
+Markdown==2.3.1
+South==0.8.4
+django-filter==0.7
+djangorestframework==2.3.12
