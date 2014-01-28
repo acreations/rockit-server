@@ -1,3 +1,4 @@
 # Specifies all common dependencies
 
 Django==1.6.1
+south==0.8.4
