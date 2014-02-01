@@ -7,7 +7,7 @@ def auto_migrate():
 
 def build():
 	migrate('rockit.foundation.core')
-	test()
+	test()	
 
 def migrate(app):
 	local('python manage.py migrate ' + app)
