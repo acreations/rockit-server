@@ -7,10 +7,13 @@ def auto_migrate():
 
 def build():
 	migrate('rockit.foundation.core')
-	local('python manage.py test')
+	test()
 
 def migrate(app):
 	local('python manage.py migrate ' + app)
 
 def setup(environment):
 	local('pip install -r requirements/' + environment)
+
+def test():
+	local('python manage.py test')
