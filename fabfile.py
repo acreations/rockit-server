@@ -4,6 +4,7 @@ from fabric.api import warn_only
 def auto_schema():
     with warn_only():
         schema('rockit.foundation.core')
+        schema('rockit.plugins.mailout')
 
 def build():
     migrate('rockit.foundation.core')
