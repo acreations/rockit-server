@@ -30,3 +30,17 @@ def register(association, aid):
 @task(name='rockit-unregister-node')
 def unregister(uuid):
     logger.debug("Trying to unregister node (%s) from rockit network" % uuid)
+
+    if uuid:
+        try:
+            node = Node.objects.get(uuid=uuid)
+            node.delete()
+            
+            return True
+
+        except Node.DoesNotExist:
+            logger.warn("Unregister failed. Node (%s) not found" % uuid)
+    else:
+        logger.warn("Cannot unregister node if uuid is empty")
+
+    return False
