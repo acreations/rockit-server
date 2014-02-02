@@ -9,7 +9,7 @@ from django.conf import settings
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rockit.settings')
 
-app = Celery('rockit')
+app = Celery('rockit', backend='amqp', broker='amqp://guest@localhost/')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
