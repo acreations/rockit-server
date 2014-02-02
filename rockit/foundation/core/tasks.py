@@ -23,6 +23,6 @@ def register(association, aid):
         else:
             logger.warn("Node (%s) has already been created" % aid)
     else:
-        logger.warn("Assocation or aid cannot be empty")
+        logger.warn("Cannot register if assocation/aid is empty")
 
     return False
