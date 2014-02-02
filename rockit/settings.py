@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'djcelery',
     'rest_framework',
     'rockit.foundation.core',
+    'rockit.plugins.mailout',
     'south'
 )
 
