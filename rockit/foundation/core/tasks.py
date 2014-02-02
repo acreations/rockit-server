@@ -26,3 +26,7 @@ def register(association, aid):
         logger.warn("Cannot register if assocation/aid is empty")
 
     return False
+
+@task(name='rockit-unregister-node')
+def unregister(uuid):
+    logger.debug("Trying to unregister node (%s) from rockit network" % uuid)
