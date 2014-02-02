@@ -1,0 +1,13 @@
+[
+	{
+		"model": "core.association",
+		"pk": 1,
+		"fields": {
+    	"name":  "Rockit core",
+    	"description": "Rockit core foundation",
+    	"namespace": "rockit.foundation.core",
+    	"entry": "rockit",
+    	"date_added": "2013-10-20T00:00:00+00:00"
+		}
+	}
+]
