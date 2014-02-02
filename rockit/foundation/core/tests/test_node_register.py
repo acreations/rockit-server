@@ -5,7 +5,7 @@ from rockit.foundation.core.tasks import register
 from rockit.foundation.core.models import Node
 from rockit.foundation.core.models import Association
 
-class NodeTestCase(TestCase):
+class NodeRegisterTestCase(TestCase):
 
     def setUp(self):
         self.association = Association.objects.create(name = 'my_node')
