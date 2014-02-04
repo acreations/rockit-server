@@ -36,3 +36,14 @@ class SettingsViewSet(viewsets.ViewSet):
             })
 
         return Response(result)
+
+class Settings(APIView):
+    """
+    View to list settings in rockit server. (No plugins settings here)
+    """
+
+    def get(self, request, format=None):
+        """
+        Return a list of settings
+        """
+        return Response("TEST")
