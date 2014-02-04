@@ -19,6 +19,6 @@ urlpatterns = list()
 
 for assoc in models.Association.objects.all():
 	try:
-		urlpatterns += patterns('', url(r'%s/' % assoc.entry, include(assoc.namespace + '.urls')))
+		urlpatterns += patterns('', url(r'^%s/' % assoc.entry, include(assoc.namespace + '.urls')))
 	except ImportError:
 		continue
