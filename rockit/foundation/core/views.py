@@ -15,7 +15,7 @@ class AssociationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Association.objects.all()
     serializer_class = serializers.AssociationSerializer
 
-class SettingsViewSet(viewsets.ViewSet):
+class AllSettingsViewSet(viewsets.ViewSet):
     """
     View to list all settings in rockit server.
 
@@ -37,13 +37,10 @@ class SettingsViewSet(viewsets.ViewSet):
 
         return Response(result)
 
-class Settings(APIView):
+class SettingViewSet(viewsets.ModelViewSet):
     """
-    View to list settings in rockit server. (No plugins settings here)
-    """
+    API endpoint that allows nodes to be view and set. 
 
-    def get(self, request, format=None):
-        """
-        Return a list of settings
-        """
-        return Response("TEST")
+    """
+    queryset = models.Setting.objects.all()
+    serializer_class = serializers.SettingSerializer
