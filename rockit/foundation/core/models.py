@@ -12,6 +12,19 @@ class Association(models.Model):
     then_addable = models.BooleanField(default=False)
     date_added   = models.DateTimeField(auto_now_add=True, blank=True)
 
+class Action(models.Model):
+    """
+    Action that used to call a function in rockit network
+    """
+    name = models.CharField(max_length=200, default='undefined')
+    description = models.CharField(max_length=500, blank=True)
+    association = models.ForeignKey(Association)
+    aid         = models.CharField(max_length=100, blank=True)
+    params      = models.CharField(max_length=1000, blank=True)
+    favorite    = models.BooleanField(default=False)
+    date_added     = models.DateTimeField(auto_now_add=True, blank=True)
+    date_modified  = models.DateTimeField(auto_now=True, blank=True)
+
 class NodeCategory(models.Model):
     """
     Node category in rockit network 
@@ -33,3 +46,4 @@ class Node(models.Model):
     description    = models.CharField(max_length=500, blank=True)
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
+
