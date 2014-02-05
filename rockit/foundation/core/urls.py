@@ -7,10 +7,9 @@ from rockit.foundation.core import models
 from rockit.foundation.core import views
 
 router = routers.DefaultRouter()
-router.register('association',  views.AssociationViewSet)
-router.register('settings-all', views.AllSettingsViewSet, base_name="rockit-settings-all")
+router.register('associations',  views.AssociationViewSet)
+router.register('settings', views.SettingViewSet, base_name="setting")
 
 urlpatterns = patterns('',
-	url('', include(router.urls)),
-	url(r'^settings', views.SettingViewSet.as_view({'get': 'list'}), name='rockit-settings')
+	url('', include(router.urls))
 )

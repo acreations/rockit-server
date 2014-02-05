@@ -7,7 +7,7 @@ import uuid
 
 logger = get_task_logger(__name__)
 
-@task(name='rockit-register-node')
+@task(name='rockit.register.node')
 def register(association, aid):
     logger.debug("Trying to register node (%s) to rockit network" % aid)
 
@@ -27,7 +27,7 @@ def register(association, aid):
 
     return False
 
-@task(name='rockit-unregister-node')
+@task(name='rockit.unregister.node')
 def unregister(uuid):
     logger.debug("Trying to unregister node (%s) from rockit network" % uuid)
 
@@ -44,3 +44,10 @@ def unregister(uuid):
         logger.warn("Cannot unregister node if uuid is empty")
 
     return False
+
+@task(name='rockit.settings')
+def settings(holder):
+
+    holder.add_simple('key', 'name', 'value')
+
+    return holder

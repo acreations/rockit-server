@@ -1,0 +1,13 @@
+[
+	{
+		"model": "core.rockitsetting",
+		"pk": 1,
+		"fields": {
+    	"name":  "Version",
+    	"description": "Rockit server version",
+    	"value": "0.1-BETA",
+    	"date_modified": "2014-02-04T00:00:00+00:00",
+    	"date_added":    "2014-02-04T00:00:00+00:00"
+		}
+	}
+]

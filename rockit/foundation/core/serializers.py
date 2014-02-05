@@ -23,9 +23,3 @@ class NodeCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.NodeCategory
         read_only_fields = ('date_added', 'date_modified')
-
-class SettingSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model  = models.Setting
-        read_only_fields = ('date_added',)
