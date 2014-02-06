@@ -11,6 +11,14 @@ from rockit.foundation.core import models
 from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.settings import SettingsHolder
 
+class ActionViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows nodes to be view and set. 
+
+    """
+    queryset = models.Action.objects.all()
+    serializer_class = serializers.ActionSerializer
+
 class AssociationViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows nodes to be view and set. 

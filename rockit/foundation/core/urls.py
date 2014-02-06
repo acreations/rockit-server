@@ -7,6 +7,7 @@ from rockit.foundation.core import models
 from rockit.foundation.core import views
 
 router = routers.DefaultRouter()
+router.register('actions',  views.ActionViewSet)
 router.register('associations',  views.AssociationViewSet)
 router.register('categories',  views.NodeCategoryViewSet)
 router.register('nodes',  views.NodeViewSet)

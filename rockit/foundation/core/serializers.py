@@ -8,6 +8,11 @@ class AssociationSerializer(serializers.HyperlinkedModelSerializer):
         model  = models.Association
         read_only_fields = ('date_added',)
 
+class ActionSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model  = models.Action
+
 class NodeCategorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
