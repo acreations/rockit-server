@@ -1,6 +1,8 @@
 from fabric.api import local
 from fabric.api import warn_only
 
+CMD_MANAGE = "python manage.py "
+
 def auto_schema():
     with warn_only():
         schema('rockit.foundation.core')
@@ -8,16 +10,28 @@ def auto_schema():
 
 def build():
     migrate('rockit.foundation.core')
-    test()	
+    
+    load_data('rockit/foundation/core/fixtures/settings.json')
+
+    test()
+
+def load_data(path):
+    local(CMD_MANAGE + 'loaddata %s' % path)
 
 def migrate(app):
-    local('python manage.py migrate %s' % app)
+    local(CMD_MANAGE + 'migrate %s' % app)
+
+def runserver(localonly=True):
+    if localonly:
+        local(CMD_MANAGE + 'runserver')
+    else:
+        local(CMD_MANAGE + 'runserver 0.0.0.0')
 
 def schema(app):
-    local('python manage.py schemamigration %s --auto' % app)
+    local(CMD_MANAGE + 'schemamigration %s --auto' % app)
 
 def setup(environment):
     local('pip install -r requirements/%s' % environment)
 
 def test():
-    local('python manage.py test')
+    local(CMD_MANAGE + 'test')
