@@ -1,15 +1,11 @@
-class SettingsHolder(object):
+from rockit.foundation.core.holders.holder import Holder
 
-    def __init__(self):
-        self.holder = list()
+class SettingsHolder(Holder):
 
     def add_simple(self, key, name, value, readonly=False):
-        self.holder.append({
+        self.append({
             'id':    key,
             'name':  name,
             'value': value,
             'isReadonly': readonly
             })
-
-    def get_content(self):
-    	return self.holder
