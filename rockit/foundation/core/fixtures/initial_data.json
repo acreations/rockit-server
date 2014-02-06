@@ -3,7 +3,7 @@
 		"model": "core.association",
 		"pk": 1,
 		"fields": {
-    	"name":  "Rockit core",
+    	"name":  "Rockit",
     	"description": "All rockit core functionality",
     	"namespace": "rockit.foundation.core",
     	"entry": "rockit",
