@@ -1,4 +1,3 @@
-
 class SettingsHolder(object):
 
     def __init__(self):
