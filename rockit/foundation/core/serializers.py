@@ -8,6 +8,12 @@ class AssociationSerializer(serializers.HyperlinkedModelSerializer):
         model  = models.Association
         read_only_fields = ('date_added',)
 
+class NodeCategorySerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = models.NodeCategory
+        read_only_fields = ('date_added', 'date_modified')
+
 class NodeSerializer(serializers.HyperlinkedModelSerializer):
 
     category = serializers.RelatedField(many=False)
@@ -17,9 +23,3 @@ class NodeSerializer(serializers.HyperlinkedModelSerializer):
         model  = models.Node
         read_only_fields = ('date_added', 'date_modified')
         fields = ('uuid', 'category', 'association')
-
-class NodeCategorySerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = models.NodeCategory
-        read_only_fields = ('date_added', 'date_modified')

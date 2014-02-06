@@ -8,6 +8,7 @@ from rockit.foundation.core import views
 
 router = routers.DefaultRouter()
 router.register('associations',  views.AssociationViewSet)
+router.register('category',  views.NodeCategoryViewSet)
 router.register('settings', views.SettingViewSet, base_name="setting")
 
 urlpatterns = patterns('',

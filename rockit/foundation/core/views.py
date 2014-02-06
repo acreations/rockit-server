@@ -19,6 +19,13 @@ class AssociationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Association.objects.all()
     serializer_class = serializers.AssociationSerializer
 
+class NodeCategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows node categories to be view and set
+    """
+    queryset = models.NodeCategory.objects.all()
+    serializer_class = serializers.NodeCategorySerializer
+
 class SettingViewSet(viewsets.ViewSet):
     """
     View to list all settings in rockit server.
