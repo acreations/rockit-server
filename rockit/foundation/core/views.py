@@ -26,6 +26,27 @@ class NodeCategoryViewSet(viewsets.ModelViewSet):
     queryset = models.NodeCategory.objects.all()
     serializer_class = serializers.NodeCategorySerializer
 
+class NodeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows nodes to be view and set.
+
+    """
+    queryset = models.Node.objects.all()
+    serializer_class = serializers.NodeSerializer
+
+    def list(self, request):
+        return super(NodeViewSet, self).list(request)
+
+    def retrieve(self, request, pk=None):
+        response = super(NodeViewSet, self).retrieve(request, pk)
+
+        if response.data['association'] is not None and response.data['aid'] is not None:
+            pk = response.data['aid']
+            ns = response.data['association']['entry'] 
+            response.data['detail'] = reverse_lazy(ns, kwargs={ 'pk': pk }, request=request)
+
+        return response
+
 class SettingViewSet(viewsets.ViewSet):
     """
     View to list all settings in rockit server.

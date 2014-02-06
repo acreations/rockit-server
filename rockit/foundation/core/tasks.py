@@ -1,7 +1,7 @@
 from celery import task
 from celery.utils.log import get_task_logger
 
-from rockit.foundation.core.models import Node
+from rockit.foundation.core import models
 
 import uuid
 
@@ -12,7 +12,7 @@ def register(association, aid):
     logger.debug("Trying to register node (%s) to rockit network" % aid)
 
     if association and aid:
-        node, created = Node.objects.get_or_create(association=association, aid=aid)
+        node, created = models.Node.objects.get_or_create(association=association, aid=aid)
 
         if created:
             node.uuid = uuid.uuid4()
@@ -33,12 +33,11 @@ def unregister(uuid):
 
     if uuid:
         try:
-            node = Node.objects.get(uuid=uuid)
+            node = models.Node.objects.get(uuid=uuid)
             node.delete()
             
             return True
-
-        except Node.DoesNotExist:
+        except models.Node.DoesNotExist:
             logger.warn("Unregister failed. Node (%s) not found" % uuid)
     else:
         logger.warn("Cannot unregister node if uuid is empty")
@@ -47,7 +46,7 @@ def unregister(uuid):
 
 @task(name='rockit.settings')
 def settings(holder):
-
-    holder.add_simple('key', 'name', 'value')
+    for setting in models.Setting.objects.all():
+        holder.add_simple(setting.id, setting.name, setting.value)
 
     return holder
