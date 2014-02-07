@@ -1,6 +1,6 @@
 from django.db import models
 
-class Server(models.Model):
+class MailoutServer(models.Model):
     """
     Server configuration for mail
     """
@@ -9,10 +9,10 @@ class Server(models.Model):
     date_added    = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified = models.DateTimeField(auto_now=True, blank=True)
 
-class Node(models.Model):
+class MailoutNode(models.Model):
     """
     Mailout Node
     """
-    server = models.ForeignKey(Server)
+    server = models.ForeignKey(MailoutServer)
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)

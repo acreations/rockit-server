@@ -9,3 +9,10 @@ class NodeViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Node.objects.all()
     serializer_class = serializers.NodeSerializer
+
+class ServerViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows node categories to be view and set
+    """
+    queryset = models.Server.objects.all()
+    serializer_class = serializers.ServerSerializer
