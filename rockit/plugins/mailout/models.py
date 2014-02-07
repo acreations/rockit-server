@@ -8,3 +8,11 @@ class Server(models.Model):
     description  = models.CharField(max_length=500, blank=True)
     date_added    = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified = models.DateTimeField(auto_now=True, blank=True)
+
+class Node(models.Model):
+    """
+    Mailout Node
+    """
+    server = models.ForeignKey(Server)
+    date_added     = models.DateTimeField(auto_now_add=True, blank=True)
+    date_modified  = models.DateTimeField(auto_now=True, blank=True)
