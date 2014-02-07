@@ -24,7 +24,7 @@ class AddableViewSet(viewsets.ViewSet):
         for association in models.Association.objects.filter(addable=True):
             result.append({
                 'name': association.name,
-                'url':  reverse_lazy("%s-addable-list" % association.entry, request=request)
+                'url':  reverse_lazy("%snode-list" % association.entry, request=request)
                 })
 
         return Response(result)
