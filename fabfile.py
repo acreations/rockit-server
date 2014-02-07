@@ -10,6 +10,7 @@ def auto_schema():
 
 def build():
     migrate('rockit.foundation.core')
+    migrate('rockit.plugins.mailout')
     
     load_data('rockit/foundation/core/fixtures/settings.json')
 
