@@ -13,6 +13,7 @@ def build():
     migrate('rockit.plugins.mailout')
     
     load_data('rockit/foundation/core/fixtures/settings.json')
+    load_data('rockit/plugins/mailout/fixtures/servers.json')
 
     test()
 
