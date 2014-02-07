@@ -1,5 +1,7 @@
-from rockit.foundation.core import models
-from rockit.foundation.core import serializers
+from rest_framework import viewsets
+
+from rockit.plugins.mailout import models
+from rockit.plugins.mailout import serializers
 
 class NodeViewSet(viewsets.ModelViewSet):
     """
