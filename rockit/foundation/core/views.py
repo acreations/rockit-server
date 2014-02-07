@@ -11,6 +11,36 @@ from rockit.foundation.core import models
 from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.settings import SettingsHolder
 
+class AddableViewSet(viewsets.ViewSet):
+    """
+    View to list all addables in rockit server.
+    """
+
+    def list(self, request):
+        """
+        Return a list of all addables.
+        """
+        result = list()
+        for association in models.Association.objects.filter(addable=True):
+            result.append({
+                'name': association.name,
+                'url':  reverse_lazy("addable-detail", kwargs={ 'pk': association.id }, request=request)
+                })
+
+        return Response(result)
+
+    def retrieve(self, request, pk=None):
+        """
+        Get addables for a specific association
+        """
+        queryset = models.Association.objects.all()
+        association = get_object_or_404(queryset, pk=pk)
+
+        settings = send_task("%s.settings" % association.entry, args=[SettingsHolder()])
+        result = settings.wait()
+
+        return Response(result.get_content()) 
+
 class ActionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows nodes to be view and set. 

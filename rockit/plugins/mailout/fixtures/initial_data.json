@@ -6,6 +6,7 @@
         "name":  "Mailout",
         "description": "Mailout configurations",
         "namespace": "rockit.plugins.mailout",
+        "addable": true,
         "entry": "mailout",
         "date_added": "2014-02-07T00:00:00+00:00"
         }
