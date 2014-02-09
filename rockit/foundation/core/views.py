@@ -29,18 +29,6 @@ class AddableViewSet(viewsets.ViewSet):
 
         return Response(result)
 
-    def retrieve(self, request, pk=None):
-        """
-        Get addables for a specific association
-        """
-        queryset = models.Association.objects.all()
-        association = get_object_or_404(queryset, pk=pk)
-
-        settings = send_task("%s.settings" % association.entry, args=[SettingsHolder()])
-        result = settings.wait()
-
-        return Response(result.get_content()) 
-
 class ActionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows nodes to be view and set. 
@@ -72,16 +60,13 @@ class NodeViewSet(viewsets.ModelViewSet):
     queryset = models.Node.objects.all()
     serializer_class = serializers.NodeSerializer
 
-    def list(self, request):
-        return super(NodeViewSet, self).list(request)
-
     def retrieve(self, request, pk=None):
         response = super(NodeViewSet, self).retrieve(request, pk)
 
         if response.data['association'] is not None and response.data['aid'] is not None:
             pk = response.data['aid']
             ns = response.data['association']['entry'] 
-            response.data['detail'] = reverse_lazy(ns, kwargs={ 'pk': pk }, request=request)
+            response.data['detail'] = reverse_lazy("%snode-detail" % ns, kwargs={ 'pk': pk }, request=request)
 
         return response
 

@@ -1,3 +1,5 @@
+from celery.execute import send_task
+
 from rest_framework import viewsets
 
 from rockit.plugins.mailout import models
@@ -9,6 +11,14 @@ class NodeViewSet(viewsets.ModelViewSet):
     """
     queryset = models.MailoutNode.objects.all()
     serializer_class = serializers.NodeSerializer
+
+    def create(self, request):
+        response = super(NodeViewSet, self).create(request)
+
+        create = send_task("rockit.register.node", args=[10, 1])
+        result = create.wait()
+
+        return response
 
 class ServerViewSet(viewsets.ModelViewSet):
     """
