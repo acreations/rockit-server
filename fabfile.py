@@ -7,10 +7,12 @@ def auto_schema():
     with warn_only():
         schema('rockit.foundation.core')
         schema('rockit.plugins.mailout')
+        schema('rockit.plugins.razberry')
 
 def build():
     migrate('rockit.foundation.core')
     migrate('rockit.plugins.mailout')
+    migrate('rockit.plugins.razberry')
     
     load_data('rockit/foundation/core/fixtures/settings.json')
     load_data('rockit/plugins/mailout/fixtures/servers.json')

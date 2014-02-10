@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rockit.foundation.core',
     'rockit.plugins.mailout',
+    'rockit.plugins.razberry',
     'south'
 )
 
