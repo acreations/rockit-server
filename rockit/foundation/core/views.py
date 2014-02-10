@@ -13,9 +13,8 @@ from rockit.foundation.core.holders.settings import SettingsHolder
 
 class AddableViewSet(viewsets.ViewSet):
     """
-    View to list all addables in rockit server.
+    View to list all addable nodes in rockit server.
     """
-
     def list(self, request):
         """
         Return a list of all addables.
@@ -26,7 +25,6 @@ class AddableViewSet(viewsets.ViewSet):
                 'name': association.name,
                 'url':  reverse_lazy("%snode-list" % association.entry, request=request)
                 })
-
         return Response(result)
 
 class ActionViewSet(viewsets.ReadOnlyModelViewSet):
