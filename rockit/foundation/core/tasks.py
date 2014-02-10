@@ -11,19 +11,20 @@ logger = get_task_logger(__name__)
 def register(namespace, node_id):
     logger.debug("Trying to register node (%s) to rockit network" % node_id)
 
-    association = models.Association.objects.get(namespace=namespace)
+    if namespace and node_id:
+        association = models.Association.objects.get(namespace=namespace)
 
-    if association and node_id:
-        node, created = models.Node.objects.get_or_create(association=association, aid=node_id)
+        if association:
+            node, created = models.Node.objects.get_or_create(association=association, aid=node_id)
 
-        if created:
-            node.uuid = uuid.uuid4()
-            node.save()
+            if created:
+                node.uuid = uuid.uuid4()
+                node.save()
 
-            logger.debug("Node (%s) successfully registered to rockit network" % node_id)
-            return True
-        else:
-            logger.warn("Node (%s) has already been created" % node_id)
+                logger.debug("Node (%s) successfully registered to rockit network" % node_id)
+                return True
+            else:
+                logger.warn("Node (%s) has already been created" % node_id)
     else:
         logger.warn("Cannot register if assocation/node_id is empty")
 
