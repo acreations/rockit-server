@@ -11,6 +11,10 @@ from rockit.foundation.core import models
 from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.settings import SettingsHolder
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class AddableViewSet(viewsets.ViewSet):
     """
     View to list all addable nodes in rockit server.
@@ -19,6 +23,8 @@ class AddableViewSet(viewsets.ViewSet):
         """
         Return a list of all addables.
         """
+        logger.info("TEst")
+
         result = list()
         for association in models.Association.objects.filter(addable=True):
             result.append({
