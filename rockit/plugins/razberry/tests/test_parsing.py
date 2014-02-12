@@ -4,6 +4,7 @@ import os
 
 from django.test import TestCase
 
+from rockit.plugins.razberry import models
 from rockit.plugins.razberry.parser import RazberryParser
 
 class ParsingTestCase(TestCase):
@@ -22,9 +23,17 @@ class ParsingTestCase(TestCase):
         self.assertEqual(None, self.parser.parseDevices(None))
 
     def test_it_should_parse_devices_correctly(self):
-        """
-        Test
-        """
         devices = self.j['devices']
 
         self.assertNotEqual(None, self.parser.parseDevices(devices))
+
+    def test_it_should_parse_device_versions_correctly(self):
+        devices = self.j['devices']
+
+        self.parser.parseDevices(devices)
+
+        for key in devices:
+            node = models.Node.objects.get(device_id=key)
+
+            self.assertNotEqual(models.NodeVersion.objects.get(node=node), None)
+

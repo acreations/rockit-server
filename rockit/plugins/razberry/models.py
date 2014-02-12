@@ -11,7 +11,7 @@ class Node(models.Model):
     manufacturer_id   = models.CharField(max_length = 50, default = '')
     manufacturer_name = models.CharField(max_length = 50, default = '')
     
-    version  = models.PositiveSmallIntegerField(default = 0)
+    version = models.CharField(max_length = 10, default = '')
 
     listening = models.BooleanField(default = False)
     routing  = models.BooleanField(default = False)
@@ -21,6 +21,17 @@ class Node(models.Model):
 
     date_added    = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+
+class NodeVersion(models.Model):
+    """
+    Node libraries version
+    """
+    node = models.ForeignKey(Node)
+    sdk  = models.CharField(max_length = 16, default = '')
+
+    application = models.CharField(max_length = 16, default = '')
+    zw_library  = models.IntegerField(default=0)
+    zw_protocol = models.CharField(max_length = 16, default = '')
 
 class Setting(models.Model):
     """

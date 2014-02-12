@@ -1,21 +1,21 @@
 import logging
 
+from rockit.plugins.razberry import constants
 from rockit.plugins.razberry import models
-
-logger = logging.getLogger(__name__)
 
 class RazberryParser(object):
 
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
+
         self._supportedCommandClasses = {
-            '37':  True, # SwitchBinary
-            '39':  True, # SwitchAll
-            '50':  True, # Meter
-            '114': True, # ManufacturerSpecific
-            '134': True, # Version
-            '129': True, # Clock
-            '138': True, # Time
+            #'37':  True, # SwitchBinary
+            #'39':  True, # SwitchAll
+            #'50':  True, # Meter
+            #'114': True, # ManufacturerSpecific
+            '134':  lambda n, c: self._parseNodeVersion(n, c) # Version
         }
+
         self._ignoredCommandClasses = {
             '32':  True, # Basic
             '38':  True, # SwitchMultilevel
@@ -26,7 +26,9 @@ class RazberryParser(object):
             '96':  True, # MultiChannel
             '112': True, # Configuration
             '119': True, # NodeNaming
+            '129': True, # Clock
             '133': True, # Association
+            '138': True, # Time
             '143': True, # MultiCmd
             '152': True, # Security
         }
@@ -43,13 +45,15 @@ class RazberryParser(object):
                 node.manufacturer_name = self._getValue(data['vendorString'])
 
                 node.listening = self._getValue(data['isListening'])
-                node.routing = self._getValue(data['isRouting'])
-                node.awaken = self._getValue(data['isAwake'])
+                node.routing   = self._getValue(data['isRouting'])
+                node.awaken    = self._getValue(data['isAwake'])
                 node.failed = self._getValue(data['isFailed'])
 
                 node.beaming = self._getValue(data['beam'])
 
                 self._parseInstances(node, device['instances'])
+
+                node.save()
 
             return len(devices.keys())
 
@@ -60,24 +64,48 @@ class RazberryParser(object):
             return data['value']
         return defaultValue
 
-    def _parseCommandClasses(self, node, commandClasses):
-        if node and commandClasses:            
-            for key in commandClasses:
-                unknown = list()
+    def _getValueAsVersion(self, minor, major, defaultValue=""):
+        if(minor and major):
+            result = "%s.%s" % (self._getValue(minor), self._getValue(major))
 
+            if len(result) is not 1:
+                return result
+        return defaultValue
+
+    def _parseCommandClasses(self, node, commandClasses):
+        if node and commandClasses:   
+            unknownClass = list()
+
+            for key in commandClasses:
                 if key in self._supportedCommandClasses:
-                    logger.debug(commandClasses[key])
+                    self._supportedCommandClasses[key](node, commandClasses[key]['data'])
                 elif key in self._ignoredCommandClasses:
                     pass
                 else:
-                    unknown.append(key)
-        else:
-            logger.warn("Cannot parse command classes, node or command classes are empty")
+                    unknownClass.append(key)
 
+            if unknownClass:
+                self.logger.debug("Unsupported commandClasses %s" % unknownClass)
+        else:
+            self.logger.warn("Cannot parse command classes, node or command classes are empty")
 
     def _parseInstances(self, node, instances):
         if node and instances:
             for key, instance in instances.items():
                 self._parseCommandClasses(node, instance['commandClasses'])
         else:
-            logger.warn("Cannot parse instances, node or instances are empty")
+            self.logger.warn("Cannot parse instances, node or instances are empty")
+
+    def _parseNodeVersion(self, node, commandClass):
+        version, created = models.NodeVersion.objects.get_or_create(node=node)
+
+        version.sdk = self._getValue(commandClass['SDK'])
+
+        version.application = self._getValueAsVersion(
+            commandClass['applicationMajor'], commandClass['applicationMinor'])
+
+        version.zw_library  = self._getValue(commandClass['ZWLib'], 0)
+        version.zw_protocol = self._getValueAsVersion(
+            commandClass['ZWProtocolMajor'], commandClass['ZWProtocolMinor'])
+
+        version.save()
