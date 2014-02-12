@@ -1,0 +1,14 @@
+[
+    {
+        "model": "core.association",
+        "pk": 20,
+        "fields": {
+        "name":  "Razberry",
+        "description": "Communicate with Z-Wave devices using Razberry",
+        "namespace": "rockit.plugins.razberry",
+        "addable": true,
+        "entry": "razberry",
+        "date_added": "2014-02-07T00:00:00+00:00"
+        }
+    }
+]

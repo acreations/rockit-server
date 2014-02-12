@@ -35,6 +35,8 @@ class RazberryParser(object):
 
     def parseDevices(self, devices):
         if devices:
+            result = list()
+
             for key,device in devices.items():
                 data = device['data']
                 node, created = models.Node.objects.get_or_create(device_id=key)
@@ -54,8 +56,10 @@ class RazberryParser(object):
                 self._parseInstances(node, device['instances'])
 
                 node.save()
+                
+                result.append(key)
 
-            return len(devices.keys())
+            return result
 
         return None
 
