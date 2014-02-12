@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from rockit.foundation.core import models
 from rockit.foundation.core import serializers
+from rockit.foundation.core.holders.details import DetailsHolder
 from rockit.foundation.core.holders.settings import SettingsHolder
 
 import logging
@@ -23,8 +24,6 @@ class AddableViewSet(viewsets.ViewSet):
         """
         Return a list of all addables.
         """
-        logger.info("TEst")
-
         result = list()
         for association in models.Association.objects.filter(addable=True):
             result.append({
@@ -67,10 +66,12 @@ class NodeViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         response = super(NodeViewSet, self).retrieve(request, pk)
 
-        if response.data['association'] is not None and response.data['aid'] is not None:
-            pk = response.data['aid']
-            ns = response.data['association']['entry'] 
-            response.data['detail'] = reverse_lazy("%snode-detail" % ns, kwargs={ 'pk': pk }, request=request)
+        node = get_object_or_404(self.queryset, pk=pk)
+
+        task_d = send_task("%s.node.detailed" % node.association.entry, args=[node.id, DetailsHolder()])
+        detail = task_d.wait(timeout=30)
+
+        response.data['detailed'] = detail.get_content()
 
         return response
 
