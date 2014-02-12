@@ -100,15 +100,11 @@ LOGGING = {
         'console':{
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'simple'
+            'formatter': 'verbose'
         },
     },
     'loggers': {
         'rockit': {
-            'handlers': ['console'],
-            'level': 'INFO'
-        },
-        'plugins.razberry': {
             'handlers': ['console'],
             'level': 'INFO'
         }
