@@ -1,6 +1,6 @@
 [
     {
-        "model": "mailout.mailoutserver",
+        "model": "mailout.server",
         "pk": 1,
         "fields": {
             "name":  "Comhem mailserver",

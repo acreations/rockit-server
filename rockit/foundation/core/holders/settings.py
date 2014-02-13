@@ -30,4 +30,4 @@ class SettingsHolder(Holder):
         self.append_data({name: settings})
 
     def generate_setting(self, key, name, value, readonly=False):
-        return {'id': key, 'name':  name, 'value': value, 'isReadonly': readonly}
+        return {'id': key, 'name':  name, 'value': value, 'readonly': readonly}

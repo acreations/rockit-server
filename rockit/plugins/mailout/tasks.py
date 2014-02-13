@@ -5,6 +5,6 @@ from rockit.plugins.mailout import models
 @task(name='mailout.settings')
 def settings(holder):
     for server in models.Server.objects.all():
-        holder.add_simple(server.id, 'name', 'value')
+        holder.add_setting(server.id, 'name', 'value')
 
     return holder
