@@ -5,7 +5,7 @@ from celery.execute import send_task
 from django.core.management.base import BaseCommand
 
 from rockit.plugins.razberry import models
-from rockit.plugins.razberry.parser import RazberryParser
+from rockit.plugins.razberry.parsers import RazberryParser
 
 class Command(BaseCommand):
     args = 'timestamp'
