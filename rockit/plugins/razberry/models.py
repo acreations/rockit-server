@@ -22,6 +22,20 @@ class Node(models.Model):
     date_added    = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
+class NodeCommand(models.Model):
+    '''
+    Describes a RaZberry Z-Wave node
+    '''
+    node = models.ForeignKey(Node)
+
+    name = models.CharField(max_length=50)
+
+    identifier = models.IntegerField()
+    namespace  = models.CharField(max_length = 100, default = '')
+
+    date_added    = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+
 class NodeVersion(models.Model):
     """
     Node libraries version

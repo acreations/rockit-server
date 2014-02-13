@@ -1,6 +1,6 @@
 import logging
 
-from rockit.plugins.razberry import constants
+from rockit.plugins.razberry import constants as c
 from rockit.plugins.razberry import models
 
 class RazberryParser(object):
@@ -9,11 +9,11 @@ class RazberryParser(object):
         self.logger = logging.getLogger(__name__)
 
         self._supportedCommandClasses = {
-            #'37':  True, # SwitchBinary
+            c.CLASS_SWITCH_BINARY: lambda n,k,c: self._parseNodeCommand(n,k,c),
             #'39':  True, # SwitchAll
             #'50':  True, # Meter
             #'114': True, # ManufacturerSpecific
-            '134':  lambda n, c: self._parseNodeVersion(n, c) # Version
+            c.CLASS_VERSION:  lambda n,k,c: self._parseNodeVersion(n,k,c) 
         }
 
         self._ignoredCommandClasses = {
@@ -82,7 +82,7 @@ class RazberryParser(object):
 
             for key in commandClasses:
                 if key in self._supportedCommandClasses:
-                    self._supportedCommandClasses[key](node, commandClasses[key]['data'])
+                    self._supportedCommandClasses[key](node, key, commandClasses[key]['data'])
                 elif key in self._ignoredCommandClasses:
                     pass
                 else:
@@ -100,7 +100,10 @@ class RazberryParser(object):
         else:
             self.logger.warn("Cannot parse instances, node or instances are empty")
 
-    def _parseNodeVersion(self, node, commandClass):
+    def _parseNodeCommand(self, node, key, commandClass):
+        print commandClass
+
+    def _parseNodeVersion(self, node, key, commandClass):
         version, created = models.NodeVersion.objects.get_or_create(node=node)
 
         version.sdk = self._getValue(commandClass['SDK'])

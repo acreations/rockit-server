@@ -5,7 +5,7 @@ import os
 from django.test import TestCase
 
 from rockit.plugins.razberry import models
-from rockit.plugins.razberry.parser import RazberryParser
+from rockit.plugins.razberry.parsers import RazberryParser
 
 class ParsingTestCase(TestCase):
 
