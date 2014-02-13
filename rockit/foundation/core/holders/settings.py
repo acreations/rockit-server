@@ -35,7 +35,7 @@ class SettingsHolder(Holder):
         """
         data =  { 'id': key, 'name':  name, 'value': value, 'readonly': readonly }
 
-        if changeable:
+        if url:
             data['url'] = url
 
         return data
