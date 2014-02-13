@@ -50,6 +50,6 @@ def unregister(uuid):
 @task(name='rockit.settings')
 def settings(holder):
     for setting in models.Setting.objects.all():
-        holder.add_simple(setting.id, setting.name, setting.value)
+        holder.add_setting(setting.id, setting.name, setting.value)
 
     return holder

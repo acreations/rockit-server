@@ -15,5 +15,5 @@ router.register('nodes',  views.NodeViewSet)
 router.register('settings', views.SettingViewSet, base_name="setting")
 
 urlpatterns = patterns('',
-	url('', include(router.urls))
+    url('', include(router.urls))
 )
