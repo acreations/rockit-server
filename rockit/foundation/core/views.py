@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from rockit.foundation.core import models
 from rockit.foundation.core import serializers
+from rockit.foundation.core.holders.commands import CommandsHolder
 from rockit.foundation.core.holders.details import DetailsHolder
 from rockit.foundation.core.holders.settings import SettingsHolder
 
@@ -69,9 +70,13 @@ class NodeViewSet(viewsets.ModelViewSet):
         node = get_object_or_404(self.queryset, pk=pk)
 
         task_d = send_task("%s.node.detailed" % node.association.entry, args=[node.id, DetailsHolder()])
-        detail = task_d.wait(timeout=30)
+        detailed = task_d.wait(timeout=30)
 
-        response.data['detailed'] = detail.get_content()
+        task_c = send_task("%s.node.commands" % node.association.entry, args=[node.id, CommandsHolder()])
+        commands = task_c.wait(timeout=30)
+
+        response.data['commands'] = commands.get_content()
+        response.data['detailed'] = detailed.get_content()
 
         return response
 

@@ -29,5 +29,13 @@ class SettingsHolder(Holder):
 
         self.append_data({name: settings})
 
-    def generate_setting(self, key, name, value, readonly=False):
-        return {'id': key, 'name':  name, 'value': value, 'readonly': readonly}
+    def generate_setting(self, key, name, value, readonly=False, url=None):
+        """
+        Generate settings tuple
+        """
+        data =  { 'id': key, 'name':  name, 'value': value, 'readonly': readonly }
+
+        if changeable:
+            data['url'] = url
+
+        return data

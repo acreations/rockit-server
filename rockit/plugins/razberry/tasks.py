@@ -2,6 +2,13 @@ from celery import task
 
 from rockit.plugins.razberry import models
 
+@task(name='razberry.node.commands')
+def node_commands(identifier, holder):
+
+    holder.add_switch_command('ONOFF')
+
+    return holder
+
 @task(name='razberry.node.detailed')
 def node_detailed(identifier, holder):
     node = models.Node.objects.get(device_id=identifier)
@@ -24,7 +31,7 @@ def node_detailed(identifier, holder):
 
     return holder
 
-@task(name='razberry.settings')
+@task(name='razberryx.settings')
 def settings(holder):
 
     return holder
