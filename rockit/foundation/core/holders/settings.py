@@ -14,5 +14,20 @@ class SettingsHolder(Holder):
         readonly -- specifies if this is readonly
 
         """
-        self.append({'id': key, 'name':  name, 'value': value, 'isReadonly': readonly})
+        self.append(self.generate_setting(key, name, value, readonly))
 
+    def add_setting_group(self, name, settings):
+        """
+        Add a group of settings
+
+        Keyword arguments:
+        name      -- name of group
+        settings  -- list of settings
+
+        """
+        assert hasattr(settings, "__iter__")
+
+        self.append({name: settings})
+
+    def generate_setting(self, key, name, value, readonly=False):
+        return {'id': key, 'name':  name, 'value': value, 'isReadonly': readonly}
