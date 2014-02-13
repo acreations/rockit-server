@@ -34,7 +34,7 @@ class AddableViewSet(viewsets.ViewSet):
 
 class ActionViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    API endpoint that allows nodes to be view and set. 
+    API endpoint that allows actions to be view and set. 
 
     """
     queryset = models.Action.objects.all()
@@ -42,7 +42,7 @@ class ActionViewSet(viewsets.ReadOnlyModelViewSet):
 
 class AssociationViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    API endpoint that allows nodes to be view and set. 
+    API endpoint that allows association to be view and set. 
 
     """
     queryset = models.Association.objects.all()
@@ -78,9 +78,6 @@ class NodeViewSet(viewsets.ModelViewSet):
 class SettingViewSet(viewsets.ViewSet):
     """
     View to list all settings in rockit server.
-
-    This includes all plugins which got its own settings, the rockit server will just point to it
-    using reverse lookup.
     """
 
     def list(self, request):

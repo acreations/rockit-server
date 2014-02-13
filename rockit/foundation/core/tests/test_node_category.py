@@ -8,6 +8,5 @@ class NodeCategoryTestCase(TestCase):
         NodeCategory.objects.create(name='test')
 
     def test_it_should_have_black_as_default_color(self):
-        """A new node category should have black as default color"""
         result = NodeCategory.objects.get(name='test')
         self.assertEqual(result.color, "#000000")

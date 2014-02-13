@@ -2,7 +2,7 @@ from django.db import models
 
 class Association(models.Model):
     """
-    Association information that exist in rockit network
+    Plugin information that exist in Rockit network
     """
     name = models.CharField(max_length=200, default='undefined')
     description  = models.CharField(max_length=500, blank=True)
@@ -37,7 +37,7 @@ class NodeCategory(models.Model):
 
 class Node(models.Model):
     """
-    Describes a node in the rockit network. All devices should be coupled to a Node
+    Describes a node in the rockit network.
     """
     uuid = models.CharField(max_length=36,  blank=True)
     name = models.CharField(max_length=200, default='undefined')
