@@ -1,11 +1,10 @@
-import requests
-
 from celery.execute import send_task
 
 from django.core.management.base import BaseCommand
 
 from rockit.plugins.razberry import models
 from rockit.plugins.razberry.parsers import RazberryParser
+from rockit.plugins.razberry.services import RazberryService
 
 class Command(BaseCommand):
     args = 'timestamp'
@@ -14,16 +13,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         assert (len(args) == 1 or len(args) == 0)
 
-        parser = RazberryParser()
-
-        t = 0
+        parser  = RazberryParser()
+        service = RazberryService()
 
         if args:
-            t = args[0]
+            data = service.data(args[0])
+        else:
+            data = service.data()
 
-        r = requests.get('http://192.168.1.203:8083/ZWaveAPI/data/%s' % t)
-
-        ids = parser.parseDevices(r.json()['devices'])
+        ids = parser.parseDevices(data['devices'])
 
         for device_id in ids:
             node = models.Node.objects.get(device_id=device_id)

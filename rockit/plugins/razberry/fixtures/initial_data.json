@@ -4,11 +4,35 @@
         "pk": 20,
         "fields": {
         "name":  "Razberry",
-        "description": "Communicate with Z-Wave devices using Razberry",
-        "namespace": "rockit.plugins.razberry",
-        "addable": true,
-        "entry": "razberry",
-        "date_added": "2014-02-07T00:00:00+00:00"
+            "description": "Communicate with Z-Wave devices using Razberry",
+            "namespace": "rockit.plugins.razberry",
+            "addable": true,
+            "entry": "razberry",
+            "date_added": "2014-02-07T00:00:00+00:00"
+        }
+    },
+    {
+        "model": "razberry.setting",
+        "pk": 1,
+        "fields": {
+            "name":          "RAZBERRY_SERVER",
+            "description":   "Razberry server",
+            "value":         "192.168.1.203:8083",
+            "readonly":      false,
+            "date_modified": "2014-02-15T00:00:00+00:00",
+            "date_added":    "2014-02-15T00:00:00+00:00"
+        }
+    },  
+    {
+        "model": "razberry.setting",
+        "pk": 10,
+        "fields": {
+            "name":          "SERVICE_TIMEOUT",
+            "description":   "Razberry server",
+            "value":         "30",
+            "readonly":      false,
+            "date_modified": "2014-02-15T00:00:00+00:00",
+            "date_added":    "2014-02-15T00:00:00+00:00"
         }
     }
 ]
