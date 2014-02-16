@@ -9,28 +9,28 @@ class RazberryService(object):
 
     logger = logging.getLogger(__name__)
 
-    SERVICE_DATA = "http://%s/ZWaveAPI/data/%s"
-    SERVICE_GET  = "http://%s/ZWaveAPI/run/%s.Get()"
-    SERVICE_SET  = "http://%s/ZWaveAPI/run/%s.Set(%s)"
+    SERVICE_URI  = "http://%s/%s"
+    SERVICE_DATA = "ZWaveAPI/data/%s"
+    SERVICE_GET  = "ZWaveAPI/run/%s.Get()"
+    SERVICE_SET  = "ZWaveAPI/run/%s.Set(%s)"
 
     def data(self, timestamp=0):
-        server_address = SettingsService().get(constants.SETTING_SERVER_ADDRRESS)
-
-        if server_address:
-            service = self.SERVICE_DATA % (server_address, timestamp)
-
-            r = requests.get(service)
-
-            return r.json()
-        else:
-            self.logger.debug("Server address is not set yet")
-        return None
+        return self._send_request(self.SERVICE_DATA % timestamp)
 
     def retrieve(self, namespace):
-        pass
+        if namespace:
+            return self._send_request(self.SERVICE_DATA % namespace)
+        else:
+            self.logger.debug("Cannot retrieve, namespace is empty")
+        return None
 
     def update(self, namespace, value):
-        pass
+        if namespace and value:
+            return self._send_request(self.SERVICE_SET % (namespace, value))
+        else:
+            self.logger.debug("Cannot update, namespace or value is empty")
+
+        return None
 
     def normalize(self, namespace):
         if namespace:
@@ -52,6 +52,16 @@ class RazberryService(object):
             self.logger.debug("Could not normalize, namespace is empty")
 
         return namespace
+
+    def _send_request(self, path):
+        server_address = SettingsService().get(constants.SETTING_SERVER_ADDRRESS)
+        
+        if server_address and path:
+            r = requests.get(self.SERVICE_URI % (server_address, path))
+            return r.json()
+        else:
+            self.logger.debug("Server address is not set yet")
+        return None
 
 
 class CommandClassesService(object):
