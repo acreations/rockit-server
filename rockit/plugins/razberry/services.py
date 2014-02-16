@@ -10,6 +10,8 @@ class RazberryService(object):
     logger = logging.getLogger(__name__)
 
     SERVICE_DATA = "http://%s/ZWaveAPI/data/%s"
+    SERVICE_GET  = "http://%s/ZWaveAPI/run/%s.Get()"
+    SERVICE_SET  = "http://%s/ZWaveAPI/run/%s.Set(%s)"
 
     def data(self, timestamp=0):
         server_address = SettingsService().get(constants.SETTING_SERVER_ADDRRESS)
@@ -21,8 +23,35 @@ class RazberryService(object):
 
             return r.json()
         else:
-            logger.warn("Server address is not set yet")
+            self.logger.debug("Server address is not set yet")
         return None
+
+    def retrieve(self, namespace):
+        pass
+
+    def update(self, namespace, value):
+        pass
+
+    def normalize(self, namespace):
+        if namespace:
+            splits = namespace.split(".")
+            result = list()
+
+            for current in splits:
+                if current.isdigit():
+                    last_seen = result[-1]
+
+                    if 'commandClasses' in last_seen:
+                        result[-1] = last_seen + "[%s]" % hex(int(current))
+                    else:
+                        result[-1] = last_seen + "[%s]" % current
+                else:
+                    result.append(current)
+            return '.'.join(result)
+        else:
+            self.logger.debug("Could not normalize, namespace is empty")
+
+        return namespace
 
 
 class CommandClassesService(object):

@@ -101,7 +101,7 @@ class RazberryParser(object):
             self.logger.warn("Cannot parse instances, node or instances are empty")
 
     def _parseNodeCommand(self, node, key, commandClass):
-        print commandClass
+        pass
 
     def _parseNodeVersion(self, node, key, commandClass):
         version, created = models.NodeVersion.objects.get_or_create(node=node)
