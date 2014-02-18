@@ -21,10 +21,10 @@ class Command(BaseCommand):
         else:
             data = service.data()
 
-        ids = parser.parseDevices(data['devices'])
+        ids = parser.parse_devices(data['devices'])
 
         for device_id in ids:
             node = models.Node.objects.get(device_id=device_id)
 
             create = send_task("rockit.register.node", args=['rockit.plugins.razberry', node.device_id])
-            result = create.wait()
+            result = create.wait(timeout=10)

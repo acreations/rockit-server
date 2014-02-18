@@ -1,11 +1,17 @@
 from celery import task
 
+from rockit.plugins.razberry import actions
 from rockit.plugins.razberry import models
+from rockit.plugins.razberry import services
 
 @task(name='razberry.node.commands')
 def node_commands(identifier, holder):
+    instances = services.RazberryService().retrieve_instances(identifier)
 
-    holder.add_switch_command('ONOFF')
+    if instances:
+        for key, instance in instances.items():
+            builder = actions.ActionBuilder(instance['commandClasses'])
+            builder.filter_actions_by_command_classes(identifier, holder)
 
     return holder
 

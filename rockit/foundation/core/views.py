@@ -2,6 +2,9 @@ from celery.execute import send_task
 
 from django.shortcuts import get_object_or_404
 
+
+from rest_framework import generics
+from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.reverse import reverse_lazy
@@ -12,6 +15,7 @@ from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.commands import CommandsHolder
 from rockit.foundation.core.holders.details import DetailsHolder
 from rockit.foundation.core.holders.settings import SettingsHolder
+from rockit.foundation.core import resolvers
 
 import logging
 
@@ -49,6 +53,31 @@ class AssociationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Association.objects.all()
     serializer_class = serializers.AssociationSerializer
 
+class CommandRetrieveViewSet(generics.RetrieveAPIView):
+    """
+    API endpoint for setting and getting a specific command
+    """
+    serializer_class = serializers.NodeSerializer
+
+    def retrieve(request, *args, **kwargs):
+        queryset = models.Node.objects.all()
+        node     = get_object_or_404(queryset, pk=kwargs['pk'])
+
+        #return Response(status=status.HTTP_400_BAD_REQUEST, kwargs)
+        return Response(kwargs['cid'])
+
+class CommandUpdateViewSet(generics.UpdateAPIView):
+    """
+    API endpoint for setting and getting a specific command
+    """
+    serializer_class = serializers.NodeSerializer
+
+    def update(request, *args, **kwargs):
+        queryset = models.Node.objects.all()
+        node     = get_object_or_404(queryset, pk=kwargs['pk'])
+
+        return Response(kwargs['value'])
+
 class NodeCategoryViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows node categories to be view and set
@@ -72,11 +101,15 @@ class NodeViewSet(viewsets.ModelViewSet):
         task_d = send_task("%s.node.detailed" % node.association.entry, args=[node.id, DetailsHolder()])
         detailed = task_d.wait(timeout=30)
 
+        if not task_d.failed():
+            response.data['detailed'] = detailed.get_content()
+
         task_c = send_task("%s.node.commands" % node.association.entry, args=[node.id, CommandsHolder()])
         commands = task_c.wait(timeout=30)
 
-        response.data['commands'] = commands.get_content()
-        response.data['detailed'] = detailed.get_content()
+        if not task_c.failed():
+            resolver = resolvers.CommandResolver()
+            response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content())
 
         return response
 

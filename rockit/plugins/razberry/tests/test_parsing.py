@@ -20,20 +20,19 @@ class ParsingTestCase(TestCase):
         f.close()
 
     def test_it_should_not_parse_node_if_no_response(self):
-        self.assertEqual(None, self.parser.parseDevices(None))
+        self.assertEqual(0, len(self.parser.parse_devices(None)))
 
     def test_it_should_parse_devices_correctly(self):
         devices = self.j['devices']
 
-        self.assertNotEqual(None, self.parser.parseDevices(devices))
+        self.assertNotEqual(0, len(self.parser.parse_devices(devices)))
 
     def test_it_should_parse_device_versions_correctly(self):
         devices = self.j['devices']
 
-        self.parser.parseDevices(devices)
+        self.parser.parse_devices(devices)
 
         for key in devices:
             node = models.Node.objects.get(device_id=key)
 
             self.assertNotEqual(models.NodeVersion.objects.get(node=node), None)
-
