@@ -4,22 +4,30 @@ from rest_framework.reverse import reverse_lazy
 
 class CommandResolver(object):
     """
-    Helper for resolving 
+    Helper for resolving commands, used specific patterns on each command to determine
+    how to resolve it. E.g command type 
     """
     logger = logging.getLogger(__name__)
 
     def __init__(self):
-
+        # All currently supported command
         self._supportedCommands = {
-            'binary': lambda r,p,c: self._resolve_command_binary(r,p,c)
+            'binary': lambda r,n,c: self._resolve_command_binary(r,n,c)
         }
 
-    def resolve_commands(self, request, pk, commands):
+    def resolve_commands(self, request, node_id, commands):
+        """
+        Keywords arguments:
+
+        request  - request object used for reverse lookup
+        node_id  - current node id
+        commands - all commands to be resolved
+        """
         if commands:
             unsupported = list()
             for command in commands['data']:
                 if command['type'] in self._supportedCommands:
-                    self._supportedCommands[command['type']](request, pk, command)
+                    self._supportedCommands[command['type']](request, node_id, command)
                 else:
                     unsupported.append(command.type)
         else:
@@ -27,7 +35,7 @@ class CommandResolver(object):
 
         return commands
 
-    def _resolve_command_binary(self, request, pk, command):
+    def _resolve_command_binary(self, request, node_id, command):
         urls = dict()
 
         cid = command['id']

@@ -16,6 +16,6 @@ router.register('settings', views.SettingViewSet, base_name="setting")
 
 urlpatterns = patterns('',
     url('', include(router.urls)),
-    url('^nodes/(?P<pk>\d+)/commands/(?P<cid>\d+)', views.CommandRetrieveViewSet.as_view(), name="commands-get"),
+    url('nodes/(?P<pk>\d+)/commands/(?P<cid>\d+)', views.CommandRetrieveViewSet.as_view(), name="commands-get"),
     url('^nodes/(?P<pk>\d+)/commands/(?P<cid>\d+)/value/(?P<value>\d+)', views.CommandUpdateViewSet.as_view(), name="commands-set")
 )
