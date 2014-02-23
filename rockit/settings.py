@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djcelery',
+    'corsheaders',
     'rest_framework',
     'rockit.foundation.core',
     'rockit.plugins.mailout',
@@ -57,6 +58,8 @@ ROOT_URLCONF = 'rockit.urls'
 
 WSGI_APPLICATION = 'rockit.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_WHITELIST = ('localhost:9000')
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
