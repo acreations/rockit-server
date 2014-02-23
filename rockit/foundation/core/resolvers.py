@@ -42,8 +42,8 @@ class CommandResolver(object):
         on  = command['values']['on']
         off = command['values']['off']
 
-        urls['on']  = reverse_lazy('commands-set', kwargs={ 'pk': pk, 'cid': cid, 'value': on }, request=request)
-        urls['off'] = reverse_lazy('commands-set', kwargs={ 'pk': pk, 'cid': cid , 'value': off }, request=request)
-        urls['current'] = reverse_lazy('commands-get', kwargs={ 'pk': pk, 'cid': cid }, request=request)
+        urls['on']  = reverse_lazy('commands-set', kwargs={ 'pk': node_id, 'cid': cid, 'value': on }, request=request)
+        urls['off'] = reverse_lazy('commands-set', kwargs={ 'pk': node_id, 'cid': cid , 'value': off }, request=request)
+        urls['current'] = reverse_lazy('commands-get', kwargs={ 'pk': node_id, 'cid': cid }, request=request)
 
         command['urls'] = urls
