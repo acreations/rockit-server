@@ -21,8 +21,8 @@ def node_detailed(identifier, holder):
     version = models.NodeVersion.objects.get(node=node)
 
     holder.add_detail('device_type', node.device_type)
-    holder.add_detail('manufacturer_name', node.manufacturer_id)
-    holder.add_detail('manufacturer_id', node.manufacturer_name)
+    holder.add_detail('manufacturer_name', node.manufacturer_name)
+    holder.add_detail('manufacturer_id', node.manufacturer_id)
 
     holder.add_detail('isListening', node.listening)
     holder.add_detail('routing', node.routing)

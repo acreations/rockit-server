@@ -66,11 +66,17 @@ class CommandRetrieveViewSet(generics.RetrieveAPIView):
         #return Response(status=status.HTTP_400_BAD_REQUEST, kwargs)
         return Response(kwargs['cid'])
 
-class CommandUpdateViewSet(generics.UpdateAPIView):
+class CommandUpdateViewSet(generics.RetrieveAPIView):
     """
     API endpoint for setting and getting a specific command
     """
     serializer_class = serializers.NodeSerializer
+
+    def retrieve(request, *args, **kwargs):
+        queryset = models.Node.objects.all()
+        node     = get_object_or_404(queryset, pk=kwargs['pk'])
+
+        return Response(kwargs['value'])
 
     def update(request, *args, **kwargs):
         queryset = models.Node.objects.all()
