@@ -43,7 +43,7 @@ class ActionBuilder(object):
 
     def _generalize_switch_binary(self, holder, command):
         holder.add_switch_command(
-            command['id'], 
+            command['data']['name'].replace('.data',''), 
             command['name'],
-            255, 0,
+            True, False,
             command['data']['level']['value'])

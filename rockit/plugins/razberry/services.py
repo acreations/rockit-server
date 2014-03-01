@@ -1,5 +1,4 @@
 import logging
-
 import requests
 
 from rockit.plugins.razberry import constants
@@ -29,7 +28,12 @@ class RazberryService(object):
 
     def update(self, namespace, value):
         if namespace and value:
-            return self._send_request(self.SERVICE_SET % (namespace, value))
+            normalized_value = value
+
+            if bool(value):
+                normalized_value = str(value).lower()
+
+            return self._send_request(self.SERVICE_SET % (namespace, normalized_value))
         else:
             self.logger.debug("Cannot update, namespace or value is empty")
 
@@ -60,6 +64,7 @@ class RazberryService(object):
         server_address = SettingsService().get(constants.SETTING_SERVER_ADDRRESS)
         
         self.logger.debug("Razberry server address %s" % server_address)
+        self.logger.debug("Request: %s"  % path)
 
         if server_address and path:
             normalized = self.normalize(path)

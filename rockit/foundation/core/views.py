@@ -63,8 +63,16 @@ class CommandRetrieveViewSet(generics.RetrieveAPIView):
         queryset = models.Node.objects.all()
         node     = get_object_or_404(queryset, pk=kwargs['pk'])
 
-        #return Response(status=status.HTTP_400_BAD_REQUEST, kwargs)
-        return Response(kwargs['cid'])
+        retrieve = send_task("%s.node.command.value" % node.association.entry, kwargs={
+            'identifier': node.aid,
+            'command_id': kwargs['cid']
+            })
+        value = retrieve.wait(timeout=30)
+
+        if value:
+            return Response({ 'data': value })
+
+        return Response({ 'detail': 'Not found' }, status=status.HTTP_404_NOT_FOUND)
 
 class CommandUpdateViewSet(generics.RetrieveAPIView):
     """
@@ -75,8 +83,18 @@ class CommandUpdateViewSet(generics.RetrieveAPIView):
     def retrieve(request, *args, **kwargs):
         queryset = models.Node.objects.all()
         node     = get_object_or_404(queryset, pk=kwargs['pk'])
+        
+        update = send_task("%s.node.command.update.value" % node.association.entry, kwargs={
+            'identifier': node.aid,
+            'command_id': kwargs['cid'],
+            'value': kwargs['value']
+            })
+        value = update.wait(timeout=30)
 
-        return Response(kwargs['value'])
+        if value is not None:
+            return Response({ 'data': value })
+
+        return Response({ 'detail': 'Not found' }, status=status.HTTP_404_NOT_FOUND)
 
     def update(request, *args, **kwargs):
         queryset = models.Node.objects.all()
