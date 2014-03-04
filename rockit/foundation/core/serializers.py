@@ -28,3 +28,4 @@ class NodeSerializer(serializers.HyperlinkedModelSerializer):
         model  = models.Node
         read_only_fields = ('uuid','date_added', 'date_modified')
         fields = ('url', 'uuid', 'name', 'association')
+        
