@@ -12,7 +12,10 @@ class DetailsHolder(Holder):
         value -- value
 
         """
-        item = { 'title': title, 'value': value }
+        item = { 
+            'title': title,
+            'value': value
+        }
 
         if changeable:
             item['url'] = ''

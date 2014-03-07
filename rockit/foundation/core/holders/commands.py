@@ -1,9 +1,12 @@
 from rockit.foundation.core.holders.holder import Holder
 
 class CommandsHolder(Holder):
-    """Details holder is used to help plugins to collect details about a node in network."""
+    """
+    The command holder holds all commands set by a given plugin.
+    """
 
     def add_switch_command(self, identifier, name, on_value, off_value, current_value):
+        """Add a binary switch command data"""
         data = self._generate_base_template(identifier, name, 'binary')
 
         data['values']['on']  = on_value
@@ -13,11 +16,13 @@ class CommandsHolder(Holder):
         self.append_data(data)
 
     def add_choice_command(self, name):
+        """Add a choice command data"""
         data = self._generate_base_template(name, 'choice')
 
         self.append_data(data)
 
     def add_scales_command(self, name):
+        """Add scales command data"""
         data = self._generate_base_template(name, 'scales')
 
         self.append_data(data)
