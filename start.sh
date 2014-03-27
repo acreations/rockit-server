@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 set -e
 DJANGODIR=/opt/apps/rockit-server
 DJANGO_SETTINGS_MODULE=rockit.settings
