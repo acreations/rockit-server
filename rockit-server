@@ -1,0 +1,50 @@
+server {
+    # Redirect all www.project.com requests to project.com
+    listen 80;
+    server_name www.project.com;
+    return 301 http://project.com$request_uri;
+}
+
+server {
+    listen   80;
+    server_name project.com;
+    # no security problem here, since / is alway passed to upstream
+    root /home/ubuntu/project/;
+    # serve directly - analogous for static/staticfiles
+    location /media/ {
+        # if asset versioning is used
+        if ($query_string) {
+            expires max;
+        }
+    }
+    location /admin/media/ {
+        # this changes depending on your python version
+        root /home/pi/ENV/lib/python2.7/site-packages/django/contrib;
+    }
+    location /static/admin {
+        autoindex on;
+        root   /home/pi/ENV/lib/python2.7/site-packages/django/contrib/admin/;
+    }
+    location /static/ {
+        autoindex on;
+        alias   /opt/apps/rockit-server/assets/;
+    }
+    location / {
+    # This section is to redirect all http traffic to https if desired
+    # if ($http_x_forwarded_proto != 'https') {
+    #   rewrite ^ https://$host$request_uri? permanent;
+    # }
+
+        client_max_body_size 5M;
+        client_body_buffer_size 128k;
+        proxy_pass_header Server;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 300;
+        proxy_read_timeout 300;
+        proxy_pass http://127.0.0.1:8001/;
+    }
+    # what to serve if upstream is not available or crashes
+    error_page 500 502 503 504 /media/50x.html;
