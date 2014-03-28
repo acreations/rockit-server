@@ -1,3 +1,7 @@
+upstream app_server_djangoapp {
+    server localhost:8001 fail_timeout=0;
+}
+
 server {
     # Redirect all www.project.com requests to project.com
     listen 80;
