@@ -31,7 +31,7 @@ server {
     }
     location /static/ {
         autoindex on;
-        alias  /home/pi/ENV/lib/python2.7/site-packages/;
+        alias  /opt/apps/rockit-server/staticfiles/;
     }
     location / {
     # This section is to redirect all http traffic to https if desired
