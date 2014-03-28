@@ -1,8 +1,8 @@
 server {
     # Redirect all www.project.com requests to project.com
     listen 80;
-    server_name www.project.com;
-    return 301 http://project.com$request_uri;
+    server_name 192.168.1.2;
+    return 301 http://192.168.1.2$request_uri;
 }
 
 server {
