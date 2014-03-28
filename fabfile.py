@@ -1,13 +1,11 @@
 from fabric.api import local
-from fabric.api import warn_only
 
 CMD_MANAGE = "python manage.py "
 
 def auto_schema():
-    with warn_only():
-        schema('rockit.foundation.core')
-        schema('rockit.plugins.mailout')
-        schema('rockit.plugins.razberry')
+    schema('rockit.foundation.core')
+    schema('rockit.plugins.mailout')
+    schema('rockit.plugins.razberry')
 
 def build():
     migrate('rockit.foundation.core')
