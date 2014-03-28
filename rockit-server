@@ -1,15 +1,15 @@
 server {
     # Redirect all www.project.com requests to project.com
     listen 80;
-    server_name 192.168.1.2;
+    server_name www.192.168.1.2;
     return 301 http://192.168.1.2$request_uri;
 }
 
 server {
     listen   80;
-    server_name project.com;
+    server_name 192.168.1.2;
     # no security problem here, since / is alway passed to upstream
-    root /home/ubuntu/project/;
+    root /opt/apps/rockit-server;
     # serve directly - analogous for static/staticfiles
     location /media/ {
         # if asset versioning is used
