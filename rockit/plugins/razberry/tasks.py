@@ -66,7 +66,7 @@ def node_detailed(identifier, holder):
 
     return holder
 
-@task(name='razberryx.settings')
+@task(name='razberry.settings')
 def settings(holder):
 
     return holder
