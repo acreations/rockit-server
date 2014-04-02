@@ -10,7 +10,6 @@ NUM_WORKERS=1
 USER=pi
 GROUP=pi
 cd /opt/apps/rockit-server
-source /home/pi/ENV/bin/activate
 
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
