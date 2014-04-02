@@ -3,7 +3,7 @@ set -e
 DJANGODIR=/opt/apps/rockit-server
 DJANGO_SETTINGS_MODULE=rockit.settings
 
-LOGFILE=/var/log/gunicorn/guni-project.log
+LOGFILE=/opt/apps/logs/gunicorn/guni-project.log
 LOGDIR=$(dirname $LOGFILE)
 NUM_WORKERS=1
 # user/group to run as
