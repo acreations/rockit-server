@@ -1,7 +1,6 @@
 # Specifies all common dependencies
 
 Django==1.6.2
-Fabric==1.8.1
 Markdown==2.3.1
 PyYAML==3.11
 South==0.8.4
