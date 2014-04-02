@@ -12,12 +12,7 @@ server {
     keepalive_timeout 5;
 
     # path for static files
-    root /opt/apps/rockit-server/staticfiles/;
-
-    location /static/ {
-        autoindex on;
-        alias  /opt/apps/rockit-server/staticfiles/;
-    }
+    root /opt/apps/rockit-server/static/;
 
     location / {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
