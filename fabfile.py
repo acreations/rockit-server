@@ -17,6 +17,9 @@ def build():
 
     test()
 
+def celery():
+    local("python manage.py celeryd worker --loglevel=DEBUG  -E -B -c 1")
+
 def load_data(path):
     local(CMD_MANAGE + 'loaddata %s' % path)
 

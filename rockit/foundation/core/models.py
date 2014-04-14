@@ -26,6 +26,14 @@ class Action(models.Model):
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
 
+class DateTimeTrigger(models.Model):
+    """
+    Defines a time to tigger events/actions
+    """
+    alarm = models.DateTimeField()
+    association = models.ForeignKey(Association)
+    date_added  = models.DateTimeField(auto_now_add=True, blank=True)
+
 class NodeCategory(models.Model):
     """
     Node category in rockit network 

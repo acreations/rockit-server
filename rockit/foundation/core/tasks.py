@@ -3,6 +3,8 @@ from celery.utils.log import get_task_logger
 
 from rockit.foundation.core import models
 
+import datetime
+import celery
 import uuid
 
 logger = get_task_logger(__name__)
@@ -53,3 +55,13 @@ def settings(holder):
         holder.add_setting(setting.id, setting.name, setting.value)
 
     return holder
+
+@task(name='rockit.when')
+def when(holder):
+
+    return holder;
+
+@celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
+def scheduler():
+    logger.debug("Check for some task to run")
+    print 'periodic_task'

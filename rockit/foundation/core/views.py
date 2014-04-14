@@ -21,22 +21,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class AddableViewSet(viewsets.ViewSet):
-    """
-    View to list all addable nodes in rockit server.
-    """
-    def list(self, request):
-        """
-        Return a list of all addables.
-        """
-        result = list()
-        for association in models.Association.objects.filter(addable=True):
-            result.append({
-                'name': association.name,
-                'url':  reverse_lazy("%snode-list" % association.entry, request=request)
-                })
-        return Response(result)
-
 class ActionViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows actions to be view and set. 
@@ -166,3 +150,16 @@ class SettingViewSet(viewsets.ViewSet):
         result = settings.wait()
 
         return Response(result.get_content())
+
+class WhenViewSet(viewsets.ViewSet):
+    """
+    View to list all addable nodes in rockit server.
+    """
+    def list(self, request):
+        """
+        Return a list of all addables.
+        """
+        result = list()
+        #for association in models.Association.objects.filter(when_addable=True):
+   
+        return Response(result)
