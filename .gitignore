@@ -2,7 +2,7 @@
 *.pot
 *.pyc
 *.sqlite3
+*.db
 local_settings.py
 
-celerybeat-schedule
 static/
