@@ -52,7 +52,11 @@ def unregister(uuid):
 @task(name='rockit.settings')
 def settings(holder):
     for setting in models.Setting.objects.all():
-        holder.add_setting(setting.id, setting.name, setting.value)
+        holder.add(**{
+            'key': setting.id,
+            'name': setting.name,
+            'value': setting.value
+            })
 
     return holder
 

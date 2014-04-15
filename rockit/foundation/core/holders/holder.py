@@ -4,10 +4,20 @@ class Holder(object):
 
     This object contains common functionality for all holders.
     """
-
     def __init__(self):
         self._content = dict()
         self._content['data'] = list()
+
+    def append(self, item):
+        """
+        Append arbitary item to holder
+
+        If item is a type list then extend will be used instead of append
+        """
+        if type(item) is list:
+            self._content['data'].extend(item)
+        else:
+            self._content['data'].append(item)
 
     def append_data(self, item):
         """Append data to the holder"""

@@ -1,22 +1,26 @@
 from rockit.foundation.core.holders.holder import Holder
 
 class SettingsHolder(Holder):
-    """Settings holder is used to help plugins to collect settings."""
+    """
+    Settings holder is used to help plugins to collect settings.
 
-    def add_setting(self, key, name, value, readonly=False):
+    Supported kwargs:
+
+    {
+        key:   unique key (when updating)
+        name:  name 
+        value: value
+        readonly: readonly?
+    }
+    """
+
+    def add(self, **kwargs):
         """
         Add a simple settings
-
-        Keyword arguments:
-        key      -- unique key
-        name     -- name 
-        value    -- current value
-        readonly -- specifies if this is readonly
-
         """
-        self.append_data(self.generate_setting(key, name, value, readonly))
+        self.append(self.normalize(**kwargs))
 
-    def add_setting_group(self, name, settings):
+    def add_to_group(self, name, settings):
         """
         Add a group of settings
 
@@ -27,15 +31,23 @@ class SettingsHolder(Holder):
         """
         assert hasattr(settings, "__iter__")
 
-        self.append_data({name: settings})
+        self.append({
+            'name': name,
+            'settings': settings
+            })
 
-    def generate_setting(self, key, name, value, readonly=False, url=None):
+    def normalize(self, **kwargs):
         """
-        Generate settings tuple
+        Normalize as a setting type
         """
-        data =  { 'id': key, 'name':  name, 'value': value, 'readonly': readonly }
+        result = {
+            'id': kwargs.get('key', "NOT_SET"),
+            'name': kwargs.get('name', "NOT_SET"),
+            'value': kwargs.get('value', "NOT_SET"),
+            'readonly': kwargs.get('readonly', True)
+            }
 
-        if url:
-            data['url'] = url
+        if 'url' in kwargs:
+            result['url'] = kwargs.get('url') 
 
-        return data
+        return result

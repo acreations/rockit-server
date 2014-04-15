@@ -69,4 +69,12 @@ def node_detailed(identifier, holder):
 @task(name='razberry.settings')
 def settings(holder):
 
+    for setting in models.Setting.objects.all():
+        holder.add(**{
+            'key': setting.id,
+            'name': setting.name,
+            'value': setting.value,
+            'readonly': setting.readonly
+            })
+
     return holder
