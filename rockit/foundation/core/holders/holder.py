@@ -19,6 +19,12 @@ class Holder(object):
         else:
             self._content['data'].append(item)
 
+    def extend(self, holder):
+        """
+        Extend current holder with another one
+        """
+        self.append(holder.get_content())
+
     def append_data(self, item):
         """Append data to the holder"""
         self._content['data'].append(item)
