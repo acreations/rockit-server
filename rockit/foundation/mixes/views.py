@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from rockit.foundation.core.holders.when import WhenHolder
+from rockit.foundation.mixes import holders
 
 class WhenViewSet(viewsets.ViewSet):
     """
@@ -11,7 +11,7 @@ class WhenViewSet(viewsets.ViewSet):
         """
         Return a list of all addables.
         """
-        result = WhenHolder()
+        result = holders.WhenHolder()
 
         result.add('1', 'Alarm')
 
