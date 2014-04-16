@@ -15,7 +15,6 @@ from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.commands import CommandsHolder
 from rockit.foundation.core.holders.details import DetailsHolder
 from rockit.foundation.core.holders.settings import SettingsHolder
-from rockit.foundation.core.holders.when import WhenHolder
 from rockit.foundation.core import resolvers
 
 import logging
@@ -149,19 +148,5 @@ class SettingViewSet(viewsets.ViewSet):
 
         settings = send_task("%s.settings" % association.entry, args=[SettingsHolder()])
         result = settings.wait()
-
-        return Response(result.get_content())
-
-class WhenViewSet(viewsets.ViewSet):
-    """
-    View to list all addable nodes in rockit server.
-    """
-    def list(self, request):
-        """
-        Return a list of all addables.
-        """
-        result = WhenHolder()
-
-        result.add('1', 'Alarm')
 
         return Response(result.get_content())

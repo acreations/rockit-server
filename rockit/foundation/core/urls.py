@@ -5,9 +5,10 @@ from rest_framework import routers
 
 from rockit.foundation.core import models
 from rockit.foundation.core import views
+from rockit.foundation.mixes.views import WhenViewSet
 
 router = routers.DefaultRouter()
-router.register('when',  views.WhenViewSet, base_name="addable")
+router.register('when',  WhenViewSet, base_name="addable")
 router.register('actions',  views.ActionViewSet)
 router.register('associations',  views.AssociationViewSet)
 router.register('categories',  views.NodeCategoryViewSet)
