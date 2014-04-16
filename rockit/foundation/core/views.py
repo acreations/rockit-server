@@ -2,7 +2,6 @@ from celery.execute import send_task
 
 from django.shortcuts import get_object_or_404
 
-
 from rest_framework import generics
 from rest_framework import status
 from rest_framework import viewsets
@@ -14,7 +13,6 @@ from rockit.foundation.core import models
 from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.commands import CommandsHolder
 from rockit.foundation.core.holders.details import DetailsHolder
-from rockit.foundation.core.holders.settings import SettingsHolder
 from rockit.foundation.core import resolvers
 
 import logging
@@ -120,33 +118,3 @@ class NodeViewSet(viewsets.ModelViewSet):
             response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content())
 
         return response
-
-class SettingViewSet(viewsets.ViewSet):
-    """
-    View to list all settings in rockit server.
-    """
-
-    def list(self, request):
-        """
-        Return a list of all settings.
-        """
-        result = list()
-        for association in models.Association.objects.all():
-            result.append({
-                'name': association.name,
-                'url':  reverse_lazy("setting-detail", kwargs={ 'pk': association.id }, request=request)
-                })
-
-        return Response(result)
-
-    def retrieve(self, request, pk=None):
-        """
-        Get settings for a specific association
-        """
-        queryset = models.Association.objects.all()
-        association = get_object_or_404(queryset, pk=pk)
-
-        settings = send_task("%s.settings" % association.entry, args=[SettingsHolder()])
-        result = settings.wait()
-
-        return Response(result.get_content())
