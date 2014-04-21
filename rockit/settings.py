@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'djcelery',
     'corsheaders',
     'rest_framework',
-    'rockit.foundation.core',
+    'rockit',
     'rockit.plugins.mailout',
     'rockit.plugins.razberry',
     'south'

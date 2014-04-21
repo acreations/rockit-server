@@ -18,10 +18,9 @@ class WhenViewSet(viewsets.ViewSet):
         result = Holder()
 
         for a in models.Association.objects.all():
-            print a.entry
             task = send_task("%s.when" % a.entry, args=[holders.WhenHolder(a)])
             when = task.wait(timeout=30)
-            print when.get_content()
+            
             result.extend(when)
 
         return Response(result.get_content())
