@@ -1,13 +1,14 @@
+from rockit.foundation.core import serializers
 from rockit.foundation.core.holders.holder import Holder
 
 class WhenHolder(Holder):
     """
     A holder that collects all items that can be assigned to when action
     """
-    def __init__(self, association_id):
+    def __init__(self, association):
         super(WhenHolder, self).__init__()
 
-        self.association_id = association_id
+        self.association = serializers.AssociationSerializer(association).data
 
     def add(self, identifier, name):
         """
@@ -15,6 +16,6 @@ class WhenHolder(Holder):
         """
         self.append({
             'identifier': identifier,
-            'association': self.association_id, 
+            'association': self.association, 
             'name': name
             })
