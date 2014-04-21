@@ -11,7 +11,7 @@ class WhenViewSet(viewsets.ViewSet):
         """
         Return a list of all addables.
         """
-        result = holders.WhenHolder()
+        result = holders.WhenHolder(1)
 
         result.add('1', 'Alarm')
 
