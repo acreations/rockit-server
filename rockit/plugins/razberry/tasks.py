@@ -78,3 +78,10 @@ def settings(holder):
             })
 
     return holder
+
+@task(name='razberry.when')
+def when(holder):
+
+    holder.add(1, 'TEST-RAZBERRY')
+
+    return holder

@@ -12,3 +12,8 @@ def settings(holder):
             })
 
     return holder
+
+@task(name='mailout.when')
+def when(holder):
+    holder.add(1, 'TEST_MAILOUT')
+    return holder
