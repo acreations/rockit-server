@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from rockit.foundation.core.tasks import unregister
+from rockit.core.tasks import unregister
 
-from rockit.foundation.core.models import Node
-from rockit.foundation.core.models import Association
+from rockit.core.models import Node
+from rockit.core.models import Association
 
 class NodeRegisterTestCase(TestCase):
 

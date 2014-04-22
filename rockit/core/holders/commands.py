@@ -1,4 +1,4 @@
-from rockit.foundation.core.holders.holder import Holder
+from rockit.core.holders import Holder
 
 class CommandsHolder(Holder):
     """

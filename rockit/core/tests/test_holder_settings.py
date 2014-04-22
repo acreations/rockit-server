@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rockit.foundation.settings.holders import SettingsHolder
+from rockit.core.holders import SettingsHolder
 
 class SettingsHolderTestCase(TestCase):
 

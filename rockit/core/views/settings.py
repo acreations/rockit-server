@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.reverse import reverse_lazy
 
-from rockit.foundation.core.models import Association
-from rockit.foundation.settings import holders
+from rockit.core.models import Association
+from rockit.core.holders import SettingsHolder
 
 class SettingViewSet(viewsets.ViewSet):
     """

@@ -1,4 +1,4 @@
-from rockit.foundation.core.holders.holder import Holder
+from rockit.core.holders import Holder
 
 class DetailsHolder(Holder):
     """Details holder is used to help plugins to collect details about a node in network."""

@@ -9,5 +9,5 @@ if __name__ == "__main__":
 
     execute_from_command_line(sys.argv)
 
-    import rockit.foundation.core.startup as startup
+    import rockit.core.startup as startup
     startup.run()

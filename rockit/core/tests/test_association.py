@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rockit.foundation.core.models import Association
+from rockit.core.models import Association
 
 class AssociationTestCase(TestCase):
 

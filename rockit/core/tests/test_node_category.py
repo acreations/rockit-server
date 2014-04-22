@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rockit.foundation.core.models import NodeCategory
+from rockit.core.models import NodeCategory
 
 class NodeCategoryTestCase(TestCase):
 

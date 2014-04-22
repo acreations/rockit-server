@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from rockit.foundation.core import models
+from rockit.core import models
 
 class AssociationSerializer(serializers.HyperlinkedModelSerializer):
 

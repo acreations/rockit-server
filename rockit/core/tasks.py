@@ -1,7 +1,7 @@
 from celery import task
 from celery.utils.log import get_task_logger
 
-from rockit.foundation.core import models
+from rockit.core import models
 
 import datetime
 import celery

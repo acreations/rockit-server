@@ -3,12 +3,12 @@ from fabric.api import local
 CMD_MANAGE = "python manage.py "
 
 def auto_schema():
-    schema('rockit')
+    schema('rockit.core')
     schema('rockit.plugins.mailout')
     schema('rockit.plugins.razberry')
 
 def build():
-    migrate('rockit')
+    migrate('rockit.core')
     migrate('rockit.plugins.mailout')
     migrate('rockit.plugins.razberry')
     

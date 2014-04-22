@@ -9,11 +9,11 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse_lazy
 from rest_framework.views import APIView
 
-from rockit.foundation.core import models
-from rockit.foundation.core import serializers
-from rockit.foundation.core.holders.commands import CommandsHolder
-from rockit.foundation.core.holders.details import DetailsHolder
-from rockit.foundation.core import resolvers
+from rockit.core import models
+from rockit.core import serializers
+from rockit.core.holders.commands import CommandsHolder
+from rockit.core.holders.details import DetailsHolder
+from rockit.core import resolvers
 
 import logging
 
