@@ -3,9 +3,8 @@ from celery.execute import send_task
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from rockit.foundation.core import models
-from rockit.foundation.core.holders.holder import Holder
-from rockit.foundation.mixes import holders
+from rockit.core import models
+from rockit.core import holders
 
 class WhenViewSet(viewsets.ViewSet):
     """

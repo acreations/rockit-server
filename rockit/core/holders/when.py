@@ -1,5 +1,5 @@
-from rockit.foundation.core import serializers
-from rockit.foundation.core.holders.holder import Holder
+from rockit.core import serializers
+from rockit.core.holders import Holder
 
 class WhenHolder(Holder):
     """
