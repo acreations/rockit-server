@@ -3,3 +3,4 @@
 -r common
 
 coverage==3.7.1
+django-jenkins==0.15.0

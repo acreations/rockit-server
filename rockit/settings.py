@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djcelery',
+    'django_jenkins',
     'corsheaders',
     'rest_framework',
     'rockit.core',
@@ -92,6 +93,9 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL  = '/static/'
+
+JENKINS_TASKS = ('django_jenkins.tasks.django_tests',)
+PROJECT_APPS = [appname for appname in INSTALLED_APPS if appname.startswith('rockit')]
 
 LOGGING = {
     'version': 1,
