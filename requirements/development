@@ -1,3 +1,5 @@
 # Specifies development dependencies
 
 -r common
+
+coverage==3.7.1
