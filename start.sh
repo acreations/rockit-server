@@ -14,6 +14,8 @@ cd /opt/apps/rockit-server
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
+pip install -r requirements/developement
+
 test -d $LOGDIR || mkdir -p $LOGDIR
 exec /usr/local/bin/gunicorn_django -w $NUM_WORKERS \
   --user=$USER --group=$GROUP --log-level=debug \
