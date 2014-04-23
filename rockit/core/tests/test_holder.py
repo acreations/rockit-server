@@ -32,3 +32,13 @@ class HolderTestCase(TestCase):
         self.holder.append(['TEST-02'])
 
         self.assertEqual(2, len(self.holder.get_content()['data']))
+
+    def test_it_should_be_able_to_extend_another_holder(self):
+        self.holder.append('TEST-01')
+
+        holder = Holder()
+        holder.append('TEST-02')
+
+        self.holder.extend(holder)
+        self.assertEqual(2, len(self.holder.get_content()['data']))
+        
