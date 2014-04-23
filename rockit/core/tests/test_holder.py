@@ -26,3 +26,9 @@ class HolderTestCase(TestCase):
         self.assertEqual(2, len(data))
         self.assertEqual('TEST-01', data[0])
         self.assertEqual('TEST-02', data[1])
+
+    def test_content_should_be_extended_when_append_list(self):
+        self.holder.append('TEST-01')
+        self.holder.append(['TEST-02'])
+
+        self.assertEqual(2, len(self.holder.get_content()['data']))
