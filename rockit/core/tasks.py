@@ -1,6 +1,8 @@
 from celery import task
 from celery.utils.log import get_task_logger
 
+from django.core import management
+
 from rockit.core import models
 
 import datetime
@@ -68,4 +70,4 @@ def when(holder):
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
 def scheduler():
     logger.debug("Check for some task to run")
-    print 'periodic_task'
+    management.call_command('rockitscheduler')
