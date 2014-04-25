@@ -25,12 +25,8 @@ class Holder(object):
         """
         self.append(holder.get_content())
 
-    def generate_url_container(self, identifier, args, **kwargs):
-        """Generate url container"""
-        return { 
-            'identifier': identifier 
-        }
-
     def get_content(self):
-        """Get contents from holder"""
+        """
+        Get contents from holder
+        """
         return self._content
