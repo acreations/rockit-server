@@ -15,7 +15,7 @@ def settings(holder):
 
 @task(name='mailout.when')
 def when(holder):
-    holder.add({
+    holder.add(**{
         'identifier': 1, 
         'name': 'TEST_MAILOUT' 
         })
