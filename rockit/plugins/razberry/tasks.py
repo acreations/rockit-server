@@ -49,20 +49,20 @@ def node_detailed(identifier, holder):
     node = models.Node.objects.get(device_id=identifier)
     version = models.NodeVersion.objects.get(node=node)
 
-    holder.add(to_kwargs('device_type', node.device_type))
-    holder.add(to_kwargs('manufacturer_name', node.manufacturer_name))
-    holder.add(to_kwargs('manufacturer_id', node.manufacturer_id))
+    holder.add(**to_kwargs('device_type', node.device_type))
+    holder.add(**to_kwargs('manufacturer_name', node.manufacturer_name))
+    holder.add(**to_kwargs('manufacturer_id', node.manufacturer_id))
 
-    holder.add(to_kwargs('isListening', node.listening))
-    holder.add(to_kwargs('routing', node.routing))
-    holder.add(to_kwargs('beaming', node.beaming))
-    holder.add(to_kwargs('awaken', node.awaken))
-    holder.add(to_kwargs('failed', node.failed))
+    holder.add(**to_kwargs('isListening', node.listening))
+    holder.add(**to_kwargs('routing', node.routing))
+    holder.add(**to_kwargs('beaming', node.beaming))
+    holder.add(**to_kwargs('awaken', node.awaken))
+    holder.add(**to_kwargs('failed', node.failed))
 
-    holder.add(to_kwargs('sdk', version.sdk))
-    holder.add(to_kwargs('application', version.application))
-    holder.add(to_kwargs('zw_library', version.zw_library))
-    holder.add(to_kwargs('zw_protocol', version.zw_protocol))
+    holder.add(**to_kwargs('sdk', version.sdk))
+    holder.add(**to_kwargs('application', version.application))
+    holder.add(**to_kwargs('zw_library', version.zw_library))
+    holder.add(**to_kwargs('zw_protocol', version.zw_protocol))
 
     return holder
 
@@ -87,7 +87,7 @@ def when(holder):
     return holder
 
 def to_kwargs(title, value):
-    return **{
+    return {
         'title': title,
         'value': value
     }
