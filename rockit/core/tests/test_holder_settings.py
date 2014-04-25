@@ -25,22 +25,35 @@ class SettingsHolderTestCase(TestCase):
         self.assertEqual(True, 'MY_VALUE' in str(content))
 
     def test_it_should_be_able_to_normalize_a_settings(self):
-    	setting = self.holder.normalize(**self.create_kwargs('MY_KEY', 'MY_NAME', 'MY_VALUE'))
+        setting = self.holder.normalize(**self.create_kwargs('MY_KEY', 'MY_NAME', 'MY_VALUE'))
 
         self.assertEqual(True, 'MY_KEY' in str(setting))
         self.assertEqual(True, 'MY_NAME' in str(setting))
         self.assertEqual(True, 'MY_VALUE' in str(setting))
 
+    def test_it_should_be_able_to_normalize_a_settings_with_url(self):
+        setting = self.holder.normalize(**{
+            'key': 'MY_KEY',
+            'name': 'MY_NAME',
+            'value': 'MY_VALUE',
+            'url': 'MY_URL'
+            })
+
+        self.assertEqual(True, 'MY_KEY' in str(setting))
+        self.assertEqual(True, 'MY_NAME' in str(setting))
+        self.assertEqual(True, 'MY_VALUE' in str(setting))
+        self.assertEqual(True, 'MY_URL' in str(setting))
+
     def test_it_should_be_able_to_add_group_of_settings(self):
-    	settings = [
-    		self.holder.normalize(**self.create_kwargs('MY_KEY1', 'MY_NAME1', 'MY_VALUE1')),
-    		self.holder.normalize(**self.create_kwargs('MY_KEY2', 'MY_NAME2', 'MY_VALUE2')),
-    		self.holder.normalize(**self.create_kwargs('MY_KEY3', 'MY_NAME3', 'MY_VALUE3'))
-    	]
+        settings = [
+            self.holder.normalize(**self.create_kwargs('MY_KEY1', 'MY_NAME1', 'MY_VALUE1')),
+            self.holder.normalize(**self.create_kwargs('MY_KEY2', 'MY_NAME2', 'MY_VALUE2')),
+            self.holder.normalize(**self.create_kwargs('MY_KEY3', 'MY_NAME3', 'MY_VALUE3'))
+        ]
 
-    	self.holder.add_to_group('MY_GROUP', settings)
+        self.holder.add_to_group('MY_GROUP', settings)
 
-    	content = self.holder.get_content()
+        content = self.holder.get_content()
 
-    	self.assertEqual(1, len(content))
-    	self.assertEqual(True, 'MY_GROUP' in str(content))
+        self.assertEqual(1, len(content))
+        self.assertEqual(True, 'MY_GROUP' in str(content))
