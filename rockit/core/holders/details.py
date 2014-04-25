@@ -1,9 +1,11 @@
 from rockit.core.holders import Holder
 
 class DetailsHolder(Holder):
-    """Details holder is used to help plugins to collect details about a node in network."""
+    """
+    Details holder is used to help plugins to collect details about a node in network.
+    """
 
-    def add_detail(self, title, value, changeable=False):
+    def add(self, **kwargs):
         """
         Add a simple detail
 
@@ -13,11 +15,11 @@ class DetailsHolder(Holder):
 
         """
         item = { 
-            'title': title,
-            'value': value
+            'title': kwargs.get('title', 'NOT_SET'),
+            'value': kwargs.get('value', 'NOT_SET')
         }
 
-        if changeable:
-            item['url'] = ''
+        if 'url' in kwargs:
+            result['url'] = kwargs.get('url', 'BAD_URL')
 
-        self.append_data(item)
+        self.append(item)

@@ -41,13 +41,13 @@ class SettingsHolder(Holder):
         Normalize as a setting type
         """
         result = {
-            'id': kwargs.get('key', "NOT_SET"),
-            'name': kwargs.get('name', "NOT_SET"),
-            'value': kwargs.get('value', "NOT_SET"),
+            'id': kwargs.get('key', 'NOT_SET'),
+            'name': kwargs.get('name', 'NOT_SET'),
+            'value': kwargs.get('value', 'NOT_SET'),
             'readonly': kwargs.get('readonly', True)
             }
 
         if 'url' in kwargs:
-            result['url'] = kwargs.get('url') 
+            result['url'] = kwargs.get('url', 'BAD_URL')
 
         return result
