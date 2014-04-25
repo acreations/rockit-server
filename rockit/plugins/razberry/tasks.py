@@ -88,6 +88,6 @@ def when(holder):
 
 def to_kwargs(title, value):
     return **{
-        'title': title
+        'title': title,
         'value': value
     }
