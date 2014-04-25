@@ -82,7 +82,10 @@ def settings(holder):
 @task(name='razberry.when')
 def when(holder):
 
-    holder.add(1, 'TEST-RAZBERRY')
+    holder.add(**{
+        'identifier': 1, 
+        'name': 'TEST-RAZBERRY'
+        })
 
     return holder
 

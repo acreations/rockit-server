@@ -64,7 +64,10 @@ def settings(holder):
 
 @task(name='rockit.when')
 def when(holder):
-    holder.add(2, 'TEST-ROCKIT')
+    holder.add(**{
+        'identifier': 2, 
+        'name': 'TEST-ROCKIT'
+        })
     return holder
 
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)

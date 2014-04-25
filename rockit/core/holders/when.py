@@ -10,12 +10,12 @@ class WhenHolder(Holder):
 
         self.association = serializers.AssociationSerializer(association).data
 
-    def add(self, identifier, name):
+    def add(self, **kwargs):
         """
         Add a when item
         """
         self.append({
-            'identifier': identifier,
+            'identifier': kwargs.get('identifier', 'NOT_SET'),
             'association': self.association, 
-            'name': name
+            'name': kwargs.get('name', 'NOT_SET')
             })
