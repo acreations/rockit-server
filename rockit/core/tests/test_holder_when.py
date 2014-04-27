@@ -3,7 +3,7 @@ from django.test import TestCase
 from rockit.core.holders import WhenHolder
 from rockit.core.models import Association
 
-class SettingsHolderTestCase(TestCase):
+class WhenHolderTestCase(TestCase):
 
     def setUp(self):
         self.association = Association.objects.create(name = 'my_node', namespace='test')
