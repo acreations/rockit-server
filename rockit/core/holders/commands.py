@@ -13,19 +13,13 @@ class CommandsHolder(Holder):
         data['values']['off'] = off_value
         data['values']['current'] = current_value
 
-        self.append_data(data)
+        self.append(data)
 
     def add_choice_command(self, name):
         """Add a choice command data"""
-        data = self._generate_base_template(name, 'choice')
-
-        self.append_data(data)
 
     def add_scales_command(self, name):
         """Add scales command data"""
-        data = self._generate_base_template(name, 'scales')
-
-        self.append_data(data)
 
     def _generate_base_template(self, identifier, name, typed):
         result = dict()
