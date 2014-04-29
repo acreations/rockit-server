@@ -7,7 +7,10 @@ class Command(BaseCommand):
     help = 'Run action based on current time'
 
     def handle(self, *args, **options):
-        print 'Check in database if some date has been passed'
-        print 'Get the action from db'
-        print 'Get the association for action'
-        print 'Trigger a celery task with action data'
+        '''
+        Handle it
+        '''
+        #print 'Check in database if some date has been passed'
+        #print 'Get the action from db'
+        #print 'Get the association for action'
+        #print 'Trigger a celery task with action data'
