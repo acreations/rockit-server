@@ -23,7 +23,7 @@ class Holder(object):
         """
         Extend current holder with another one
         """
-        self.append(holder.get_content())
+        self.append(holder.get_content()['data'])
 
     def get_content(self):
         """
