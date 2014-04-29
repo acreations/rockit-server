@@ -15,4 +15,3 @@ djangorestframework==2.3.12
 grunt==0.1.1
 gunicorn==18.0
 requests==2.2.1
-supervisor==3.0
