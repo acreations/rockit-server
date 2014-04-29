@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse_lazy
 
 from rockit.core.models import Association
-from rockit.core.holders import SettingsHolder
+from rockit.core import holders
 
 class SettingViewSet(viewsets.ViewSet):
     """
