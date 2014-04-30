@@ -12,3 +12,7 @@ def settings(holder):
             })
 
     return holder
+
+@task(name='mailout.when')
+def when(holder):
+    return None
