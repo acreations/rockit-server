@@ -66,7 +66,11 @@ def settings(holder):
 def when(holder):
     holder.add(**{
         'identifier': 2, 
-        'name': 'TEST-ROCKIT'
+        'name': 'button'
+        })
+    holder.add(**{
+        'identifier': 3, 
+        'name': 'scheduler'
         })
     return holder
 
