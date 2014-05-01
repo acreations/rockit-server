@@ -26,12 +26,12 @@ class Action(models.Model):
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
 
-class DateTimeTrigger(models.Model):
+class Schedule(models.Model):
     """
     Defines a time to tigger events/actions
     """
-    alarm = models.DateTimeField()
-    association = models.ForeignKey(Association)
+    cron = models.CharField(max_length=50, blank=True)
+    action = models.ForeignKey(Action)
     date_added  = models.DateTimeField(auto_now_add=True, blank=True)
 
 class NodeCategory(models.Model):

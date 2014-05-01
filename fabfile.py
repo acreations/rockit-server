@@ -4,7 +4,7 @@ CMD_MANAGE = "python manage.py "
 
 def auto_schema():
     schema('rockit.core')
-    schema('rockit.plugins.mailout')
+    #schema('rockit.plugins.mailout')
     schema('rockit.plugins.razberry')
 
 def build():
