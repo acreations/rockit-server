@@ -4,6 +4,7 @@ from celery.utils.log import get_task_logger
 from django.core import management
 
 from rockit.core import models
+from rockit.core import executors
 
 import datetime
 import celery
@@ -53,26 +54,11 @@ def unregister(uuid):
 
 @task(name='rockit.settings')
 def settings(holder):
-    for setting in models.Setting.objects.all():
-        holder.add(**{
-            'key': setting.id,
-            'name': setting.name,
-            'value': setting.value
-            })
-
-    return holder
+    return executors.SettingsExecutor().collect(holder)
 
 @task(name='rockit.when')
 def when(holder):
-    holder.add(**{
-        'identifier': 2, 
-        'name': 'button'
-        })
-    holder.add(**{
-        'identifier': 3, 
-        'name': 'scheduler'
-        })
-    return holder
+    return executors.WhenExecutor().collect(holder)
 
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
 def scheduler():
