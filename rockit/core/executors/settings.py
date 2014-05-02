@@ -3,7 +3,7 @@ from rockit.core import models
 
 class SettingsExecutor(object):
 
-    def collect(holder):
+    def collect(self, holder):
         '''
         Collect settings
         '''
