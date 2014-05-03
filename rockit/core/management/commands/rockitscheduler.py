@@ -1,5 +1,9 @@
 from django.core.management.base import BaseCommand
 
+from croniter import croniter
+
+from rockit.core import models
+
 class Command(BaseCommand):
     '''
     Rockit scheduler checks for actions to be triggered based on current time
@@ -10,6 +14,10 @@ class Command(BaseCommand):
         '''
         Handle it
         '''
+
+
+
+
         #print 'Check in database if some date has been passed'
         #print 'Get the action from db'
         #print 'Get the association for action'
