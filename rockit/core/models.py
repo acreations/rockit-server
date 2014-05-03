@@ -31,6 +31,7 @@ class Schedule(models.Model):
     Defines a time to tigger events/actions
     """
     cron = models.CharField(max_length=50, blank=True)
+    done = models.BooleanField(default=False)
     action = models.ForeignKey(Action)
     date_added  = models.DateTimeField(auto_now_add=True, blank=True)
 
