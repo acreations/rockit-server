@@ -9,7 +9,7 @@ class MixesResolver(object):
         # All currently supported command
         self.resolves = {
             'when': lambda r,c: self.resolve_when(r,c),
-            'then': lambda r,c: self.resolve_then(r,c),
+            'then': lambda r,c: self.resolve_then(r,c)
             'finish': lambda r,c: self.resolve_finish(r,c)
         }
 
@@ -21,7 +21,7 @@ class MixesResolver(object):
         if content:
             for key in content:
                 if key in resolves:
-                    self.resolves[key](request, content[key])
+                    self.resolves[key](request, content)
 
         return content
 
@@ -32,4 +32,9 @@ class MixesResolver(object):
         pass
 
     def resolve_when(self, request, content):
-        pass
+        
+        if content and 'when' in content:
+            association = content['when']['association']
+
+            for item in content['when']['items']:
+                item['url'] = reverse_lazy('commands-set', kwargs={ 'pk': 1, 'cid': 1, 'value': 'on' }, request=request)

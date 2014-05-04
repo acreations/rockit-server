@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from rockit.core import models
 from rockit.core import holders
+from rockit.core import resolvers
 
 class MixesViewSet(viewsets.ViewSet):
     """
@@ -23,4 +24,6 @@ class MixesViewSet(viewsets.ViewSet):
             if mixes:
                 result.extend(mixes)
 
-        return Response(result.get_content())
+        data = resolvers.MixesResolver().resolve_mixes(result.get_content())
+
+        return Response(data)
