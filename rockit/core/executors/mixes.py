@@ -15,6 +15,8 @@ class MixesExecutor(object):
         '''
         Collect capabilities of this executor
         '''
+        holder.reset()
+
         for c in self.when_capabilities:
             holder.add_when(**c)
 
