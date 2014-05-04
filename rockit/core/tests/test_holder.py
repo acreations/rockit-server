@@ -70,3 +70,11 @@ class HolderTestCase(TestCase):
 
         self.holder.reset()
         self.assertTrue('items' not in self.holder.get_content()['data'])
+
+    def test_it_should_be_able_to_consume_contents_from_holder(self):
+        self.holder.append('TEST-01')
+
+        content = self.holder.consume()['data']['items']
+
+        self.assertEqual(1, len(content))
+        self.assertTrue('items' not in self.holder.get_content()['data'])

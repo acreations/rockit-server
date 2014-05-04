@@ -29,6 +29,16 @@ class Holder(object):
         else:
             self._content[group].append(item)
 
+    def consume(self):
+        """
+        Consume contents from holder (read it and reset holder afterwards)
+        """
+        result = self.get_content()
+
+        self.reset()
+
+        return result
+
     def extend(self, holder):
         """
         Extend current holder with another one
