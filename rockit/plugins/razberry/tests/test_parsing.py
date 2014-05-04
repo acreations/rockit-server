@@ -46,3 +46,8 @@ class ParsingTestCase(TestCase):
         self.parser.parse_command_classes(node, {'UNSUPPORTED': {
             'name': 'UNSUPPORTED_NAME'
             }})
+
+    def test_it_should_not_parse_none_instance(self):
+        node = models.Node.objects.create(device_id='TEST_ID')
+
+        self.parser.parse_instance(node, None)
