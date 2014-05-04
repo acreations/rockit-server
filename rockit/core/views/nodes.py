@@ -38,7 +38,7 @@ class NodeViewSet(viewsets.ModelViewSet):
         task_c = send_task("%s.node.commands" % node.association.entry, args=[node.id, holders.CommandsHolder()])
         commands = task_c.wait(timeout=30)
 
-        if not task_c.failed():
+        if not task_c.failed() and 'commands' in commands.get_content()['data']:
             resolver = resolvers.CommandResolver()
             response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content()['data']['commands'])
 
