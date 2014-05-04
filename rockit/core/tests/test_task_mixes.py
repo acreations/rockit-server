@@ -7,7 +7,7 @@ from rockit.core import tasks
 class TaskWhenTestCase(TestCase):
 
     def test_it_should_be_able_to_call_task(self):
-        holder = holders.WhenHolder(models.Association.objects.create(name = 'my_node', namespace='test'))
+        holder = holders.MixesHolder(models.Association.objects.create(name = 'my_node', namespace='test'))
         holder = tasks.when(holder)
 
         self.assertNotEqual(0, len(holder.get_content()))

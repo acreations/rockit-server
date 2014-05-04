@@ -1,14 +1,14 @@
 from django.test import TestCase
 
-from rockit.core.models import Association
-from rockit.core.holders import WhenHolder
-from rockit.core.executors import WhenExecutor
+from rockit.core import executors 
+from rockit.core import models
+from rockit.core import holders
 
-class WhenExecutorTestCase(TestCase):
+class MixesExecutorTestCase(TestCase):
 
     def setUp(self):
-        self.holder = WhenHolder(Association.objects.create(name = 'my_node', namespace='test'))
-        self.executor = WhenExecutor()
+        self.holder = holders.MixesHolder(models.Association.objects.create(name = 'my_node', namespace='test'))
+        self.executor = executors.MixesExecutor()
 
     def test_it_should_be_able_to_collect(self):
         self.executor.collect(self.holder)
