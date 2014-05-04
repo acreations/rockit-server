@@ -29,17 +29,17 @@ class NodeViewSet(viewsets.ModelViewSet):
 
         node = get_object_or_404(self.queryset, pk=pk)
 
-        task_d = send_task("%s.node.detailed" % node.association.entry, args=[node.id, commands.DetailsHolder()])
+        task_d = send_task("%s.node.detailed" % node.association.entry, args=[node.id, holders.DetailsHolder()])
         detailed = task_d.wait(timeout=30)
 
         if not task_d.failed():
-            response.data['detailed'] = detailed.get_content()
+            response.data['details'] = detailed.get_content()['details']
 
-        task_c = send_task("%s.node.commands" % node.association.entry, args=[node.id, commands.CommandsHolder()])
+        task_c = send_task("%s.node.commands" % node.association.entry, args=[node.id, holders.CommandsHolder()])
         commands = task_c.wait(timeout=30)
 
         if not task_c.failed():
             resolver = resolvers.CommandResolver()
-            response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content())
+            response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content()['commands'])
 
         return response

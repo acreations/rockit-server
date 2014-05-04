@@ -22,4 +22,4 @@ class DetailsHolder(Holder):
         if 'url' in kwargs:
             item['url'] = kwargs.get('url', 'BAD_URL')
 
-        self.append(item)
+        self.append(item, 'details')
