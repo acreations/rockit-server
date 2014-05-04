@@ -42,7 +42,8 @@ class RazberryParser(object):
                     self._supportedCommandClasses[key](node, key, commandClasses[key]['data'])
                 else:
                     unknownClass.append({ 'name': commandClasses[key]['name'], 'value': key })
-            if unknownClass:
+
+            if len(unknownClass) != 0:
                 self.logger.debug("Unsupported commandClasses %s" % unknownClass)
         else:
             self.logger.warn("Cannot parse command classes, node or command classes are empty")
