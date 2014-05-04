@@ -13,9 +13,11 @@ class MixesExecutorTestCase(TestCase):
     def test_it_should_be_able_to_collect(self):
         self.executor.collect(self.holder)
 
-        data = self.holder.get_content()['data']['when']
+        when = self.holder.get_content()['data']['when'][0]
 
-        self.assertEqual(1001, data[0]['identifier'])
-        self.assertEqual('button', data[0]['name'])
-        self.assertEqual(1002, data[1]['identifier'])
-        self.assertEqual('schedule', data[1]['name'])
+        self.assertEqual('my_node', when['association']['name'])
+
+        self.assertEqual(1001, when['items'][0]['identifier'])
+        self.assertEqual('button', when['items'][0]['name'])
+        self.assertEqual(1002, when['items'][1]['identifier'])
+        self.assertEqual('schedule', when['items'][1]['name'])

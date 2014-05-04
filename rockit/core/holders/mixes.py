@@ -19,15 +19,33 @@ class MixesHolder(Holder):
         self.then = self._create_container(self.CONTAINER_THEN)
         self.final = self._create_container(self.CONTAINER_FINAL)
 
+        self.dirty = False
+
     def add_when(self, **kwargs):
         """
         Add a when item
         """
-        self.append({
+        self.when['items'].append({
             'identifier': kwargs.get('identifier', 'NOT_SET'),
-            'association': self.association, 
             'name': kwargs.get('name', 'NOT_SET')
-            }, self.CONTAINER_WHEN)
+        })
+
+        self.dirty = True
+
+    def get_content(self):
+        """
+        Override by adding when, then, final before get content
+        """
+        if self.dirty:
+            self.reset_group(self.CONTAINER_WHEN)
+            self.reset_group(self.CONTAINER_THEN)
+            self.reset_group(self.CONTAINER_FINAL)
+
+            self.append(self.when, self.CONTAINER_WHEN)
+            self.append(self.then, self.CONTAINER_THEN)
+            self.append(self.final, self.CONTAINER_FINAL)
+        
+        return super(MixesHolder, self).get_content()
 
     def _create_container(self, container):
         self.create_group(container)

@@ -13,7 +13,7 @@ class Holder(object):
         Create a new group in content dict
         '''
         if group not in self._content:
-            self._content[group] = list()
+            self.reset_group(group)
 
     def append(self, item, group='items'):
         """
@@ -59,3 +59,10 @@ class Holder(object):
         Clear contents from this holder
         """
         self._content = dict()
+
+    def reset_group(self, group):
+        """
+        Reset specific group
+        """
+        if group:
+            self._content[group] = list()
