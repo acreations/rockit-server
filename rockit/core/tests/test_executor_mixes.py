@@ -10,7 +10,7 @@ class MixesExecutorTestCase(TestCase):
         self.holder = holders.MixesHolder(models.Association.objects.create(name = 'my_node', namespace='test'))
         self.executor = executors.MixesExecutor()
 
-    def test_it_should_be_able_to_collect(self):
+    def test_it_should_be_able_to_collect_when(self):
         self.executor.collect(self.holder)
 
         when = self.holder.get_content()['data']['when'][0]
