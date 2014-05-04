@@ -5,10 +5,15 @@ class MixesHolder(Holder):
     """
     A holder that collects all items that can be assigned to when action
     """
+
+    CONTAINER_WHEN = 'when'
+
     def __init__(self, association):
         super(MixesHolder, self).__init__()
 
         self.association = serializers.AssociationSerializer(association).data
+
+        self.create_group(self.CONTAINER_WHEN)
 
     def add_when(self, **kwargs):
         """
@@ -18,4 +23,4 @@ class MixesHolder(Holder):
             'identifier': kwargs.get('identifier', 'NOT_SET'),
             'association': self.association, 
             'name': kwargs.get('name', 'NOT_SET')
-            })
+            }, self.CONTAINER_WHEN)

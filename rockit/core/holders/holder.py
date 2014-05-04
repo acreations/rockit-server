@@ -6,27 +6,40 @@ class Holder(object):
     """
     def __init__(self):
         self._content = dict()
-        self._content['data'] = list()
 
-    def append(self, item):
+    def create_group(self, group):
+        '''
+        Create a new group in content dict
+        '''
+        if group not in self._content:
+            self._content[group] = list()
+
+    def append(self, item, group='items'):
         """
         Append arbitary item to holder
 
         If item is a type list then extend will be used instead of append
         """
+
+        self.create_group(group)
+
         if type(item) is list:
-            self._content['data'].extend(item)
+            self._content[group].extend(item)
         else:
-            self._content['data'].append(item)
+            self._content[group].append(item)
 
     def extend(self, holder):
         """
         Extend current holder with another one
         """
-        self.append(holder.get_content()['data'])
+        for key in holder.get_content()['data']:
+            self.append(holder.get_content()['data'][key], key)
+
 
     def get_content(self):
         """
         Get contents from holder
         """
-        return self._content
+        return {
+            'data': self._content
+        }

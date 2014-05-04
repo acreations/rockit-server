@@ -13,7 +13,7 @@ class MixesExecutorTestCase(TestCase):
     def test_it_should_be_able_to_collect(self):
         self.executor.collect(self.holder)
 
-        data = self.holder.get_content()['data']
+        data = self.holder.get_content()['data']['when']
 
         self.assertEqual(1001, data[0]['identifier'])
         self.assertEqual('button', data[0]['name'])

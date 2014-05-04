@@ -13,7 +13,7 @@ class CommandsHolder(Holder):
         data['values']['off'] = off_value
         data['values']['current'] = current_value
 
-        self.append(data)
+        self.append(data, 'commands')
 
     def add_choice_command(self, name):
         """Add a choice command data"""
