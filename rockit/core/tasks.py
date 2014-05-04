@@ -56,8 +56,8 @@ def unregister(uuid):
 def settings(holder):
     return executors.SettingsExecutor().collect(holder)
 
-@task(name='rockit.when')
-def when(holder):
+@task(name='rockit.mixes')
+def mixes(holder):
     return executors.MixesExecutor().collect(holder)
 
 @celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)

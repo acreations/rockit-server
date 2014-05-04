@@ -79,8 +79,8 @@ def settings(holder):
 
     return holder
 
-@task(name='razberry.when')
-def when(holder):
+@task(name='razberry.mixes')
+def mixes(holder):
     return None
 
 def to_kwargs(title, value):

@@ -13,6 +13,6 @@ def settings(holder):
 
     return holder
 
-@task(name='mailout.when')
-def when(holder):
+@task(name='mailout.mixes')
+def mixes(holder):
     return None

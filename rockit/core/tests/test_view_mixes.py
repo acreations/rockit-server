@@ -1,8 +1,8 @@
 from django.test import TestCase
 
-from rockit.core.views import WhenViewSet
+from rockit.core import views
 
 class WhenViewSetTestCase(TestCase):
 
     def setUp(self):
-        self.views = WhenViewSet()
+        self.views = views.MixesViewSet()

@@ -7,7 +7,7 @@ from rockit.core import models
 from rockit.core import views
 
 router = routers.DefaultRouter()
-router.register('when',  views.WhenViewSet, base_name="addable")
+router.register('mixes',  views.MixesViewSet, base_name="addable")
 router.register('actions',  views.ActionViewSet)
 router.register('associations',  views.AssociationViewSet)
 router.register('categories',  views.NodeCategoryViewSet)
