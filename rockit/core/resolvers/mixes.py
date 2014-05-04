@@ -9,7 +9,7 @@ class MixesResolver(object):
         # All currently supported command
         self.resolves = {
             'when': lambda r,c: self.resolve_when(r,c),
-            'then': lambda r,c: self.resolve_then(r,c)
+            'then': lambda r,c: self.resolve_then(r,c),
             'finish': lambda r,c: self.resolve_finish(r,c)
         }
 
