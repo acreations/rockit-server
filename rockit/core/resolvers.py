@@ -25,7 +25,7 @@ class CommandResolver(object):
         """
         if commands:
             unsupported = list()
-            for command in commands['data']:
+            for command in commands['commands']:
                 if command['type'] in self._supportedCommands:
                     self._supportedCommands[command['type']](request, node_id, command)
                 else:
