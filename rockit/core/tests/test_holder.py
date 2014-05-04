@@ -86,3 +86,6 @@ class HolderTestCase(TestCase):
         self.holder.reset_group('MY_GROUP')
 
         self.assertEqual(0, len(self.holder.get_content()['data']['MY_GROUP']))
+
+    def test_it_should_handle_none_when_trying_to_reset_group(self):
+        self.holder.reset_group(None)
