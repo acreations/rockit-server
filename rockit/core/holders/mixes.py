@@ -41,9 +41,14 @@ class MixesHolder(Holder):
             self.reset_group(self.CONTAINER_THEN)
             self.reset_group(self.CONTAINER_FINAL)
 
-            self.append(self.when, self.CONTAINER_WHEN)
-            self.append(self.then, self.CONTAINER_THEN)
-            self.append(self.final, self.CONTAINER_FINAL)
+            if len(self.when['items']) > 0:
+                self.append(self.when, self.CONTAINER_WHEN)
+
+            if len(self.then['items']) > 0:
+                self.append(self.then, self.CONTAINER_THEN)
+
+            if len(self.final['items']) > 0:
+                self.append(self.final, self.CONTAINER_FINAL)
         
         return super(MixesHolder, self).get_content()
 
