@@ -40,6 +40,6 @@ class NodeViewSet(viewsets.ModelViewSet):
 
         if not task_c.failed():
             resolver = resolvers.CommandResolver()
-            response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content()['data'])
+            response.data['commands'] = resolver.resolve_commands(request, pk, commands.get_content()['data']['commands'])
 
         return response
