@@ -21,6 +21,29 @@ class MixesHolder(Holder):
 
         self.dirty = False
 
+    def add_final(self, **kwargs):
+        """
+        Add a final item
+        """
+        self.final['items'].append({
+            'identifier': kwargs.get('identifier', 'NOT_SET'),
+            'name': kwargs.get('name', 'NOT_SET')
+        })
+
+        self.dirty = True
+
+
+    def add_then(self, **kwargs):
+        """
+        Add a then item
+        """
+        self.then['items'].append({
+            'identifier': kwargs.get('identifier', 'NOT_SET'),
+            'name': kwargs.get('name', 'NOT_SET')
+        })
+
+        self.dirty = True
+
     def add_when(self, **kwargs):
         """
         Add a when item
@@ -31,6 +54,7 @@ class MixesHolder(Holder):
         })
 
         self.dirty = True
+
 
     def get_content(self):
         """
