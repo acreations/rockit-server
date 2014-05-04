@@ -27,7 +27,6 @@ class NodeRegisterTestCase(TestCase):
     def test_it_should_not_add_if_aid_and_association_is_empty(self):
         self.assertEqual(register(None, None), False)
 
-
     def test_it_should_successfully_register_node(self):
         aid = 'node_success'
 
