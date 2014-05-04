@@ -7,6 +7,8 @@ class MixesHolder(Holder):
     """
 
     CONTAINER_WHEN = 'when'
+    CONTAINER_THEN = 'then'
+    CONTAINER_FINALLY = 'finally'
 
     def __init__(self, association):
         super(MixesHolder, self).__init__()
@@ -14,6 +16,8 @@ class MixesHolder(Holder):
         self.association = serializers.AssociationSerializer(association).data
 
         self.create_group(self.CONTAINER_WHEN)
+        self.create_group(self.CONTAINER_THEN)
+        self.create_group(self.CONTAINER_FINALLY)
 
     def add_when(self, **kwargs):
         """

@@ -10,6 +10,12 @@ class MixesHolderTestCase(TestCase):
 
         self.holder = holders.MixesHolder(self.association)
 
+    def test_it_should_contain_when_then_finally(self):
+        content = self.holder.get_content()['data']
+        self.assertNotEqual(None, content['when'])
+        self.assertNotEqual(None, content['then'])
+        self.assertNotEqual(None, content['finally'])
+
     def test_it_should_be_able_to_add(self):
         self.holder.add_when(**{
             'identifier': 1,
