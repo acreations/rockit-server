@@ -63,3 +63,10 @@ class HolderTestCase(TestCase):
 
         self.holder.extend(holder)
         self.assertEqual(2, len(self.holder.get_content()['data']['MY_GROUP']))
+
+    def test_it_should_be_able_to_reset_holder(self):
+        self.holder.append('TEST-01')
+        self.assertEqual(1, len(self.holder.get_content()['data']['items']))
+
+        self.holder.reset()
+        self.assertTrue('items' not in self.holder.get_content()['data'])

@@ -4,6 +4,7 @@ class Holder(object):
 
     This object contains common functionality for all holders.
     """
+
     def __init__(self):
         self._content = dict()
 
@@ -35,7 +36,6 @@ class Holder(object):
         for key in holder.get_content()['data']:
             self.append(holder.get_content()['data'][key], key)
 
-
     def get_content(self):
         """
         Get contents from holder
@@ -43,3 +43,9 @@ class Holder(object):
         return {
             'data': self._content
         }
+
+    def reset(self):
+        """
+        Clear contents from this holder
+        """
+        self._content = dict()

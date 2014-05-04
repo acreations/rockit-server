@@ -14,7 +14,7 @@ class MixesHolderTestCase(TestCase):
         content = self.holder.get_content()['data']
         self.assertNotEqual(None, content['when'])
         self.assertNotEqual(None, content['then'])
-        self.assertNotEqual(None, content['finally'])
+        self.assertNotEqual(None, content['final'])
 
     def test_it_should_be_able_to_add(self):
         self.holder.add_when(**{
