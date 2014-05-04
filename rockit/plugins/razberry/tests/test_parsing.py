@@ -36,3 +36,13 @@ class ParsingTestCase(TestCase):
             node = models.Node.objects.get(device_id=key)
 
             self.assertNotEqual(models.NodeVersion.objects.get(node=node), None)
+
+    def test_it_should_not_parse_none_commands(self):
+        self.parser.parse_command_classes(None, None)
+
+    def test_it_should_not_parse_unsupported_command(self):
+        node = models.Node.objects.create(device_id='TEST_ID')
+
+        self.parser.parse_command_classes(node, {'UNSUPPORTED': {
+            'name': 'UNSUPPORTED_NAME'
+            }})
