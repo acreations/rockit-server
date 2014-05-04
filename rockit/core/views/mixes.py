@@ -17,7 +17,7 @@ class WhenViewSet(viewsets.ViewSet):
         result = holders.Holder()
 
         for a in models.Association.objects.all():
-            task = send_task("%s.when" % a.entry, args=[holders.WhenHolder(a)])
+            task = send_task("%s.when" % a.entry, args=[holders.MixesHolder(a)])
             when = task.wait(timeout=30)
             
             if when:
