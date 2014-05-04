@@ -1,8 +1,8 @@
 
 class MixesExecutor(object): 
 
-    IDENTIFIER_BUTTON   = 1001;
-    IDENTIFIER_SCHEDULE = 1002;
+    IDENTIFIER_BUTTON   = 'when-button';
+    IDENTIFIER_SCHEDULE = 'when-schedule';
 
     def collect(self, holder):
         '''
