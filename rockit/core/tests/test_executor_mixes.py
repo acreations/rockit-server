@@ -17,9 +17,9 @@ class MixesExecutorTestCase(TestCase):
 
         self.assertEqual('my_node', when['association']['name'])
 
-        self.assertEqual(1001, when['items'][0]['identifier'])
+        self.assertEqual('when-button', when['items'][0]['identifier'])
         self.assertEqual('button', when['items'][0]['name'])
-        self.assertEqual(1002, when['items'][1]['identifier'])
+        self.assertEqual('when-schedule', when['items'][1]['identifier'])
         self.assertEqual('schedule', when['items'][1]['name'])
 
     def test_it_should_be_able_to_collect_then(self):
