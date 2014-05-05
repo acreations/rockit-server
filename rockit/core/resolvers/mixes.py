@@ -19,9 +19,9 @@ class MixesResolver(object):
         """
         assert content
 
-        for key in content['data']:
+        for key in content:
             if key in self.resolves:
-                self.resolves[key](request, content['data'])
+                self.resolves[key](request, content)
 
         return content
 
