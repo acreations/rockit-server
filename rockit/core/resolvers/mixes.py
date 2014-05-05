@@ -38,4 +38,4 @@ class MixesResolver(object):
             association = when['association']
 
             for item in when['items']:
-                item['url'] = reverse_lazy('mixes-detailed', kwargs={ 'pk': item['identifier'], 'entry': association['entry'] }, request=request)
+                item['url'] = reverse_lazy('mixes-details', kwargs={ 'pk': item['identifier'], 'entry': association['entry'] }, request=request)

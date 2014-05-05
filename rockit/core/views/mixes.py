@@ -28,12 +28,15 @@ class MixesViewSet(viewsets.ViewSet):
 
         return Response(data)
 
-    def detailed(self, request, *args, **kwargs):
+    def details(self, request, *args, **kwargs):
         """
         Return specifc options for the requested mix
         """
-        
+
         entry = kwargs['entry']
         identifier = kwargs['pk']
+
+        task = send_task("%s.mixes" % a.entry, args=[holders.MixesHolder(a)])
+        mixes = task.wait(timeout=30)
 
         return Response({})

@@ -83,3 +83,10 @@ class MixesHolder(Holder):
             'association': self.association,
             'items': list()
         }
+
+class MixesDetailsHolder(Holder):
+    """
+    Mixes details holder
+    """
+
+    
