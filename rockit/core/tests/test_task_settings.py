@@ -9,4 +9,4 @@ class TaskSettingsTestCase(TestCase):
         holder = holders.SettingsHolder()
         holder = tasks.settings(holder)
 
-        self.assertNotEqual(0, len(holder.get_content()))
+        self.assertEqual(0, len(holder.get_content()))

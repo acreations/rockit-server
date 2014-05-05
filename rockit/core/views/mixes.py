@@ -27,3 +27,13 @@ class MixesViewSet(viewsets.ViewSet):
         data = resolvers.MixesResolver().resolve_mixes(request, result.get_content())
 
         return Response(data)
+
+    def detailed(self, request, *args, **kwargs):
+        """
+        Return specifc options for the requested mix
+        """
+        
+        entry = kwargs['entry']
+        identifier = kwargs['pk']
+
+        return Response({})

@@ -43,16 +43,14 @@ class Holder(object):
         """
         Extend current holder with another one
         """
-        for key in holder.get_content()['data']:
-            self.append(holder.get_content()['data'][key], key)
+        for key in holder.get_content():
+            self.append(holder.get_content()[key], key)
 
     def get_content(self):
         """
         Get contents from holder
         """
-        return {
-            'data': self._content
-        }
+        return self._content
 
     def reset(self):
         """

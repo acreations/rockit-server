@@ -11,13 +11,13 @@ class MixesHolderTestCase(TestCase):
         self.holder = holders.MixesHolder(self.association)
 
     def test_it_should_contain_when_then_finally(self):
-        content = self.holder.get_content()['data']
+        content = self.holder.get_content()
         self.assertNotEqual(None, content['when'])
         self.assertNotEqual(None, content['then'])
         self.assertNotEqual(None, content['final'])
 
     def test_it_should_not_containing_any_values(self):
-        content = self.holder.get_content()['data']
+        content = self.holder.get_content()
         self.assertEqual(0, len(content['when']))
         self.assertEqual(0, len(content['then']))
         self.assertEqual(0, len(content['final']))
@@ -28,7 +28,7 @@ class MixesHolderTestCase(TestCase):
             'name': 'MY_NAME'
             })
 
-        content = self.holder.get_content()['data']['final']
+        content = self.holder.get_content()['final']
 
         self.assertEqual(True, 'MY_NAME' in str(content))
 
@@ -38,7 +38,7 @@ class MixesHolderTestCase(TestCase):
             'name': 'MY_NAME'
             })
 
-        content = self.holder.get_content()['data']['then']
+        content = self.holder.get_content()['then']
 
         self.assertEqual(True, 'MY_NAME' in str(content))
 
@@ -48,6 +48,6 @@ class MixesHolderTestCase(TestCase):
             'name': 'MY_NAME'
             })
 
-        content = self.holder.get_content()['data']['when']
+        content = self.holder.get_content()['when']
 
         self.assertEqual(True, 'MY_NAME' in str(content))
