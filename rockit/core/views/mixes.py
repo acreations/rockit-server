@@ -24,6 +24,6 @@ class MixesViewSet(viewsets.ViewSet):
             if mixes:
                 result.extend(mixes)
 
-        data = resolvers.MixesResolver().resolve_mixes(result.get_content())
+        data = resolvers.MixesResolver().resolve_mixes(request, result.get_content())
 
         return Response(data)

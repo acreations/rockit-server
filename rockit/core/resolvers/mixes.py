@@ -17,11 +17,11 @@ class MixesResolver(object):
         """
         Resolve mixes (when, then, finish)
         """
+        assert content
 
-        if content:
-            for key in content:
-                if key in resolves:
-                    self.resolves[key](request, content)
+        for key in content['data']:
+            if key in self.resolves:
+                self.resolves[key](request, content['data'])
 
         return content
 
@@ -32,9 +32,10 @@ class MixesResolver(object):
         pass
 
     def resolve_when(self, request, content):
-        
-        if content and 'when' in content:
-            association = content['when']['association']
+        assert content and 'when' in content
 
-            for item in content['when']['items']:
+        for when in content['when']:
+            association = when['association']
+
+            for item in when['items']:
                 item['url'] = reverse_lazy('commands-set', kwargs={ 'pk': 1, 'cid': 1, 'value': 'on' }, request=request)
