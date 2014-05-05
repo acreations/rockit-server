@@ -88,5 +88,3 @@ class MixesDetailsHolder(Holder):
     """
     Mixes details holder
     """
-
-    
