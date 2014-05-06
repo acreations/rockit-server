@@ -32,7 +32,6 @@ class MixesHolder(Holder):
 
         self.dirty = True
 
-
     def add_then(self, **kwargs):
         """
         Add a then item
@@ -54,7 +53,6 @@ class MixesHolder(Holder):
         })
 
         self.dirty = True
-
 
     def get_content(self):
         """

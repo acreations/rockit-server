@@ -42,3 +42,10 @@ class MixesDetailsHolderTestCase(TestCase):
         self.assertEqual(True, post['TEST']['required'])
         self.assertEqual('TEST_LABEL', post['TEST']['label'])
         self.assertEqual(100, post['TEST']['max_length'])
+
+    def test_it_should_not_contain_required_if_not_set(self):
+        del self.example['max_length']
+        
+        self.holder.add_post(**self.example)
+
+        self.assertTrue('max_length' not in self.holder.get_content()['actions']['POST']['TEST'])
