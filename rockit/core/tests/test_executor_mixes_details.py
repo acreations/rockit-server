@@ -24,3 +24,7 @@ class MixesExecutorTestCase(TestCase):
         self.assertEquals('name', name['label'])
         self.assertEquals(True, name['required'])
     
+    def test_it_should_return_empty_action_when_trying_to_get_invalid(self):
+        self.executor.collect_details('CRAPPY-FUNCTION', self.holder)
+
+        self.assertEquals(0, len(self.holder.get_content()['actions']))
