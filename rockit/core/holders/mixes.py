@@ -112,8 +112,7 @@ class MixesDetailsHolder(Holder):
         if self.dirty:
             self.reset_group('actions')
 
-            if len(self.container):
-                self.append({ '%s' % self.name : self.container }, 'actions', True)
+            self.append({ '%s' % self.name : self.container }, 'actions', True)
 
         if len(self.container) is 0:
             self.reset_group('actions')
