@@ -88,3 +88,42 @@ class MixesDetailsHolder(Holder):
     """
     Mixes details holder
     """
+    CONTAINER_POST = 'POST'
+    CONTAINER_ACTION = 'actions'
+
+    def __init__(self):
+        super(MixesDetailsHolder, self).__init__()
+
+        self.post = dict()
+        self.dirty = False
+
+    def add_post(self, **kwargs):
+        """
+        Add post update data
+        """
+        data = {
+            'type': kwargs.get('type', 'NOT_SET'),
+            'required': kwargs.get('required', False),
+            'label': kwargs.get('label', 'NOT_SET'),
+        }
+
+        if 'max_length' in kwargs:
+            data['max_length'] = kwargs.get('max_length', 0)
+
+        self.post[kwargs.get('identifier', 'UNKNOWN_IDENTIFIER')] = data
+        self.dirty = True
+
+    def get_content(self):
+        """
+        Override by post before calling super class
+        """
+        if self.dirty:
+            self.reset_group(self.CONTAINER_ACTION)
+
+            if len(self.post):
+                self.append({ '%s' % self.CONTAINER_POST : self.post }, self.CONTAINER_ACTION, True)
+
+        if len(self.post) is 0:
+            self.reset_group(self.CONTAINER_ACTION)
+
+        return super(MixesDetailsHolder, self).get_content()

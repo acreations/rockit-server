@@ -15,19 +15,21 @@ class Holder(object):
         if group not in self._content:
             self.reset_group(group)
 
-    def append(self, item, group='items'):
+    def append(self, item, group='items', override=False):
         """
         Append arbitary item to holder
 
         If item is a type list then extend will be used instead of append
         """
-
-        self.create_group(group)
-
-        if type(item) is list:
-            self._content[group].extend(item)
+        if override:
+            self._content[group] = item
         else:
-            self._content[group].append(item)
+            self.create_group(group)
+
+            if type(item) is list:
+                self._content[group].extend(item)
+            else:
+                self._content[group].append(item)
 
     def consume(self):
         """
