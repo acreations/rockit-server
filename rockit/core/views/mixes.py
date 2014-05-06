@@ -36,7 +36,7 @@ class MixesViewSet(viewsets.ViewSet):
         entry = kwargs['entry']
         identifier = kwargs['pk']
 
-        task = send_task("%s.mixes" % a.entry, args=[holders.MixesHolder(a)])
+        task = send_task("%s.mixes.details" % entry, args=[identifier, holders.MixesDetailsHolder()])
         mixes = task.wait(timeout=30)
 
-        return Response({})
+        return Response(mixes.get_content())
