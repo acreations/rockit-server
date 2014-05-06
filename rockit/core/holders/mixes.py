@@ -88,42 +88,49 @@ class MixesDetailsHolder(Holder):
     """
     Mixes details holder
     """
-    CONTAINER_POST = 'POST'
-    CONTAINER_ACTION = 'actions'
-
     def __init__(self):
         super(MixesDetailsHolder, self).__init__()
 
-        self.post = dict()
+        self.container = dict()
         self.dirty = False
+
+        self.name = 'POST'
 
     def add_post(self, **kwargs):
         """
         Add post update data
         """
-        data = {
-            'type': kwargs.get('type', 'NOT_SET'),
-            'required': kwargs.get('required', False),
-            'label': kwargs.get('label', 'NOT_SET'),
-        }
-
-        if 'max_length' in kwargs:
-            data['max_length'] = kwargs.get('max_length', 0)
-
-        self.post[kwargs.get('identifier', 'UNKNOWN_IDENTIFIER')] = data
-        self.dirty = True
+        self._create_data('POST', **kwargs)
+        
+    def add_update(self, **kwargs):
+        self._create_data('PUT', **kwargs)
 
     def get_content(self):
         """
         Override by post before calling super class
         """
         if self.dirty:
-            self.reset_group(self.CONTAINER_ACTION)
+            self.reset_group('actions')
 
-            if len(self.post):
-                self.append({ '%s' % self.CONTAINER_POST : self.post }, self.CONTAINER_ACTION, True)
+            if len(self.container):
+                self.append({ '%s' % self.name : self.container }, 'actions', True)
 
-        if len(self.post) is 0:
-            self.reset_group(self.CONTAINER_ACTION)
+        if len(self.container) is 0:
+            self.reset_group('actions')
 
         return super(MixesDetailsHolder, self).get_content()
+
+    def _create_data(self, name, **kwargs):
+        self.name = name
+
+        data = {
+            'type': kwargs.get('type', ''),
+            'required': kwargs.get('required', False),
+            'label': kwargs.get('label', ''),
+        }
+
+        if 'max_length' in kwargs:
+            data['max_length'] = kwargs.get('max_length', 0)
+
+        self.container[kwargs.get('identifier', 'UNKNOWN_IDENTIFIER')] = data
+        self.dirty = True
