@@ -28,6 +28,8 @@ class MixesExecutor(object):
         if identifier in self.details:
             self.details[identifier](holder)
 
+        return holder
+
     def _add_when_capabilities(self, container, identifier, name):
         container.append({
             'identifier': identifier,
