@@ -1,8 +1,10 @@
 
 class MixesExecutor(object): 
 
-    IDENTIFIER_BUTTON   = 'when-button';
-    IDENTIFIER_SCHEDULE = 'when-schedule';
+    IDENTIFIER_BUTTON   = 'when-button'
+    IDENTIFIER_SCHEDULE = 'when-schedule'
+
+    IDENTIFIER_MAILOUT  = 'finish-mailout' 
 
     def __init__(self):
         self.details = {
@@ -30,7 +32,7 @@ class MixesExecutor(object):
 
         return holder
 
-    def _add_when_capabilities(self, container, identifier, name):
+    def _add_capabilities(self, container, identifier, name):
         container.append({
             'identifier': identifier,
             'name': name
@@ -53,8 +55,15 @@ class MixesExecutor(object):
     def _get_when_capabilities(self):
         result = list()
 
-        self._add_when_capabilities(result, self.IDENTIFIER_BUTTON, 'button')
-        self._add_when_capabilities(result, self.IDENTIFIER_SCHEDULE, 'schedule')
+        self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'button')
+        self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'schedule')
+
+        return result
+
+    def _get_finish_capabilities(self):
+        result = list()
+
+        self._add_capabilities(result, self.IDENTIFIER_MAILOUT, 'mailout')
 
         return result
 
