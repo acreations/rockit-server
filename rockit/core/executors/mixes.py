@@ -19,7 +19,7 @@ class MixesExecutor(object):
             holder.add_when(**c)
 
         for f in self._get_finish_capabilities():
-            holder.add_final(**f)
+            holder.add_finish(**f)
 
         return holder
 

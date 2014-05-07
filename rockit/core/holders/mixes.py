@@ -8,7 +8,7 @@ class MixesHolder(Holder):
 
     CONTAINER_WHEN = 'when'
     CONTAINER_THEN = 'then'
-    CONTAINER_FINAL = 'final'
+    CONTAINER_FINISH = 'finish'
 
     def __init__(self, association):
         super(MixesHolder, self).__init__()
@@ -17,15 +17,15 @@ class MixesHolder(Holder):
 
         self.when = self._create_container(self.CONTAINER_WHEN)
         self.then = self._create_container(self.CONTAINER_THEN)
-        self.final = self._create_container(self.CONTAINER_FINAL)
+        self.finish = self._create_container(self.CONTAINER_FINISH)
 
         self.dirty = False
 
-    def add_final(self, **kwargs):
+    def add_finish(self, **kwargs):
         """
         Add a final item
         """
-        self.final['items'].append({
+        self.finish['items'].append({
             'identifier': kwargs.get('identifier', 'NOT_SET'),
             'name': kwargs.get('name', 'NOT_SET')
         })
@@ -61,7 +61,7 @@ class MixesHolder(Holder):
         if self.dirty:
             self.reset_group(self.CONTAINER_WHEN)
             self.reset_group(self.CONTAINER_THEN)
-            self.reset_group(self.CONTAINER_FINAL)
+            self.reset_group(self.CONTAINER_FINISH)
 
             if len(self.when['items']) > 0:
                 self.append(self.when, self.CONTAINER_WHEN)
@@ -69,8 +69,8 @@ class MixesHolder(Holder):
             if len(self.then['items']) > 0:
                 self.append(self.then, self.CONTAINER_THEN)
 
-            if len(self.final['items']) > 0:
-                self.append(self.final, self.CONTAINER_FINAL)
+            if len(self.finish['items']) > 0:
+                self.append(self.finish, self.CONTAINER_FINISH)
         
         return super(MixesHolder, self).get_content()
 

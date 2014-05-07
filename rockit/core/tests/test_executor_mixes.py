@@ -26,6 +26,6 @@ class MixesExecutorTestCase(TestCase):
         then = self.holder.get_content()['then']
         self.assertEqual(0, len(then))
 
-    def test_it_should_be_able_to_collect_final(self):
-        final = self.holder.get_content()['final']
-        self.assertEqual(1, len(final))
+    def test_it_should_be_able_to_collect_finish(self):
+        finish = self.holder.get_content()['finish']
+        self.assertEqual(1, len(finish))
