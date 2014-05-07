@@ -26,7 +26,13 @@ class MixesResolver(object):
         return content
 
     def resolve_finish(self, request, content):
-        pass
+        assert content and 'finish' in content
+
+        for when in content['finish']:
+            association = when['association']
+
+            for item in when['items']:
+                item['url'] = reverse_lazy('mixes-details', kwargs={ 'pk': item['identifier'], 'entry': association['entry'] }, request=request)
 
     def resolve_then(self, request, content):
         pass
