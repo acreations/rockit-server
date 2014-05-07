@@ -28,4 +28,4 @@ class MixesExecutorTestCase(TestCase):
 
     def test_it_should_be_able_to_collect_final(self):
         final = self.holder.get_content()['final']
-        self.assertEqual(0, len(final))
+        self.assertEqual(1, len(final))

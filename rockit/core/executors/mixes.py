@@ -18,6 +18,9 @@ class MixesExecutor(object):
         for c in self._get_when_capabilities():
             holder.add_when(**c)
 
+        for f in self._get_finish_capabilities():
+            holder.add_final(**f)
+
         return holder
 
     def collect_details(self, identifier, holder):
