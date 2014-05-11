@@ -18,6 +18,8 @@ class ParsingTestCase(TestCase):
     def setUp(self):
         self.service = RazberryService()
 
+        models.Setting.objects.create(name=constants.SETTING_SERVER_ADDRRESS, value='localhost')
+
     def test_it_should_normalize_namespace_correctly(self):
         namespace = 'devices.3.instances.0.commandClasses.37.data'
         normalize = self.service.normalize(namespace)
@@ -34,11 +36,15 @@ class ParsingTestCase(TestCase):
     def test_it_should_return_none_if_namespace_is_empty(self):
         self.assertEqual(None, self.service.normalize(None))
 
-    def test_it_should_not_be_able_to_get_data_if_server_not_set(self):
+    def test_it_should_return_none_if_server_not_set(self):
+        models.Setting.objects.all().delete()
+
         self.assertEqual(None, self.service.data())
+        self.assertEqual(None, self.service.retrieve(None))
+        self.assertEqual(None, self.service.update(None, None))
+        self.assertEqual(None, self.service.update(None, ""))
+        self.assertEqual(None, self.service.update("", None))
 
     @patch('requests.get')
     def test_it_should_be_able_to_get_data(self, get): 
-        models.Setting.objects.create(name=constants.SETTING_SERVER_ADDRRESS, value='localhost')
         self.assertNotEqual(None, self.service.data())
-
