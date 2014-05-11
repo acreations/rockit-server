@@ -51,3 +51,11 @@ class MixesHolderTestCase(TestCase):
         content = self.holder.get_content()['when']
 
         self.assertEqual(True, 'MY_NAME' in str(content))
+
+    def test_resolve_names_should_be_false_when_initialized(self):
+        self.assertFalse(self.holder.should_resolve_names())
+
+    def test_it_should_be_able_to_mark_resolve_names(self):
+        self.holder.mark_resolve_names()
+
+        self.assertTrue(self.holder.should_resolve_names())
