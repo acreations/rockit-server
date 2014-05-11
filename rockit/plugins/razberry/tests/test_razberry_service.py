@@ -1,11 +1,13 @@
 import logging
 import json
 import os
+import requests
 
 from django.test import TestCase
 
 from mock import patch
 
+from rockit.plugins.razberry import constants
 from rockit.plugins.razberry import models
 from rockit.plugins.razberry.services import RazberryService
 
@@ -31,3 +33,12 @@ class ParsingTestCase(TestCase):
 
     def test_it_should_return_none_if_namespace_is_empty(self):
         self.assertEqual(None, self.service.normalize(None))
+
+    def test_it_should_not_be_able_to_get_data_if_server_not_set(self):
+        self.assertEqual(None, self.service.data())
+
+    @patch('requests.get')
+    def test_it_should_be_able_to_get_data(self, get): 
+        models.Setting.objects.create(name=constants.SETTING_SERVER_ADDRRESS, value='localhost')
+        self.assertNotEqual(None, self.service.data())
+
