@@ -21,6 +21,8 @@ class MixesHolder(Holder):
 
         self.dirty = False
 
+        self.resolve_names = False;
+
     def add_finish(self, **kwargs):
         """
         Add a final item
@@ -73,6 +75,12 @@ class MixesHolder(Holder):
                 self.append(self.finish, self.CONTAINER_FINISH)
         
         return super(MixesHolder, self).get_content()
+
+    def mark_resolve_names(self):
+        self.resolve_names = True;
+
+    def should_resolve_names(self):
+        return self.resolve_names;
 
     def _create_container(self, container):
         self.create_group(container)

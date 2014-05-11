@@ -1,6 +1,7 @@
 from celery import task
 
 from rockit.plugins.razberry import actions
+from rockit.plugins.razberry import executors
 from rockit.plugins.razberry import models
 from rockit.plugins.razberry import resolvers
 from rockit.plugins.razberry import services
@@ -81,7 +82,7 @@ def settings(holder):
 
 @task(name='razberry.mixes')
 def mixes(holder):
-    return None
+    return executors.MixesExecutor().collect(holder)
 
 def to_kwargs(title, value):
     return {
