@@ -51,20 +51,10 @@ class MixesExecutor(object):
             'type': 'radio',
             'required': True,
             'label': command['name'],
+            'value': [True,False,'']
         }
-
-        on = data.copy()
-        on['value'] = True
-
-        off = data.copy()
-        off['value'] = True
-
-        toggle = data.copy()
-        toggle['value'] = ''
-
-        holder.add_post(**on)
-        holder.add_post(**off)
-        holder.add_post(**toggle)
+        
+        holder.add_post(**data)
 
     def _get_then_capabilities(self):
         result = list()
