@@ -38,12 +38,12 @@ class MixesExecutor(object):
             })
     
     def _append_command_details(self, identifier, holder, commandClasses):
-        if commandClasses:
-            for key in commandClasses:
-                command = self.commandClasses[key]
 
-                if command['supported'] and key in self.supported:
-                    self.supported[key](holder, command)
+        for key in commandClasses:
+            command = commandClasses[key]
+
+            if command['supported'] and key in self.supported:
+                self.supported[key](holder, command)
 
     def _generalize_switch_binary(self, holder, command):
         holder.add_post(**{
