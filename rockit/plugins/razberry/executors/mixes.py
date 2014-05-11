@@ -14,6 +14,13 @@ class MixesExecutor(object):
 
         return holder
 
+    def collect_details(self, identifier, holder):
+        """
+        Collect details 
+        """
+
+        return holder
+
     def _add_capabilities(self, container, identifier, name):
         container.append({
             'identifier': identifier,

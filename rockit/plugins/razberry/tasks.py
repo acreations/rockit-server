@@ -84,6 +84,10 @@ def settings(holder):
 def mixes(holder):
     return executors.MixesExecutor().collect(holder)
 
+@task(name='rockit.mixes.details')
+def mixes_details(identifier, holder):
+    return executors.MixesExecutor().collect_details(identifier, holder)
+
 def to_kwargs(title, value):
     return {
         'title': title,
