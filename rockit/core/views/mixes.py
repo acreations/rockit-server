@@ -19,7 +19,7 @@ class MixesViewSet(viewsets.ViewSet):
 
         for a in models.Association.objects.all():
             task = send_task("%s.mixes" % a.entry, args=[holders.MixesHolder(a)])
-            mixes = task.wait(timeout=30)
+            mixes = task.wait(timeout=10)
             
             if mixes:
                 mixes = resolvers.MixesResolver().resolve(request, mixes)
@@ -36,6 +36,6 @@ class MixesViewSet(viewsets.ViewSet):
         identifier = kwargs['pk']
 
         task = send_task("%s.mixes.details" % entry, args=[identifier, holders.MixesDetailsHolder()])
-        mixes = task.wait(timeout=30)
+        mixes = task.wait(timeout=10)
 
         return Response(mixes.get_content())
