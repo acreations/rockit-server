@@ -22,7 +22,7 @@ class MixesViewSet(viewsets.ViewSet):
             mixes = task.wait(timeout=30)
             
             if mixes:
-                mixes = resolvers.MixesResolver().resolve(request, result.get_content())
+                mixes = resolvers.MixesResolver().resolve(request, mixes)
                 result.extend(resolvers.MixesNameResolver().resolve(mixes) if mixes.should_resolve_names() else mixes)
 
         return Response(mixes.get_content())
