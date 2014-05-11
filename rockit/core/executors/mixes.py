@@ -58,8 +58,8 @@ class MixesExecutor(object):
     def _get_when_capabilities(self):
         result = list()
 
-        self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'button')
-        self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'schedule')
+        self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'Button')
+        self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'Schedule')
 
         return result
 
