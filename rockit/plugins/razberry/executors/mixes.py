@@ -7,9 +7,9 @@ class MixesExecutor(object):
         """
         Collect capabilities of this executor
         """
-        
-        for c in self._get_when_capabilities():
-            holder.add_when(**c)
+
+        for c in self._get_then_capabilities():
+            holder.add_then(**c)
 
         return holder
 
@@ -22,9 +22,9 @@ class MixesExecutor(object):
     def _get_then_capabilities(self):
         result = list()
 
-        nodes = models.Nodes.object.exclude(device_type__contains='Controller').get()
+        nodes = models.Node.objects.exclude(device_type__contains='Controller')
 
         for node in nodes:
-            result.push(_add_capabilities(result, node.device_id, node.device_id))
+            self._add_capabilities(result, node.device_id, node.device_id)
 
         return result
