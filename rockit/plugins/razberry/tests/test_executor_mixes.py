@@ -29,3 +29,6 @@ class StubMixesHolder(object):
 
     def get_then(self):
         return self.then
+
+    def mark_resolve_names(self):
+        pass

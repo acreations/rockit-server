@@ -9,6 +9,7 @@ class MixesExecutor(object):
         """
 
         for c in self._get_then_capabilities():
+            holder.mark_resolve_names()
             holder.add_then(**c)
 
         return holder
