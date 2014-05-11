@@ -126,6 +126,7 @@ class MixesDetailsHolder(Holder):
             'type': kwargs.get('type', ''),
             'required': kwargs.get('required', False),
             'label': kwargs.get('label', ''),
+            'value': kwargs.get('value', '')
         }
 
         if 'max_length' in kwargs:

@@ -25,7 +25,6 @@ class MixesResolver(object):
         for item in container['items']:
             item['url'] = reverse_lazy('mixes-details', kwargs={ 'pk': item['identifier'], 'entry': association['entry'] }, request=request)
 
-
 class MixesNameResolver(object):
 
     def resolve(self, holder):
@@ -48,5 +47,3 @@ class MixesNameResolver(object):
                 node = models.Node.objects.get(aid=item['identifier'])
 
                 item['name'] = node.name
-
-
