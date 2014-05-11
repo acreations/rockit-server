@@ -53,19 +53,19 @@ class MixesExecutor(object):
             'label': command['name'],
         }
 
-        on = data.clone()
+        on = data.copy()
         on['value'] = True
 
-        off = data.clone()
+        off = data.copy()
         off['value'] = True
 
-        toggle = data.clone()
+        toggle = data.copy()
         toggle['value'] = ''
 
         holder.add_post(**on)
         holder.add_post(**off)
         holder.add_post(**toggle)
-        
+
     def _get_then_capabilities(self):
         result = list()
 
