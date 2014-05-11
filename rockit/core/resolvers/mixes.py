@@ -11,19 +11,19 @@ class MixesResolver(object):
         """
         assert holder
 
-        self._resolve_url(request, holder.when)
-        self._resolve_url(request, holder.then)
-        self._resolve_url(request, holder.finish)
+        self._resolve_url(request, "when", holder.when)
+        self._resolve_url(request, "then", holder.then)
+        self._resolve_url(request, "finish", holder.finish)
 
         return holder
 
-    def _resolve_url(self, request, container):
+    def _resolve_url(self, request, wtf, container):
         assert container
 
         association = container['association']
 
         for item in container['items']:
-            item['url'] = reverse_lazy('mixes-details', kwargs={ 'pk': item['identifier'], 'entry': association['entry'] }, request=request)
+            item['url'] = reverse_lazy('mixes-details', kwargs={ 'pk': item['identifier'], 'wtf': wtf, 'entry': association['entry'] }, request=request)
 
 class MixesNameResolver(object):
 

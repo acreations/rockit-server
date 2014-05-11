@@ -46,13 +46,26 @@ class MixesExecutor(object):
                 self.supported[key](holder, command)
 
     def _generalize_switch_binary(self, holder, command):
-        holder.add_post(**{
+        data = {
+            'identifier': command['name'],
             'type': 'radio',
             'required': True,
             'label': command['name'],
-            'value': ''
-            })
+        }
 
+        on = data.clone()
+        on['value'] = True
+
+        off = data.clone()
+        off['value'] = True
+
+        toggle = data.clone()
+        toggle['value'] = ''
+
+        holder.add_post(**on)
+        holder.add_post(**off)
+        holder.add_post(**toggle)
+        
     def _get_then_capabilities(self):
         result = list()
 

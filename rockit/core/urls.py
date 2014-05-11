@@ -18,5 +18,5 @@ urlpatterns = patterns('',
     url('', include(router.urls)),
     url('^nodes/(?P<pk>\d+)/commands/(?P<cid>[\d\w.]+)/value/(?P<value>[\d\w]+)', views.CommandUpdateViewSet.as_view(), name="commands-set"),
     url('^nodes/(?P<pk>\d+)/commands/(?P<cid>[\d\w.]+)', views.CommandRetrieveViewSet.as_view(), name="commands-get"),
-    url('^mixes/(?P<pk>[a-zA-Z0-9\-]+)/(?P<entry>[a-zA-Z]+)/$', views.MixesViewSet.as_view({'get': 'details'}), name="mixes-details")
+    url('^mixes/(?P<pk>[a-zA-Z0-9\-]+)/(?P<wtf>[a-zA-Z]+)/(?P<entry>[a-zA-Z]+)/$', views.MixesViewSet.as_view({'get': 'details'}), name="mixes-details")
 )
