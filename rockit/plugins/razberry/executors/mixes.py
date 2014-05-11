@@ -1,5 +1,6 @@
 
 from rockit.plugins.razberry import models
+from rockit.plugins.razberry import services
 
 class MixesExecutor(object): 
 
@@ -18,6 +19,12 @@ class MixesExecutor(object):
         """
         Collect details 
         """
+        instances = services.RazberryService().retrieve_instances(identifier)
+
+        if instances:
+            for key, instance in instances.items():
+                builder = actions.ActionBuilder(instance['commandClasses'])
+                builder.filter_actions_by_command_classes(identifier, holder)
 
         return holder
 

@@ -4,6 +4,8 @@ import os
 
 from django.test import TestCase
 
+from mock import patch
+
 from rockit.plugins.razberry import models
 from rockit.plugins.razberry.services import RazberryService
 
