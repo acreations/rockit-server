@@ -22,9 +22,12 @@ class MixesExecutor(object):
         instances = services.RazberryService().retrieve_instances(identifier)
 
         if instances:
+            self.supported = {
+                '37': lambda h, c: self._generalize_switch_binary(h, c),
+            }
+
             for key, instance in instances.items():
-                builder = actions.ActionBuilder(instance['commandClasses'])
-                builder.filter_actions_by_command_classes(identifier, holder)
+                self._append_command_details(identifier, holder, instance['commandClasses'])
 
         return holder
 
@@ -32,6 +35,22 @@ class MixesExecutor(object):
         container.append({
             'identifier': identifier,
             'name': name
+            })
+    
+    def _append_command_details(self, identifier, holder, commandClasses):
+
+        for key in commandClasses:
+            command = self.commandClasses[key]
+
+            if command['supported'] and key in self.supported:
+                self.supported[key](holder, command)
+
+    def _generalize_switch_binary(self, holder, command):
+        holder.add_post(**{
+            'type': 'radio',
+            'required': True,
+            'label': command['name'],
+            'value': ''
             })
 
     def _get_then_capabilities(self):

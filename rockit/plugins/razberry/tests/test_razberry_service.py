@@ -51,3 +51,4 @@ class ParsingTestCase(TestCase):
 
         self.assertNotEqual(None, self.service.retrieve_instances("TEST"))
         self.assertNotEqual(None, self.service.update("TEST_NS", "TRUE"))
+        self.assertNotEqual(None, self.service.update("TEST_NS", True))
