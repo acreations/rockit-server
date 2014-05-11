@@ -27,34 +27,19 @@ class MixesHolder(Holder):
         """
         Add a final item
         """
-        self.finish['items'].append({
-            'identifier': kwargs.get('identifier', 'NOT_SET'),
-            'name': kwargs.get('name', 'NOT_SET')
-        })
-
-        self.dirty = True
+        self._add(self.finish, **kwargs)
 
     def add_then(self, **kwargs):
         """
         Add a then item
         """
-        self.then['items'].append({
-            'identifier': kwargs.get('identifier', 'NOT_SET'),
-            'name': kwargs.get('name', 'NOT_SET')
-        })
-
-        self.dirty = True
+        self._add(self.then, **kwargs)
 
     def add_when(self, **kwargs):
         """
         Add a when item
         """
-        self.when['items'].append({
-            'identifier': kwargs.get('identifier', 'NOT_SET'),
-            'name': kwargs.get('name', 'NOT_SET')
-        })
-
-        self.dirty = True
+        self._add(self.when, **kwargs)
 
     def get_content(self):
         """
@@ -81,6 +66,15 @@ class MixesHolder(Holder):
 
     def should_resolve_names(self):
         return self.resolve_names;
+
+    def _add(self, container, **kwargs):
+
+        container['items'].append({
+            'identifier': kwargs.get('identifier', 'NOT_SET'),
+            'name': kwargs.get('name', 'NOT_SET')
+        })
+
+        self.dirty = True
 
     def _create_container(self, container):
         self.create_group(container)
