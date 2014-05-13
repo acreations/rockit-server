@@ -51,9 +51,9 @@ class MixesExecutor(object):
             'type': 'radio',
             'required': True,
             'label': command['name'],
-            'value': [True,False,'']
+            'value': ['',True,False]
         }
-        
+
         holder.add_post(**data)
 
     def _get_then_capabilities(self):
