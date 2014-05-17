@@ -8,7 +8,8 @@ class MixesExecutor(object):
 
     def __init__(self):
         self.details = {
-            self.IDENTIFIER_BUTTON: lambda h: self._set_when_button_details(h)
+            self.IDENTIFIER_BUTTON: lambda h: self._set_when_button_details(h),
+            self.IDENTIFIER_SCHEDULE: lambda h: self._set_when_schedule_details(h)
         }
 
     def collect(self, holder):
@@ -72,3 +73,6 @@ class MixesExecutor(object):
 
     def _set_when_button_details(self, holder):
         holder.add_post(**self._generate_post('name', 'string', 'name', True, 100))
+
+    def _set_when_schedule_details(self, holder):
+        holder.add_post(**self._generate_post('cron', 'cron', 'cron', True))
