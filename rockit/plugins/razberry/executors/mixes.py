@@ -51,7 +51,7 @@ class MixesExecutor(object):
             'type': 'radio',
             'required': True,
             'label': command['name'],
-            'value': ['toggle',True,False]
+            'value': ['$toggle',True,False]
         }
 
         holder.add_post(**data)
