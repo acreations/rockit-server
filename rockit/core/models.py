@@ -37,7 +37,7 @@ class Schedule(models.Model):
 
 class NodeCategory(models.Model):
     """
-    Node category in rockit network 
+    Node category in rockit network
     """
     name  = models.CharField(max_length=50, default='undefined')
     color = models.CharField(max_length=7, default='#000000')
@@ -68,7 +68,7 @@ class Setting(models.Model):
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
 
-class UserRole(models.model):
+class UserRole(models.Model):
     """
     Create a role based user model
     """
@@ -77,7 +77,7 @@ class UserRole(models.model):
     date_added = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
 
-class User(models.model):
+class User(models.Model):
     """
     Defines a user that can be used with rockit server
     """

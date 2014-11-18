@@ -11,5 +11,5 @@ for app in settings.INSTALLED_APPS:
         '''
         entry = 'rockit' if 'plugins' not in app else 'rockit/plugins/%s' % app.split('.')[-1]
         ufile = 'rockit.core' if 'plugins' not in app else app
-        
-        urlpatterns += patterns('', url(r'^%s/' % entry, include('%s.urls' % ufile)))
+
+        urlpatterns += patterns('', url(r'^api/%s/' % entry, include('%s.urls' % ufile)))
