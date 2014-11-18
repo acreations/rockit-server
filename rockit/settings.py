@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',    
+    'corsheaders.middleware.CorsMiddleware',
 )
 
 ROOT_URLCONF = 'rockit.urls'
@@ -93,6 +93,10 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL  = '/static/'
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 JENKINS_TASKS = ('django_jenkins.tasks.django_tests',)
 PROJECT_APPS = [appname for appname in INSTALLED_APPS if appname.startswith('rockit')]
