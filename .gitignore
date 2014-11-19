@@ -5,7 +5,6 @@
 *.db
 local_settings.py
 
-static/
 htmlcov/
 reports/
 
