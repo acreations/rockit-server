@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+
+{% block base_section %}
+
+	{% if user.is_authenticated %}
+
+    {% include 'base/login/login_view.html' %}
+
+	{% else %}
+
+		{% block section %}{% endblock %}
+
+  {% endif %}
+
+{% endblock %}

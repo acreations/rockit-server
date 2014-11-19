@@ -1,0 +1,15 @@
+<footer class="clearfix">
+	<p>
+		<small>
+			<span>rockit server by </span>
+			<a href="http://acreations.se">acreations</a>
+			<span id="copyright"> &copy;</span>
+			<span id="copyright_year">{% now "Y" %} Some rights reserved</span>
+		</small>
+		{% if user.is_authenticated %}
+		<small class="pull-right">
+			Logged in as {{ user.get_username }}
+		</small>
+		{% endif %}
+	</p>
+</footer>
