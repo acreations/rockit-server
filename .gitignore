@@ -7,5 +7,6 @@ local_settings.py
 
 htmlcov/
 reports/
+bower_components/
 
 .coverage

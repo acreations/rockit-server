@@ -1,0 +1,14 @@
+{% extends 'base/login/login.html' %}
+{% load i18n %}
+
+{% block section %}
+
+	<div class="page-header">
+		<h3>Settings</h3>
+	</div>
+
+	<div data-ng-controller="MyCtrl1">
+		<span data-ng-bind="::test"></span>
+	</div>
+
+{% endblock %}

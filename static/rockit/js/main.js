@@ -1,3 +1,5 @@
+'use strict';
+
 require.config({
 
   /*
@@ -19,11 +21,17 @@ require.config({
   shim: {
     angular: {
       exports: "angular"
-    },
+    }
   }
-
 });
 
-require(['angular', 'app', function (angular) {
-  angular.bootstrap(document.documentElement, ["rockit"]);
-}]);
+require.config({
+  paths: {
+    "angular": "/static/angular/angular.min",
+  }
+});
+
+require(['angular', 'app'], function (angular, app) {
+  console.log('works', app);
+  angular.bootstrap(document, [app.name]);
+});

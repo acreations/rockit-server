@@ -1,5 +1,7 @@
-define(function (require) {
-    var angular = require("angular");
+define([
+  'angular',
+  'controllers'], function (angular) {
+  'use strict';
 
-    angular.module("rockit", []);
+  return angular.module("rockit", ["rockit.controllers"]);
 });
