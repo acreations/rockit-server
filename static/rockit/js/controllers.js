@@ -3,9 +3,9 @@ define(['angular'], function (angular) {
 
   return angular.module('rockit.controllers', [])
 
-    .controller('MyCtrl1', ['$scope', function ($scope) {
+    .controller('MyCtrl1', ['$scope', 'settings', function ($scope, settings) {
       $scope.test = 'hello world';
 
-      console.log("WORKS");
+      console.log("WORKS", settings.serverUrl);
     }]);
 });

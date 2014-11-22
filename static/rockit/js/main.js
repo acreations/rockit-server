@@ -32,6 +32,5 @@ require.config({
 });
 
 require(['angular', 'app'], function (angular, app) {
-  console.log('works', app);
   angular.bootstrap(document, [app.name]);
 });
