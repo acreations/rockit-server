@@ -5,11 +5,10 @@ define(['angular'], function (angular) {
 
   return module.factory('settings', function () {
 
-    var server = '//localhost';
+    var server = '//localhost:8000';
 
     return {
-      'serverUrl': server + '/rockit',
-
+      'serverUrl': server + '/api/rockit',
     };
   });
 });

@@ -4,11 +4,20 @@
 {% block section %}
 
 	<div class="page-header">
-		<h3>Settings</h3>
+		<h3><i class="fa fa-cog"></i> Settings</h3>
 	</div>
 
-	<div data-ng-controller="MyCtrl1">
-		<span data-ng-bind="::test"></span>
+	<div class="row" data-ng-controller="SettingsCtrl" data-ng-init="loadSettings()">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
+					<a data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-10">
+			<h4 data-ng-bind="selected.name"></h4>
+		</div>
 	</div>
 
 {% endblock %}
