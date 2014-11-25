@@ -1,0 +1,10 @@
+{
+    "items": [
+        {
+            "readonly": true,
+            "id": 1,
+            "value": "value",
+            "name": "name"
+        }
+    ]
+}

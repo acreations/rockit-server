@@ -1,0 +1,10 @@
+[ { "name" : "Rockit",
+    "url" : "//localhost:8000/static/rockit/js/settings/responses/1.response"
+  },
+  { "name" : "Mailout",
+    "url" : "//localhost:8000/static/rockit/js/settings/responses/10.response"
+  },
+  { "name" : "Razberry",
+    "url" : "//localhost:8000/static/rockit/js/settings/responses/20.response"
+  }
+]

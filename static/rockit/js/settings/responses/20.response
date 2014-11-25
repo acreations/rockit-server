@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "readonly": false,
+            "id": 1,
+            "value": "192.168.1.2",
+            "name": "RAZBERRY_SERVER"
+        },
+        {
+            "readonly": false,
+            "id": 10,
+            "value": "30",
+            "name": "SERVICE_TIMEOUT"
+        }
+    ]
+}

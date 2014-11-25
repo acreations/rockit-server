@@ -1,8 +1,14 @@
 define([
   'angular',
   'configs',
-  'controllers'], function (angular) {
+  'services',
+  'associations/controller',
+  'settings/controller'], function (angular) {
   'use strict';
 
-  return angular.module("rockit", ["rockit.configs", "rockit.controllers"]);
+  return angular.module("rockit", [
+    "rockit.services",
+    "rockit.associations",
+    "rockit.settings",
+  ]);
 });

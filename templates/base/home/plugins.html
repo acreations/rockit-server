@@ -1,0 +1,8 @@
+<div class="panel panel-default" data-ng-controller="AssociationsCtrl" data-ng-init="loadAssociations()" data-ng-cloak>
+  <div class="panel-heading">Available plugins</div>
+  <div class="panel-body">
+    <div data-ng-repeat="association in associations">
+      <span data-ng-bind="::association.name"></span> - <span data-ng-bind="::association.description"></span>
+    </div>
+  </div>
+</div>

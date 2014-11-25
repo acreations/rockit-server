@@ -1,21 +1,30 @@
-define(['angular'], function (angular) {
+define(['angular', 'configs'], function (angular, configs) {
   'use strict';
 
-  return angular.module('rockit.services.settings', ['rockit.configs'])
-    .factory('SettingsService', ['$q', '$http', 'settings', function (q, http, settings) {
+  var serviceUrl = configs.rockit.serverUrl + '/settings';
 
-      var serviceUrl = settings.serverUrl + '/settings';
+  return angular.module('rockit.settings.service', ['rockit.services'])
+    .factory('SettingsService', ['$q', '$http', 'RockitService', function (q, http, baseService) {
 
-      return {
-        list: function () {
-          var deferred = q.defer();
+      var extended = angular.extend(baseService, {});
 
-          http.get(serviceUrl).success(function (response) {
-            deferred.resolve(response);
-          });
+      extended.list =  function () {
+        var deferred = q.defer();
 
-          return deferred.promise;
-        }
+        http.get(serviceUrl).success(function (response) {
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
       };
-    }]);
+
+      return extended;
+    }])
+    .config(function () {
+
+      if (configs.rockit.mockEnabled) {
+        serviceUrl = configs.rockit.mockUrl + '/settings/responses/list.response';
+      }
+
+    });
 });

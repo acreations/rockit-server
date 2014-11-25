@@ -1,8 +1,10 @@
 {% extends 'base/login/login.html' %}
 {% load i18n %}
 
+{% block breadcrumb %}{% endblock %}
+
 {% block section %}
-  <h1>{% trans "How it works." %}</h1>
+  <h2>{% trans "Dashboard" %}</h2>
 
   <div class="row">
     <div class="col-md-4">
@@ -21,5 +23,7 @@
       <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
     </div>
   </div>
+
+  {% include 'base/home/plugins.html' %}
 
 {% endblock %}

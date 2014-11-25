@@ -1,14 +1,11 @@
-define(['angular'], function (angular) {
+define(function () {
   'use strict';
 
-  var module = angular.module('rockit.configs', []);
-
-  return module.factory('settings', function () {
-
-    var server = '//localhost:8000';
-
-    return {
-      'serverUrl': server + '/api/rockit',
-    };
-  });
+  return {
+    rockit: {
+      'serverUrl': '//localhost:8000/api/rockit',
+      'mockEnabled': true,
+      'mockUrl': '//localhost:8000/static/rockit/js'
+    }
+  };
 });

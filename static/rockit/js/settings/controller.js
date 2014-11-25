@@ -1,18 +1,20 @@
 define(['angular', 'settings/service'], function (angular) {
   'use strict';
 
-  return angular.module('rockit.controllers.settings', ['rockit.services', 'rockit.services.settings'])
+  return angular.module('rockit.settings', ['rockit.settings.service'])
 
-    .controller('SettingsCtrl', ['$scope', '$log', 'RockitService', 'SettingsService', function (scope, log, resource, settings) {
+    .controller('SettingsCtrl', ['$scope', '$log', 'SettingsService', function (scope, log, settings) {
 
       scope.onSelectSettings = function (setting) {
         scope.selected = setting;
 
         // Settings has resource
         if (scope.selected.url) {
-          resource.get(scope.selected.url).then(
+          settings.get(scope.selected.url).then(
             function (data) {
-              log.debug('Successful got resource', data);
+              log.debug('Successful got selected settings', data);
+
+              scope.selected.items = data.items;
             }
           );
         }

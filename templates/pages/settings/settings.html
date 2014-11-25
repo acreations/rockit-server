@@ -1,22 +1,39 @@
 {% extends 'base/login/login.html' %}
 {% load i18n %}
 
-{% block section %}
+{% block page_title %}Settings{% endblock %}
 
-	<div class="page-header">
-		<h3><i class="fa fa-cog"></i> Settings</h3>
-	</div>
+{% block breadcrumb_items %}
+<li class="active">Settings</li>
+{% endblock %}
+
+{% block section %}
 
 	<div class="row" data-ng-controller="SettingsCtrl" data-ng-init="loadSettings()">
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked">
 				<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
-					<a data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
+					<a href="#	" data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
 				</li>
 			</ul>
 		</div>
-		<div class="col-md-10">
-			<h4 data-ng-bind="selected.name"></h4>
+		<div class="col-md-10 ng-hide" data-ng-show="selected">
+			<div class="panel panel-default">
+				<div class="panel-heading" data-ng-bind="selected.name"></div>
+				<div class="panel-body">
+					<form class="form-horizontal" role="form" data-ng-show="selected.items.length">
+						<div class="form-group" data-ng-repeat="item in selected.items">
+							<label class="col-sm-3 control-label" data-ng-bind="::item.name"></label>
+							<div class="col-sm-8">
+								<p class="form-control-static" data-ng-bind="::item.value"></p>
+							</div>
+						</div>
+					</form>
+					<p data-ng-show="!selected.items.length">
+						No available settings found
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 

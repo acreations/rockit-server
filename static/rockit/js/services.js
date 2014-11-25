@@ -1,4 +1,4 @@
-define(['angular'], function (angular) {
+define(['angular', 'configs'], function (angular, configs) {
   'use strict';
 
   return angular.module('rockit.services', [])
@@ -15,5 +15,17 @@ define(['angular'], function (angular) {
           return deferred.promise;
         }
       };
+    }])
+    .config(['$provide', function (provide) {
+      if (configs.rockit.mockEnabled) {
+        provide.decorator('RockitService', ['$delegate', '$timeout', function (delegate, timeout) {
+          var getFn = delegate.get;
+          delegate.get = function () {
+            timeout.setTimeout(function () {
+              getFn();
+            }, 5000);
+          };
+        }]);
+      }
     }]);
 });

@@ -10,8 +10,8 @@ require.config({
   /*
    * Useful convertings
    */
-  maps: {
-
+  map: {
+    "settings/service": "mock"
   },
 
   paths: {
@@ -28,7 +28,7 @@ require.config({
 require.config({
   paths: {
     "angular": "/static/angular/angular.min",
-  }
+  },
 });
 
 require(['angular', 'app'], function (angular, app) {
