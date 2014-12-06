@@ -16,10 +16,7 @@
       </a>
       <div class="media-body">
         <h4 class="media-heading">
-          <span data-ng-bind="node.name" data-ng-click="editName = true" data-ng-hide="editName"></span>
-          <div>
-            <input data-ng-value="node.name" data-ng-blur="editName = false" data-ng-show="editName"></input>
-          </div>
+          <editable data-ng-model="node.name" data-on-update="updateName(node, value)"></editable>
         </h4>
         <p data-ng-bind="::node.association.description"></p>
       </div>
