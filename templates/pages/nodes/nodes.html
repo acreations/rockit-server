@@ -1,0 +1,29 @@
+{% extends 'base/login/login.html' %}
+{% load i18n %}
+
+{% block page_title %}Settings{% endblock %}
+
+{% block breadcrumb_items %}
+<li class="active">Nodes</li>
+{% endblock %}
+
+{% block section %}
+
+  <div class="row" data-ng-controller="NodesCtrl" data-ng-init="loadNodes()">
+    <div class="media" data-ng-repeat="node in nodes">
+      <a class="media-left" href="#">
+        <img src="http://placehold.it/100">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <span data-ng-bind="node.name" data-ng-click="editName = true" data-ng-hide="editName"></span>
+          <div>
+            <input data-ng-value="node.name" data-ng-blur="editName = false" data-ng-show="editName"></input>
+          </div>
+        </h4>
+        <p data-ng-bind="::node.association.description"></p>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

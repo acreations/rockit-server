@@ -9,23 +9,14 @@ define(['angular', 'configs'], function (angular, configs) {
           var deferred = q.defer();
 
           http.get(resource).success(function (response) {
+            if (configs.rockit.mockEnabled) {
+              // Set a timer
+            }
             deferred.resolve(response);
           });
 
           return deferred.promise;
         }
       };
-    }])
-    .config(['$provide', function (provide) {
-      if (configs.rockit.mockEnabled) {
-        provide.decorator('RockitService', ['$delegate', '$timeout', function (delegate, timeout) {
-          var getFn = delegate.get;
-          delegate.get = function () {
-            timeout.setTimeout(function () {
-              getFn();
-            }, 5000);
-          };
-        }]);
-      }
     }]);
 });
