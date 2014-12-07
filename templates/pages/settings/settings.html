@@ -9,11 +9,11 @@
 
 {% block section %}
 
-	<div class="row" data-ng-controller="SettingsCtrl" data-ng-init="loadSettings()">
+	<div class="row" data-ng-controller="SettingsCtrl" data-ng-init="loadSettings('{{request.GET.s}}')">
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked">
 				<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
-					<a href="#	" data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
+					<a href="?s={% verbatim %}{{::setting.name}}{% endverbatim %}" data-ng-bind="::setting.name"></a>
 				</li>
 			</ul>
 		</div>

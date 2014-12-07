@@ -20,7 +20,7 @@ define(['angular', 'settings/service'], function (angular) {
         }
       };
 
-      scope.loadSettings = function () {
+      scope.loadSettings = function (preselect) {
         log.debug('Load rockit settings');
 
         settings.list().then(
@@ -28,7 +28,20 @@ define(['angular', 'settings/service'], function (angular) {
             log.debug('Successful got settings', data);
 
             scope.settings = data;
-            scope.onSelectSettings(data[0]);
+
+            var _preselect = data[0];
+
+            if (preselect) {
+              log.debug('Trying to preselect', preselect);
+
+              angular.forEach(data, function (setting) {
+                if (setting.name === preselect) {
+                  _preselect = setting;
+                }
+              });
+            }
+
+            scope.onSelectSettings(_preselect);
           },
           function () {
             log.error('Exception when trying to load services');

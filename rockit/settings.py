@@ -58,6 +58,10 @@ MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'rockit.urls'
 
 WSGI_APPLICATION = 'rockit.wsgi.application'
