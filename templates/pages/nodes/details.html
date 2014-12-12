@@ -1,0 +1,46 @@
+{% extends 'base/login/login.html' %}
+{% load i18n %}
+
+{% block inject_controller %}data-ng-controller="NodesCtrl" {% endblock %}
+
+{% block breadcrumb_items %}
+<li><a href="/nodes">Nodes</a></li>
+<li class="active" data-ng-bind="::selected.name"></li>
+{% endblock %}
+
+{% block section %}
+
+  <div data-ng-init="loadNode('{{request.GET.r}}')">
+    <h2 data-ng-bind="::selected.name"></h2>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Commands available</div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form" data-ng-show="selected.commands.length">
+          <div class="form-group" data-ng-repeat="detail in selected.commands">
+            <label class="col-sm-3 control-label" data-ng-bind="::detail.title"></label>
+            <div class="col-sm-8">
+              <p class="form-control-static" data-ng-bind="::detail.value"></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Z-Wave</div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form" data-ng-show="selected.details.length">
+          <div class="form-group" data-ng-repeat="detail in selected.details" data-ng-if="detail.value">
+            <label class="col-sm-3 control-label" data-ng-bind="::detail.title"></label>
+            <div class="col-sm-8">
+              <p class="form-control-static" data-ng-bind="::detail.value"></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
