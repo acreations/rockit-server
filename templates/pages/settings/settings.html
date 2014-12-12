@@ -13,7 +13,7 @@
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked">
 				<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
-					<a href="?s={% verbatim %}{{::setting.name}}{% endverbatim %}" data-ng-bind="::setting.name"></a>
+					<a href="/settings/?s={% verbatim %}{{::setting.name}}{% endverbatim %}" data-ng-bind="::setting.name"></a>
 				</li>
 			</ul>
 		</div>

@@ -5,6 +5,21 @@ define(['angular', 'nodes/service'], function (angular) {
 
     .controller('NodesCtrl', ['$scope', '$log', 'NodesService', function (scope, log, service) {
 
+      scope.loadNode = function (resource) {
+        log.debug('Trying to load node', resource);
+
+        service.get(resource).then(
+          function (data) {
+            log.debug('Successful get node', data);
+
+            scope.selected = data;
+          },
+          function () {
+            log.error('Exception when trying to get node');
+          }
+        );
+      };
+
       scope.loadNodes = function () {
         log.debug('Load rockit settings');
 

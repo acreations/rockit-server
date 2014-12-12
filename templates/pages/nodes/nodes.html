@@ -9,9 +9,9 @@
 
 {% block section %}
 
-  <div class="row" data-ng-controller="NodesCtrl" data-ng-init="loadNodes()">
+  <div data-ng-controller="NodesCtrl" data-ng-init="loadNodes()">
     <div class="media" data-ng-repeat="node in nodes">
-      <a class="media-left" href="#">
+      <a class="media-left" href="/nodes/detail/?r={% verbatim %}{{::node.url}}{% endverbatim %}">
         <img src="http://placehold.it/100">
       </a>
       <div class="media-body">

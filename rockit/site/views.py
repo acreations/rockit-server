@@ -7,5 +7,8 @@ def home(request):
 def nodes(request):
     return render_to_response('pages/nodes/nodes.html', context_instance=RequestContext(request))
 
+def node(request):
+    return render_to_response('pages/nodes/details.html', context_instance=RequestContext(request))
+
 def settings(request):
     return render_to_response('pages/settings/settings.html', context_instance=RequestContext(request))
