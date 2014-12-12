@@ -10,7 +10,7 @@ class Node(models.Model):
 
     manufacturer_id   = models.CharField(max_length = 50, default = '')
     manufacturer_name = models.CharField(max_length = 50, default = '')
-    
+
     version = models.CharField(max_length = 10, default = '')
 
     listening = models.BooleanField(default = False)
@@ -54,6 +54,7 @@ class Setting(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500, blank=True)
     value       = models.CharField(max_length=100, blank=True)
+    default     = models.CharField(max_length=100)
     readonly    = models.BooleanField(default=True)
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)

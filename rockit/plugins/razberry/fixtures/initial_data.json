@@ -17,19 +17,19 @@
         "fields": {
             "name":          "RAZBERRY_SERVER",
             "description":   "Razberry server",
-            "value":         "192.168.1.2",
+            "default":       "192.168.1.2",
             "readonly":      false,
             "date_modified": "2014-02-15T00:00:00+00:00",
             "date_added":    "2014-02-15T00:00:00+00:00"
         }
-    },  
+    },
     {
         "model": "razberry.setting",
         "pk": 10,
         "fields": {
             "name":          "SERVICE_TIMEOUT",
             "description":   "Razberry server",
-            "value":         "30",
+            "default":       "30",
             "readonly":      false,
             "date_modified": "2014-02-15T00:00:00+00:00",
             "date_added":    "2014-02-15T00:00:00+00:00"
