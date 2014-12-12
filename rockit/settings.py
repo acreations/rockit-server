@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'rockit.core',
     'rockit.plugins.mailout',
     'rockit.plugins.razberry',
-    'south'
 )
 
 MIDDLEWARE_CLASSES = (
