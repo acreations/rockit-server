@@ -27,7 +27,7 @@ def node_command_value(identifier, command_id):
 
         if data:
             return service.retrieve("%s.%s" % (command_id, data))
-            
+
     return None
 
 @task(name='razberry.node.command.update.value')
@@ -71,12 +71,21 @@ def node_detailed(identifier, holder):
 def settings(holder):
 
     for setting in models.Setting.objects.all():
-        holder.add(**{
-            'key': setting.id,
-            'name': setting.name,
-            'value': setting.value,
-            'readonly': setting.readonly
-            })
+        if setting.value:
+            holder.add(**{
+                'key': setting.id,
+                'name': setting.name,
+                'value': setting.value,
+                'readonly': setting.readonly
+                })
+        else:
+            holder.add(**{
+                'key': setting.id,
+                'name': setting.name,
+                'value': setting.default,
+                'readonly': setting.readonly
+                })
+
 
     return holder
 
