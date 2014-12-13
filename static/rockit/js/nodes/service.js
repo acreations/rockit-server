@@ -12,13 +12,7 @@ define(['angular', 'configs'], function (ng, configs) {
     var extended = ng.extend(baseService, {});
 
     extended.list =  function () {
-      var deferred = q.defer();
-
-      http.get(serviceUrl).success(function (response) {
-        deferred.resolve(response);
-      });
-
-      return deferred.promise;
+      return extended._list(serviceUrl);
     };
 
     return extended;

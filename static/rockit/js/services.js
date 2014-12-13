@@ -5,10 +5,10 @@ define(['angular', 'configs'], function (angular, configs) {
     .factory('RockitService', ['$q', '$http', function (q, http) {
 
       return {
-        /*
-         * Get a resource
+        /**
+         * Original list function that should not be public use
          */
-        get: function (resource) {
+        _list: function (resource) {
           var deferred = q.defer();
 
           http.get(resource).success(function (response) {
@@ -17,10 +17,10 @@ define(['angular', 'configs'], function (angular, configs) {
 
           return deferred.promise;
         },
-        /**
-         *
+        /*
+         * Get a resource
          */
-        list: function (resource) {
+        get: function (resource) {
           var deferred = q.defer();
 
           http.get(resource).success(function (response) {
