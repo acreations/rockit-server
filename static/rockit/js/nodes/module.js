@@ -7,6 +7,6 @@ define(['angular', './controller', './service'], function (ng, controller, servi
 
   return module
     .service('NodesService', service)
-    .controller('NodesCtrl', controller);
+    .controller('NodesController', controller);
 
 });
