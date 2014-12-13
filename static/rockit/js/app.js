@@ -5,7 +5,7 @@ define([
   'services',
   'associations/controller',
   'nodes/controller',
-  'settings/controller'], function (ng) {
+  'settings/module'], function (ng) {
   'use strict';
 
   return ng.module("rockit", [
