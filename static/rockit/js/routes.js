@@ -3,16 +3,11 @@ define(['angular', 'angular-route'], function (ng) {
 
   return ng.module("rockit.routes", ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/home', {
-            templateUrl: 'partials/home'
-        });
-        $routeProvider.when('/nodes', {
-            templateUrl: 'partials/nodes',
-            controller: 'NodesController'
-        });
-
-        $routeProvider.otherwise({
-            redirectTo: '/home'
-        });
+      $routeProvider.when('/home', {
+        templateUrl: 'partials/home'
+      });
+      $routeProvider.otherwise({
+        redirectTo: '/home'
+      });
     }]);
 });

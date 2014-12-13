@@ -1,12 +1,17 @@
 /**
  * Module for handle nodes
  */
-define(['angular', './controller', './service'], function (ng, controller, service) {
+define(['angular',
+  './controller/nodes',
+  './controller/details',
+  './service',
+  './routes'], function (ng, nodesCtrl, detailsCtrl,service, routes) {
 
   var module = ng.module("rockit.nodes", ['rockit.services']);
 
   return module
     .service('NodesService', service)
-    .controller('NodesController', controller);
-
+    .controller('NodesController', nodesCtrl)
+    .controller('NodesDetailsController', detailsCtrl)
+    .config(routes);
 });

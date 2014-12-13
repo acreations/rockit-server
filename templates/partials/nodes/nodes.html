@@ -1,6 +1,6 @@
 <div data-ng-init="loadNodes()">
   <div class="media" data-ng-repeat="node in nodes">
-    <a class="media-left" href="/nodes/detail/?r={% verbatim %}{{::node.url}}{% endverbatim %}">
+    <a class="media-left" href="/#nodes/{% verbatim %}{{::node.uuid}}{% endverbatim %}">
       <img src="http://placehold.it/100">
     </a>
     <div class="media-body">
