@@ -1,16 +1,14 @@
-define(['angular', 'configs'], function (ng, configs) {
+define(['configs'], function (configs) {
   'use strict';
 
   var serviceUrl = configs.rockit.serverUrl + '/associations';
 
-  return ['RockitService', function (baseService) {
+  return ['RockitService', function (service) {
 
-    var extended = ng.extend(baseService, {});
-
-    extended.list =  function () {
-      return extended._list(serviceUrl);
+    return {
+      list: function () {
+        return service.list(serviceUrl);
+      }
     };
-
-    return extended;
   }];
 });
