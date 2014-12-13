@@ -7,7 +7,7 @@ define(['angular', 'configs'], function (ng, configs) {
     serviceUrl = configs.rockit.mockUrl + '/settings/responses/list.response';
   }
 
-  return ['$q', '$http', 'RockitService', function (q, http, baseService) {
+  return ['RockitService', function (baseService) {
 
     var extended = ng.extend(baseService, {});
 

@@ -3,7 +3,7 @@ define([
   'directives',
   'routes',
   'services',
-  'associations/controller',
+  'associations/module',
   'nodes/module',
   'settings/module'], function (ng) {
   'use strict';

@@ -1,21 +1,16 @@
-define(['angular', 'configs'], function (angular, configs) {
+define(['angular', 'configs'], function (ng, configs) {
   'use strict';
 
-  return angular.module('rockit.associations.service', [])
-    .factory('AssociationsService', ['$q', '$http', function (q, http) {
+  var serviceUrl = configs.rockit.serverUrl + '/associations';
 
-      var serviceUrl = configs.rockit.serverUrl + '/associations';
+  return ['RockitService', function (baseService) {
 
-      return {
-        list: function () {
-          var deferred = q.defer();
+    var extended = ng.extend(baseService, {});
 
-          http.get(serviceUrl).success(function (response) {
-            deferred.resolve(response);
-          });
+    extended.list =  function () {
+      return extended._list(serviceUrl);
+    };
 
-          return deferred.promise;
-        }
-      };
-    }]);
+    return extended;
+  }];
 });
