@@ -4,11 +4,11 @@ define([], function () {
   return ['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/nodes', {
       templateUrl: 'partials/nodes',
-      controller: 'NodesController'
+      controller: 'NodeListController'
     });
     $routeProvider.when('/nodes/:resource', {
       templateUrl: 'partials/nodes/details',
-      controller: 'NodesDetailsController'
+      controller: 'NodeDetailController'
     });
   }];
 });

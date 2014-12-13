@@ -1,7 +1,7 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$log', 'NodesService', function (scope, log, service) {
+  return ['$scope', '$log', 'NodeService', function (scope, log, service) {
 
     scope.loadNode = function (resource) {
       log.debug('Trying to load node', resource);
