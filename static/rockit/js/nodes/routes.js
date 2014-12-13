@@ -6,7 +6,7 @@ define([], function () {
       templateUrl: 'partials/nodes',
       controller: 'NodeListController'
     });
-    $routeProvider.when('/nodes/:resource', {
+    $routeProvider.when('/nodes/:uuid', {
       templateUrl: 'partials/nodes/details',
       controller: 'NodeDetailController'
     });

@@ -8,7 +8,7 @@ define(['angular', 'configs'], function (angular, configs) {
         /**
          * Original list function that should not be public use
          */
-        _list: function (resource) {
+        list: function (resource) {
           var deferred = q.defer();
 
           http.get(resource).success(function (response) {

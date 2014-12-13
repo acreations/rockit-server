@@ -1,4 +1,4 @@
-define(['angular', 'configs'], function (ng, configs) {
+define(['configs'], function (configs) {
   'use strict';
 
   var serviceUrl = configs.rockit.serverUrl + '/nodes';
@@ -7,14 +7,18 @@ define(['angular', 'configs'], function (ng, configs) {
     serviceUrl = configs.rockit.mockUrl + '/settings/responses/list.response';
   }
 
-  return ['RockitService', function (baseService) {
+  return ['RockitService', function (service) {
 
-    var extended = ng.extend(baseService, {});
-
-    extended.list =  function () {
-      return extended._list(serviceUrl);
+    return {
+      list: function () {
+        return service.list(serviceUrl);
+      },
+      get: function (resource) {
+        return service.get(resource);
+      },
+      update: function (resource, update) {
+        return service.update(resource, update);
+      }
     };
-
-    return extended;
   }];
 });

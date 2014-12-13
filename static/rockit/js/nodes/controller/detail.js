@@ -1,59 +1,48 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$log', 'NodeService', function (scope, log, service) {
+  return ['$scope', '$routeParams', '$log', 'NodeService', function (scope, routeParams, log, service) {
 
-    scope.loadNode = function (resource) {
-      log.debug('Trying to load node', resource);
+    var loadSelectedNode = function (resource) {
+      if (resource) {
+        service.get(resource).then(
+          function (data) {
+            log.debug('Successful retrieve node details', data);
 
-      service.get(resource).then(
-        function (data) {
-          log.debug('Successful get node', data);
-
-          scope.selected = data;
-        },
-        function () {
-          log.error('Exception when trying to get node');
-        }
-      );
+            scope.selected = data;
+          },
+          function () {
+            log.error('Exception when trying to get node details');
+          }
+        );
+      }
     };
 
-    scope.loadNodes = function () {
-      log.debug('Load rockit settings');
+    var onCreate = function () {
+      var uuid = routeParams.uuid;
+
+      log.debug('Trying to get selected node details', uuid);
 
       service.list().then(
         function (data) {
-          log.debug('Successful got nodes', data);
+          var found;
 
-          scope.nodes = data;
+          angular.forEach(data, function (node) {
+            if (node.uuid === uuid) {
+              found = node;
+            }
+          });
+
+          if (found) {
+           loadSelectedNode(found.url);
+          }
         },
         function () {
-          log.error('Exception when trying to load services');
+          log.error('Exception when trying to get nodes', uuid);
         }
       );
     };
 
-    scope.updateName = function (node, name) {
-      if (node.name !== name) {
-        log.debug('Trying to update name of node', node, name);
-
-        var update = {
-          'name': name,
-          'association': node.association,
-        };
-
-        service.update(node.url, update).then(
-          function (data) {
-            log.debug('Successful updated name', data);
-          },
-          function () {
-            log.error('Exception when trying to update name');
-          }
-        );
-
-      } else {
-        log.debug('Trying to change to same name ... skipping');
-      }
-    };
+    onCreate();
   }];
 });
