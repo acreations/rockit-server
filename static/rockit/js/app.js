@@ -4,7 +4,7 @@ define([
   'routes',
   'services',
   'associations/controller',
-  'nodes/controller',
+  'nodes/module',
   'settings/module'], function (ng) {
   'use strict';
 

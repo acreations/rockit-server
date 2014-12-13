@@ -17,6 +17,18 @@ define(['angular', 'configs'], function (angular, configs) {
 
           return deferred.promise;
         },
+        /**
+         *
+         */
+        list: function (resource) {
+          var deferred = q.defer();
+
+          http.get(resource).success(function (response) {
+            deferred.resolve(response);
+          });
+
+          return deferred.promise;
+        },
         /*
          * Update a resource
          */
