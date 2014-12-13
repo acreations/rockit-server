@@ -6,8 +6,9 @@ define(['angular',
   './controller/detail',
   './service',
   './routes'], function (ng, nodeListCtrl, nodeDetailCtrl, service, routes) {
+  'use strict';
 
-  var module = ng.module("rockit.nodes", ['rockit.services']);
+  var module = ng.module("rockit.nodes", ['rockit']);
 
   return module
     .service('NodeService', service)

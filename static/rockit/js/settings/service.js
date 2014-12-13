@@ -1,13 +1,13 @@
-define(['configs'], function (configs) {
+define([], function () {
   'use strict';
 
-  var serviceUrl = configs.rockit.serverUrl + '/settings';
+  return ['RockitConfigs', 'RockitService', function (configs, service) {
 
-  if (configs.rockit.mockEnabled) {
-    serviceUrl = configs.rockit.mockUrl + '/settings/responses/list.response';
-  }
+    var serviceUrl = configs.serverUrl + '/settings';
 
-  return ['RockitService', function (service) {
+    if (configs.mockEnabled) {
+      serviceUrl = configs.mockUrl + '/settings/responses/list.response';
+    }
 
     return {
       list: function () {

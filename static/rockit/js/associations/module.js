@@ -4,7 +4,7 @@
 define(['angular', './controller', './service'], function (ng, controller, service) {
   'use strict';
 
-  var module = ng.module("rockit.associations", ['rockit.services']);
+  var module = ng.module("rockit.associations", ['rockit']);
 
   return module
     .service('AssociationsService', service)

@@ -1,13 +1,15 @@
-define(['configs'], function (configs) {
+define([], function () {
   'use strict';
 
-  var serviceUrl = configs.rockit.serverUrl + '/nodes';
+  return ['RockitConfigs', 'RockitService', function (configs, service) {
 
-  if (configs.rockit.mockEnabled && false) {
-    serviceUrl = configs.rockit.mockUrl + '/settings/responses/list.response';
-  }
+    console.log(configs)
 
-  return ['RockitService', function (service) {
+    var serviceUrl = configs.serverUrl + '/nodes';
+
+    if (configs.mockEnabled && false) {
+      serviceUrl = configs.mockUrl + '/settings/responses/list.response';
+    }
 
     return {
       list: function () {

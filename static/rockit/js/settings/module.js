@@ -7,7 +7,7 @@ define(['angular',
   './routes'], function (ng, controller, service, routes) {
   'use strict';
 
-  var module = ng.module("rockit.settings", ['ngRoute', 'rockit.services']);
+  var module = ng.module("rockit.settings", ['rockit']);
 
   return module
     .service('SettingsService', service)

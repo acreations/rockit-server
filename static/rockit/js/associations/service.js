@@ -1,9 +1,9 @@
-define(['configs'], function (configs) {
+define([], function () {
   'use strict';
 
-  var serviceUrl = configs.rockit.serverUrl + '/associations';
+  return ['RockitConfigs', 'RockitService', function (configs, service) {
 
-  return ['RockitService', function (service) {
+    var serviceUrl = configs.serverUrl + '/associations';
 
     return {
       list: function () {
