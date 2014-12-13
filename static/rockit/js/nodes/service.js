@@ -3,8 +3,6 @@ define([], function () {
 
   return ['RockitConfigs', 'RockitService', function (configs, service) {
 
-    console.log(configs)
-
     var serviceUrl = configs.serverUrl + '/nodes';
 
     if (configs.mockEnabled && false) {

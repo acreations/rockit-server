@@ -1,0 +1,13 @@
+<div class="panel panel-default" data-ng-controller="NodeDetailRazberryController">
+  <div class="panel-heading">Z-Wave specific settings</div>
+  <div class="panel-body">
+    <form class="form-horizontal" role="form" data-ng-show="details.length">
+      <div class="form-group" data-ng-repeat="detail in details" data-ng-if="detail.value">
+        <label class="col-sm-3 control-label" data-ng-bind="::detail.title | translate"></label>
+        <div class="col-sm-8">
+          <p class="form-control-static" data-ng-bind="::detail.value"></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

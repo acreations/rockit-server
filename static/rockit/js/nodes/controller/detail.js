@@ -4,7 +4,7 @@ define([], function () {
   return ['$scope', '$routeParams', '$log', 'RockitTranslateService', 'NodeService',
     function (scope, routeParams, log, translate, service) {
 
-      translate.addPart('nodes-razberry');
+      translate.addPart("nodes");
 
       var loadSelectedNode = function (resource) {
         if (resource) {
@@ -12,7 +12,14 @@ define([], function () {
             function (data) {
               log.debug('Successful retrieve node details', data);
 
+              translate.addPart("nodes-" + data.association.entry);
+
+              angular.forEach(data.commands, function (command) {
+                command.partial = "/partials/commands/" + command.name;
+              });
+
               scope.selected = data;
+              scope.settings = "/partials/nodes/details/" + data.association.entry;
             },
             function () {
               log.error('Exception when trying to get node details');

@@ -14,18 +14,18 @@
 
       {% block css_meta %}
         {% block external_css %}
-          <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
           <style>
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
           </style>
-          <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+          <link rel="stylesheet" href="/static/Bootflat/css/bootstrap.min.css">
+          <link rel="stylesheet" href="/static/Bootflat/bootflat/css/bootflat.min.css">
           <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
         {% endblock %}
         {% block internal_css %}
-          <link href="{% static 'openstash/css/openstash.css' %}" rel="stylesheet">
+          <link href="{% static 'rockit/css/rockit.css' %}" rel="stylesheet">
         {% endblock %}
       {% endblock %}
 
@@ -64,7 +64,7 @@
     {% block js %}
         <script src="/static/jquery/dist/jquery.min.js"></script>
       {% block js_bootstrap %}
-        <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/static/Bootflat/js/bootstrap.min.js"></script>
       {% endblock %}
       {% block js_inline %}{% endblock %}
     {% endblock %}

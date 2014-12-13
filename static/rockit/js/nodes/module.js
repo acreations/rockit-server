@@ -4,15 +4,18 @@
 define(['angular',
   './controller/list',
   './controller/detail',
+  './controller/detail-razberry',
   './service',
-  './routes'], function (ng, nodeListCtrl, nodeDetailCtrl, service, routes) {
+  './routes',
+  './commands/module'], function (ng, nodeListCtrl, nodeDetailCtrl, razberryCtrl, service, routes) {
   'use strict';
 
-  var module = ng.module("rockit.nodes", ['rockit']);
+  var module = ng.module("rockit.nodes", ['rockit', 'rockit.nodes.commands']);
 
   return module
     .service('NodeService', service)
     .controller('NodeListController', nodeListCtrl)
     .controller('NodeDetailController', nodeDetailCtrl)
+    .controller('NodeDetailRazberryController', razberryCtrl)
     .config(routes);
 });

@@ -5,25 +5,11 @@
   <div class="panel-body">
     <form class="form-horizontal" role="form" data-ng-show="selected.commands.length">
       <div class="form-group" data-ng-repeat="command in selected.commands">
-        <label class="col-sm-3 control-label" data-ng-bind="::command.name  "></label>
-        <div class="col-sm-8">
-          <p class="form-control-static" data-ng-bind="::detail.value"></p>
-        </div>
+        <div data-ng-include="command.partial"></div>
       </div>
     </form>
+    <p data-ng-hide="selected.commands.length"> No available commands exists for this node</div></p>
   </div>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">Z-Wave</div>
-  <div class="panel-body">
-    <form class="form-horizontal" role="form" data-ng-show="selected.details.length">
-      <div class="form-group" data-ng-repeat="detail in selected.details" data-ng-if="detail.value">
-        <label class="col-sm-3 control-label" data-ng-bind="::detail.title | translate"></label>
-        <div class="col-sm-8">
-          <p class="form-control-static" data-ng-bind="::detail.value"></p>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+<div data-ng-include="settings">
