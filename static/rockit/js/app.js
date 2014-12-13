@@ -5,7 +5,7 @@ define([
   'configs/translate',
   'services/rockit',
   'services/translate',
-  'directives',
+  'directives/module',
   'associations/module',
   'nodes/module',
   'settings/module'], function (ng, constants, routes, translate, rockitService, translateService) {

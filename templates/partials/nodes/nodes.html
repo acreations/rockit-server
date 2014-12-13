@@ -1,13 +1,18 @@
-<div data-ng-init="loadNodes()">
-  <div class="media" data-ng-repeat="node in nodes">
-    <a class="media-left" href="/#nodes/{% verbatim %}{{::node.uuid}}{% endverbatim %}">
-      <img src="http://placehold.it/100">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">
-        <editable data-ng-model="node.name" data-on-update="updateName(node, value)"></editable>
-      </h4>
+<h2>Nodes</h2>
+
+
+<div class="well selectable" data-ng-repeat="node in nodes" data-ng-click="onSelectedNode(node)">
+  <div class="row">
+    <div class="col-md-2 col-sm-3">
+      <img src="http://placehold.it/150">
+    </div>
+    <div class="col-md-10 col-sm-9">
+      <h4 data-ng-bind="::node.name"></h4>
       <p data-ng-bind="::node.association.description"></p>
+      <hr />
+      <div class="pull-right">
+        <span class="label label-info" data-ng-bind="::node.association.name"></span>
+      </div>
     </div>
   </div>
 </div>

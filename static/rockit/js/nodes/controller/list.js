@@ -1,24 +1,9 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$log', 'NodeService', function (scope, log, service) {
+  return ['$scope', '$location', '$log', 'NodeService', function (scope, location, log, service) {
 
-    scope.loadNode = function (resource) {
-      log.debug('Trying to load node', resource);
-
-      service.get(resource).then(
-        function (data) {
-          log.debug('Successful get node', data);
-
-          scope.selected = data;
-        },
-        function () {
-          log.error('Exception when trying to get node');
-        }
-      );
-    };
-
-    scope.loadNodes = function () {
+    scope.getAvailableNodes = function () {
       log.debug('Load rockit settings');
 
       service.list().then(
@@ -31,6 +16,14 @@ define([], function () {
           log.error('Exception when trying to load services');
         }
       );
+    };
+
+    scope.onSelectedNode = function(node) {
+      if (node) {
+        location.path('/nodes/' + node.uuid);
+      } else {
+        log.error('No node is selected');
+      }
     };
 
     scope.updateName = function (node, name) {
@@ -55,5 +48,7 @@ define([], function () {
         log.debug('Trying to change to same name ... skipping');
       }
     };
+
+    scope.getAvailableNodes();
   }];
 });

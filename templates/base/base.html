@@ -43,13 +43,6 @@
 
     <div class="container" {% block inject_controller %}{% endblock %}>
 
-      {% block breadcrumb %}
-      <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-home"></i></a></li>
-        {% block breadcrumb_items %}{% endblock %}
-      </ol>
-      {% endblock %}
-
       <div ng-view>Laddar vy ...</div>
 
       {% block base_section %}
