@@ -20,7 +20,7 @@ define(['angular', 'settings/service'], function (angular) {
         }
       };
 
-      scope.loadSettings = function (preselect) {
+      scope.loadAvailableSettings = function (preselect) {
         log.debug('Load rockit settings');
 
         settings.list().then(

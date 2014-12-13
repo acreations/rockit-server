@@ -10,5 +10,5 @@ def nodes(request):
 def node(request):
     return render_to_response('pages/nodes/details.html', context_instance=RequestContext(request))
 
-def settings(request):
+def settings(request, setting=""):
     return render_to_response('pages/settings/settings.html', context_instance=RequestContext(request))

@@ -15,22 +15,23 @@ require.config({
   },
 
   paths: {
-    "angular": "//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min",
+    "angular": "/static/angular/angular.min",
+    "angular-route": "/static/angular-route/angular-route.min",
+    "angular-translate": "/static/angular-translate/angular-translate.min",
+    "angular-translate-lp": "/static/angular-translate-loader-partial/angular-translate-loader-partial.min",
+    "domReady": "/static/requirejs-domready/domReady"
   },
 
   shim: {
-    angular: {
+    'angular': {
       exports: "angular"
+    },
+    'angular-route': {
+      deps: ['angular']
     }
   }
 });
 
-require.config({
-  paths: {
-    "angular": "/static/angular/angular.min",
-  },
-});
-
-require(['angular', 'app'], function (angular, app) {
-  angular.bootstrap(document, [app.name]);
+require(['domReady!', 'angular', 'app'], function (document, ng, app) {
+  ng.bootstrap(document, [app.name]);
 });

@@ -3,23 +3,28 @@
 
 {% block page_title %}Settings{% endblock %}
 
+{% block inject_controller %}data-ng-controller="SettingsCtrl" data-ng-init="loadAvailableSettings('')"{% endblock %}
+
 {% block breadcrumb_items %}
 <li class="active">Settings</li>
 {% endblock %}
 
 {% block section %}
 
-	<div class="row" data-ng-controller="SettingsCtrl" data-ng-init="loadSettings('{{request.GET.s}}')">
+	<div class="row">
 		<div class="col-md-2">
 			<ul class="nav nav-pills nav-stacked">
 				<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
-					<a href="/settings/?s={% verbatim %}{{::setting.name}}{% endverbatim %}" data-ng-bind="::setting.name"></a>
+					<a href="#" data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
 				</li>
 			</ul>
 		</div>
 		<div class="col-md-10 ng-hide" data-ng-show="selected">
 			<div class="panel panel-default">
-				<div class="panel-heading" data-ng-bind="selected.name"></div>
+				<div class="panel-heading">
+					<span data-ng-bind="selected.name"></span>
+					<button type="button" class="btn btn-danger btn-xs pull-right">Disable</button>
+				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" data-ng-show="selected.items.length">
 						<div class="form-group" data-ng-repeat="item in selected.items">
@@ -34,6 +39,14 @@
 					</p>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="row" data-ng-show="settings">
+		<h3 class="col-md-12"><span data-ng-bind="settings.length"></span> available plugins</h3>
+
+		<div class="col-md-2" data-ng-repeat="setting in settings">
+			<span data-ng-bind="::setting.name"></span>
 		</div>
 	</div>
 

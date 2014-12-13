@@ -1,18 +1,19 @@
 define([
   'angular',
-  'configs',
   'directives',
+  'routes',
   'services',
   'associations/controller',
   'nodes/controller',
-  'settings/controller'], function (angular) {
+  'settings/controller'], function (ng) {
   'use strict';
 
-  return angular.module("rockit", [
+  return ng.module("rockit", [
     "rockit.directives",
+    "rockit.routes",
     "rockit.services",
     "rockit.associations",
     "rockit.nodes",
-    "rockit.settings",
+    "rockit.settings"
   ]);
 });
