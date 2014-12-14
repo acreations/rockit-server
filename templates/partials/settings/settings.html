@@ -1,4 +1,6 @@
-<h2>Settings</h2>
+<div class="page-header">
+	<h2>Settings</h2>
+</div>
 
 <div class="row" data-ng-init="loadAvailableSettings()">
 	<div class="col-md-2">
@@ -17,7 +19,7 @@
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" data-ng-show="selected.items.length">
 					<div class="form-group" data-ng-repeat="item in selected.items">
-						<label class="col-sm-3 control-label" data-ng-bind="::item.name"></label>
+						<label class="col-sm-3 control-label" data-ng-bind="::item.name | translate"></label>
 						<div class="col-sm-8">
 							<p class="form-control-static" data-ng-bind="::item.value"></p>
 						</div>

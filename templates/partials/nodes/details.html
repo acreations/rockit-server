@@ -1,4 +1,14 @@
-<h2 data-ng-bind="::selected.name"></h2>
+<div class="page-header" data-ng-model="selected.name">
+  <h2 data-ng-bind="selected.name" data-ng-click="onEdit()" data-ng-hide="editMode"></h2>
+
+  <form class="form-inline" role="form" data-ng-show="">
+    <div class="form-group">
+      <input data-ng-model="selected.name" type="text" class="form-control" >
+      <button type="submit" class="btn btn-primary" data-ng-click="done(onUpdateName)">Save</button>
+      <button type="button" class="btn" data-ng-click="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
 
 <div class="panel panel-default">
   <div class="panel-heading" data-ng-bind="'Commands available' | translate">Commands available</div>
