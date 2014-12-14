@@ -1,13 +1,13 @@
 define([], function () {
   'use strict';
 
-  return ['NodeService', function (service) {
+  return ['RockitNotifyService', 'NodeService', function (notify, service) {
     return {
       restricted: 'E',
       scope: {
         model: '=ngModel',
       },
-      template: '<input type="checkbox" data-ng-model="state" data-ng-change="onChangedState()"><span class="handle"></span>',
+      template: '<input type="checkbox" data-ng-model="state" data-ng-change="onChangedState()"><span class="handle selectable"></span></input>',
       controller: function ($scope, $log) {
 
         var ongoingRequest = false;
@@ -24,11 +24,17 @@ define([], function () {
 
             service.get(command).then(
               function () {
-                // Callback
+                if ($scope.state) {
+                  notify.info("Successfully <strong>turned on</strong> device");
+                } else {
+                  notify.info("Successfully <strong>turned off</strong> device");
+                }
               },
               function () {
                 $log.error('Failed to change state ... reverting');
                 $scope.state = !futureState;
+
+                notify.error("Exception when trying to set device")
               }
             ).finally(function () {
               ongoingRequest = false;
@@ -37,9 +43,10 @@ define([], function () {
           } else {
             $log.debug('Already processing request ... skipping');
             $scope.state = futureState;
+
+            notify.warning("Already an ongoing request");
           }
         };
-
       },
       link: function (scope) {
         scope.state = scope.model.values.current;

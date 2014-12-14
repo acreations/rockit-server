@@ -1,8 +1,8 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$log', 'RockitTranslateService', 'SettingsService',
-    function (scope, log, translation, settings) {
+  return ['$scope', '$log', 'RockitNotifyService', 'RockitTranslateService', 'SettingsService',
+    function (scope, log, notify, translation, settings) {
 
       translation.addPart('settings');
 
@@ -20,6 +20,16 @@ define([], function () {
           );
         }
       };
+
+      scope.toggleSettingAvailabilty = function (setting) {
+        log.debug('Toggle settings', setting);
+
+        if (setting.enabled) {
+          notify.info("Successfully activated plugin <strong>" + setting.name + "</strong>");
+        } else {
+          notify.info("Successfully deactivated plugin <strong>" + setting.name + "</strong>");
+        }
+      }
 
       scope.loadAvailableSettings = function (preselect) {
         log.debug('Load rockit settings');

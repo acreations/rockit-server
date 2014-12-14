@@ -10,5 +10,16 @@
         "entry": "mailout",
         "date_added": "2014-02-07T00:00:00+00:00"
         }
+    },
+    {
+        "model": "mailout.settings",
+        "pk": 1,
+        "fields": {
+            "name": "SMTP_SERVER",
+            "description": "SMTP server to send out mail",
+            "default": "",
+            "readonly": false,
+            "date_added": "2014-02-07T00:00:00+00:00"
+        }
     }
 ]

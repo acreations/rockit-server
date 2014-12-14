@@ -5,13 +5,13 @@
 <div class="row" data-ng-init="loadAvailableSettings()">
 	<div class="col-md-2">
 		<ul class="nav nav-pills nav-stacked">
-			<li class="selectable" role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
+			<li class="selectable" role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}" data-ng-show="setting.enabled">
 				<a data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
 			</li>
 		</ul>
 	</div>
 	<div class="col-md-10 ng-hide" data-ng-show="selected">
-		<div class="panel panel-default">
+		<div class="panel panel-default" data-ng-show="selected.enabled">
 			<div class="panel-heading">
 				<span data-ng-bind="selected.name"></span>
 				<button type="button" class="btn btn-danger btn-xs pull-right">Disable</button>
@@ -30,6 +30,11 @@
 				</p>
 			</div>
 		</div>
+		<div class="panel panel-default" data-ng-hide="selected.enabled">
+			<div class="panel-body">
+				None settings selected
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -40,8 +45,10 @@
 <div class="row" data-ng-show="settings">
 	<div class="col-sm-3" data-ng-repeat="setting in settings">
 		<div class="well">
-			<label class="toggle">
-				<input type="checkbox"> <span class="handle"></span>
+			<label class="toggle" data-ng-init="setting.enabled = true">
+				<input type="checkbox" data-ng-model="setting.enabled" data-ng-change="toggleSettingAvailabilty(setting)">
+					<span class="handle selectable"></span>
+				</input>
 			</label>
 			<span class="pull-right"><strong data-ng-bind="::setting.name"></strong></span>
 		</div>

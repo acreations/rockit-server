@@ -19,7 +19,8 @@ require.config({
     "angular-route": "/static/angular-route/angular-route.min",
     "angular-translate": "/static/angular-translate/angular-translate.min",
     "angular-translate-loader": "/static/angular-translate-loader-partial/angular-translate-loader-partial.min",
-    "domReady": "/static/requirejs-domready/domReady"
+    "domReady": "/static/requirejs-domready/domReady",
+    "toastr": "/static/toastr/toastr.min"
   },
 
   shim: {
@@ -34,6 +35,9 @@ require.config({
     },
     'angular-route': {
       deps: ['angular']
+    },
+    'toastr': {
+      exports: "toastr"
     }
   }
 });
