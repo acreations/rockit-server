@@ -33,10 +33,17 @@
 	</div>
 </div>
 
-<div class="row" data-ng-show="settings">
-	<h3 class="col-md-12"><span data-ng-bind="settings.length"></span> available plugins</h3>
+<h3>
+	<span data-ng-bind="settings.length"></span> available plugins
+</h3>
 
-	<div class="col-md-2" data-ng-repeat="setting in settings">
-		<span data-ng-bind="::setting.name"></span>
+<div class="row" data-ng-show="settings">
+	<div class="col-sm-3" data-ng-repeat="setting in settings">
+		<div class="well">
+			<label class="toggle">
+				<input type="checkbox"> <span class="handle"></span>
+			</label>
+			<span class="pull-right"><strong data-ng-bind="::setting.name"></strong></span>
+		</div>
 	</div>
 </div>
