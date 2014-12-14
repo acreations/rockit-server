@@ -7,6 +7,9 @@ def home(request):
 def part_home(request):
     return render_to_response('partials/home.html', context_instance=RequestContext(request))
 
+def part_mixes(request):
+    return render_to_response('partials/mixes/mixes.html', context_instance=RequestContext(request))
+
 def part_nodes(request):
     return render_to_response('partials/nodes/nodes.html', context_instance=RequestContext(request))
 

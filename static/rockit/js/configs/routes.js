@@ -5,6 +5,9 @@ define(['angular-route'], function () {
     $routeProvider.when('/home', {
       templateUrl: 'partials/home'
     });
+    $routeProvider.when('/mixes', {
+      templateUrl: 'partials/mixes'
+    });
     $routeProvider.otherwise({
       redirectTo: '/home'
     });

@@ -5,7 +5,7 @@
 <div class="row" data-ng-init="loadAvailableSettings()">
 	<div class="col-md-2">
 		<ul class="nav nav-pills nav-stacked">
-			<li role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
+			<li class="selectable" role="presentation" data-ng-repeat="setting in settings" data-ng-class="{'active': (selected == setting)}">
 				<a data-ng-click="onSelectSettings(setting)" data-ng-bind="::setting.name"></a>
 			</li>
 		</ul>

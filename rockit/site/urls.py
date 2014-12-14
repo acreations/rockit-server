@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     url(r'^partials/nodes/details/razberry', 'rockit.site.views.part_nodes_details_razberry'),
     url(r'^partials/nodes/details', 'rockit.site.views.part_nodes_details'),
     url(r'^partials/nodes', 'rockit.site.views.part_nodes'),
+    url(r'^partials/mixes', 'rockit.site.views.part_mixes'),
     url(r'^partials/settings', 'rockit.site.views.part_settings'),
 )
