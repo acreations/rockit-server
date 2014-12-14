@@ -3,6 +3,17 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 
+def register_to_rockit(apps, schema_editor):
+
+    Association = apps.get_model("core", "Association")
+
+    association = Association()
+    association.name            = "Rockit"
+    association.description     = "All rockit core functionality"
+    association.namespace       = "rockit.foundation.core"
+    association.entry           = "rockit"
+    association.when_addable    = True
+    association.save()
 
 class Migration(migrations.Migration):
 
@@ -140,4 +151,5 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='core.Association'),
             preserve_default=True,
         ),
+        migrations.RunPython(register_to_rockit),
     ]

@@ -42,7 +42,7 @@ def unregister(uuid):
         try:
             node = models.Node.objects.get(uuid=uuid)
             node.delete()
-            
+
             return True
         except models.Node.DoesNotExist:
             logger.warn("Unregister failed. Node (%s) not found" % uuid)
