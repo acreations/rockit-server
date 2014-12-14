@@ -43,7 +43,9 @@
 
     <div class="container">
 
-      <div ng-view>Laddar vy ...</div>
+      <div ng-view>
+        {% include 'base/spinner.html' %}
+      </div>
 
       {% block base_section %}
         {% block section %}{% endblock %}

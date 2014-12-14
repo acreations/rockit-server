@@ -3,7 +3,7 @@ define(function () {
 
   return {
     'serverUrl': '//localhost:8000/api/rockit',
-    'mockEnabled': true,
+    'mockEnabled': false,
     'mockUrl': '//localhost:8000/static/rockit/js'
   };
 });
