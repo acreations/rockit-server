@@ -71,22 +71,12 @@ def node_detailed(identifier, holder):
 def settings(holder):
 
     for setting in models.Setting.objects.all():
-        if setting.value:
-            holder.add(**{
-                'key': setting.id,
-                'name': setting.name,
-                'value': setting.value,
-                'readonly': setting.readonly
-                })
-        else:
-            holder.add(**{
-                'key': setting.id,
-                'name': setting.name,
-                'value': setting.default,
-                'readonly': setting.readonly
-                })
-
-
+        holder.add(**{
+            'key': setting.id,
+            'name': setting.name,
+            'value': setting.value,
+            'readonly': setting.readonly
+            })
     return holder
 
 @task(name='razberry.mixes')
