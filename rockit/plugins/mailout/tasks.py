@@ -4,11 +4,12 @@ from rockit.plugins.mailout import models
 
 @task(name='mailout.settings')
 def settings(holder):
-    holder.add(**{
-      'key': server.id,
-      'name': 'name',
-      'value': 'value'
-    })
+    for setting in models.Setting.objects.all():
+      holder.add(**{
+        'key': setting.id,
+        'name': setting.name,
+        'value': setting.value
+      })
 
     return holder
 
