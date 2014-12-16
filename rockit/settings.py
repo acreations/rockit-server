@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rockit.core',
     'rockit.plugins.mailout',
+    'rockit.plugins.picamera',
     'rockit.plugins.razberry',
 )
 
