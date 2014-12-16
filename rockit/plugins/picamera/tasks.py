@@ -1,6 +1,6 @@
 from celery import task
 
-from rockit.plugins.mailout import models
+from rockit.plugins.picamera import models
 
 @task(name='picamera.settings')
 def settings(holder):
