@@ -1,8 +1,8 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$routeParams', '$log', 'RockitTranslateService', 'NodeService',
-    function (scope, routeParams, log, translate, service) {
+  return ['$scope', '$routeParams', '$log', 'RockitNotifyService', 'RockitTranslateService', 'NodeService',
+    function (scope, routeParams, log, notify, translate, service) {
 
       translate.addPart("nodes");
 
@@ -53,26 +53,32 @@ define([], function () {
         );
       };
 
-      scope.onUpdateName = function (node, name) {
-        if (node.name !== name) {
-          log.debug('Trying to update name of node', node, name);
+      scope.onUpdateName = function (name) {
+        if (scope.selected.name !== name) {
+          log.debug('Trying to update name of node', scope.selected, name);
 
           var update = {
             'name': name,
-            'association': node.association,
+            'association': scope.selected.association,
           };
 
-          service.update(node.url, update).then(
+          service.update(scope.selected.url, update).then(
             function (data) {
               log.debug('Successful updated name', data);
+
+              notify.info('Successfully changed name to <strong>' + name + '</strong');
             },
             function () {
               log.error('Exception when trying to update name');
+
+              notify.info('Failed when changing name to <strong>' + name + '</strong');
             }
           );
 
         } else {
           log.debug('Trying to change to same name ... skipping');
+
+          notify.info('Successfully changed name to <strong>' + name + '</strong');
         }
       };
 

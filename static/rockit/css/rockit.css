@@ -2,8 +2,16 @@ body {
   background-color: #FAFAFA;
 }
 
+p.thumbnail {
+  margin: 40px 0;
+}
+
 .selectable {
   cursor: pointer;
+}
+
+.main {
+  min-height: 300px;
 }
 
 .ng-hide {
@@ -20,7 +28,6 @@ body {
   margin: 50px auto 0;
   width: 70px;
   text-align: center;
-  min-height: 200px;
 }
 
 .spinner > div {

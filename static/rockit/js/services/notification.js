@@ -5,7 +5,7 @@ define(['toastr'], function (toastr) {
   toastr.options = {
     "closeButton": false,
     "debug": false,
-    "progressBar": true,
+    "progressBar": false,
     "positionClass": "toast-bottom-full-width",
     "onclick": null,
     "showDuration": "300",

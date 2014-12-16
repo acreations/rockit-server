@@ -1,0 +1,8 @@
+<h2 data-ng-bind="model" data-ng-click="onEdit()" data-ng-hide="editMode"></h2>
+<form class="form-inline" role="form">
+  <div class="form-group" data-ng-show="editMode">
+    <input class="form-control" data-ng-model="edit" data-ng-blur="done()"></input>
+    <button type="button" class="btn btn-primary" data-ng-click="done()">Save</button>
+    <button type="button" class="btn" data-ng-click="cancel()">Cancel</button>
+  </div>
+</form>

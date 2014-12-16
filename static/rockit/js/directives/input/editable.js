@@ -8,14 +8,7 @@ define([], function () {
         model: '=ngModel',
         callback: '&onUpdate'
       },
-      template: '<h4 data-ng-bind="model" data-ng-click="onEdit()" data-ng-hide="editMode"></h4>' +
-        '<form class="form-inline" role="form">' +
-          '<div class="form-group">' +
-            '<input class="form-control" data-ng-model="edit" data-ng-blur="done()"></input>' +
-            '<button type="button" class="btn btn-primary" data-ng-click="done()">Save</button>' +
-            '<button type="button" class="btn" data-ng-click="cancel()">Cancel</button>' +
-          '</div>' +
-        '</form>',
+      templateUrl: '/static/rockit/js/directives/input/editable.template',
       link: function (scope) {
         scope.cancel = function () {
           scope.editMode = false;
