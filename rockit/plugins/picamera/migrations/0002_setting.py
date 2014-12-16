@@ -5,7 +5,7 @@ from django.db import models, migrations
 
 def add_settings(apps, schema_editor):
 
-    Setting = apps.get_model("mailout", "Setting")
+    Setting = apps.get_model("picamera", "Setting")
 
     s1 = Setting()
     s1.name = "RPI_CAMERA_SERVER"
