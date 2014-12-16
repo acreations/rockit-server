@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'rockit.plugins.mailout',
     'rockit.plugins.picamera',
     'rockit.plugins.razberry',
+    'rockit.plugins.astral',
 )
 
 MIDDLEWARE_CLASSES = (
