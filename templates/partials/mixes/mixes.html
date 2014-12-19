@@ -1,3 +1,21 @@
 <div class="page-header">
   <h2>Mixes</h2>
 </div>
+
+<div class="page-header">
+  <h2>When</h2>
+  <p>Controll Rockit nodes behavior by given when it should start</p>
+</div>
+<div class="row">
+  <div class="col-xs-1" data-ng-repeat="when in criteria.when">
+    <button type="button" class="btn btn-info btn-lg"><span data-ng-bind="when.association.name"></span></button>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Then</h2>
+</div>
+
+<div class="page-header">
+  <h2>Finish</h2>
+</div>

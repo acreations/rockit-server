@@ -8,6 +8,7 @@ define([
   'services/notification',
   'directives/module',
   'associations/module',
+  'mixes/module',
   'nodes/module',
   'settings/module'], function (ng, constants, routes, translate, rockitService, translateService, notificationService) {
   'use strict';
@@ -17,6 +18,7 @@ define([
     "pascalprecht.translate",
     "rockit.directives",
     "rockit.associations",
+    "rockit.mixes",
     "rockit.nodes",
     "rockit.settings"
   ]).constant("RockitConfigs", constants)
