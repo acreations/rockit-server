@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django_jenkins',
     'corsheaders',
     'rest_framework',
+    'compressor',
     'rockit.core',
     'rockit.plugins.mailout',
     'rockit.plugins.picamera',
@@ -62,6 +63,12 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
+
+COMPRESS_PRECOMPILERS = (
+   ('text/less', 'lessc {infile} {outfile}'),
+)
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'rockit.urls'
 
@@ -98,9 +105,18 @@ USE_TZ = True
 
 STATIC_URL  = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"), os.path.join(BASE_DIR, "bower_components")
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 )
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "bower_components"),
+)
+
+COMPRESS_ROOT = 'static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),

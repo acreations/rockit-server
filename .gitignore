@@ -10,3 +10,5 @@ reports/
 bower_components/
 
 .coverage
+
+*CACHE*
