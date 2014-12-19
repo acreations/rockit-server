@@ -3,18 +3,28 @@ define([], function () {
 
   return ['$scope', '$log', 'MixesService', function (scope, log, service) {
 
-    var criteria;
+    scope.criteria = {};
 
     var onCreate = function () {
       scope.getCriterias();
     };
 
-    scope.getCriterias =  function () {
+    scope.onSelectWhen = function (item) {
+      scope.criteria.when = item;
+    };
+
+    scope.toggle = function (container, item) {
+      container.selected = container.selected === item ? null : item;
+    };
+
+    scope.getCriterias = function () {
       service.list().then(
         function (data) {
           log.debug('Successful retrieved mixes criteria', data);
 
-          criteria = data;
+          scope.when = {
+            data: data.when
+          };
         },
         function () {
           log.error('Exception when trying to get associations');
