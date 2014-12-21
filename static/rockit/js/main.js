@@ -19,13 +19,17 @@ require.config({
     "angular-route": "/static/angular-route/angular-route.min",
     "angular-translate": "/static/angular-translate/angular-translate.min",
     "angular-translate-loader": "/static/angular-translate-loader-partial/angular-translate-loader-partial.min",
+    "jquery": "/static/jquery/dist/jquery.min",
     "domReady": "/static/requirejs-domready/domReady",
-    "toastr": "/static/toastr/toastr.min"
+    "toastr": "/static/toastr/toastr.min",
   },
 
   shim: {
     'angular': {
       exports: "angular"
+    },
+    'jquery': {
+      exports: "jquery"
     },
     'angular-translate': {
       deps: ['angular']

@@ -2,26 +2,7 @@
   <h2>Mixes</h2>
 </div>
 
-<div class="page-header">
-  <h2>When</h2>
-  <p>Controll Rockit nodes behavior by given when it should start</p>
-</div>
-<div class="row">
-  <div class="col-xs-1" data-ng-repeat="item in when.data">
-    <button type="button" class="btn btn-default btn-lg btn-mixes"
-      data-ng-click="toggle(when, item)" data-ng-class="{ 'active': when.selected == item }">
-      <span data-ng-bind="item.association.name"></span>
-    </button>
-  </div>
-  <div class="margin-top col-xs-12" data-ng-show="when.selected">
-    <button type="button" class="btn btn-default btn-lg btn-mixes"
-      data-ng-repeat="item in when.selected.items"
-      data-ng-click="onSelectWhen(item)"
-      data-ng-class="{ 'active': criteria.when == item }">
-      <span data-ng-bind="item.name"></span>
-    </button>
-  </div>
-</div>
+{% include 'base/mixes/when.html' %}
 
 <div class="page-header">
   <h2>Then</h2>

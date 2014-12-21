@@ -8,7 +8,10 @@ define([], function () {
     return {
       list: function () {
         return service.list(serviceUrl);
-      }
+      },
+      get: function (resource) {
+        return service.get(resource);
+      },
     };
   }];
 });
