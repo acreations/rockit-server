@@ -1,19 +1,22 @@
 <div class="page-header">
   <h2>When</h2>
   <p>Controll Rockit nodes behavior by given when it should start</p>
+  <i class="fa fa-home fa-6"></i>
 </div>
 
 {# When criteria groups #}
-<div id="when" class="row-fluid">
+<div id="when" class="row">
   <div class="col-xs-12" data-ng-hide="when.data">
     {% include 'base/spinner.html' %}
   </div>
-  <button type="button" class="btn btn-default btn-lg btn-mixes"
-    data-ng-repeat="item in when.data"
-    data-ng-click="toggle(when, item, 'when-selected')"
-    data-ng-class="{ 'active': when.selected == item }">
-    <span data-ng-bind="item.association.name"></span>
-  </button>
+  <div class="col-xs-2" data-ng-repeat="item in when.data">
+    <button type="button" class="btn btn-default"
+      data-ng-click="toggle(when, item, 'when-selected')"
+      data-ng-class="{ 'active': when.selected == item }">
+      <i class="icon-rockit icon-large"></i>
+    </button>
+    <span class="text-center" data-ng-bind="item.association.name"></span>
+  </div>
 </div>
 
 {# When criteria items in a group #}
