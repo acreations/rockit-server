@@ -18,6 +18,8 @@ define(['jquery'], function ($) {
           log.debug('Successfully retrieved detailed info', data);
 
           scope.criteria.when = data;
+
+          console.log(scope.criteria);
         },
         function () {
           log.error('Exception when trying to get detailed info about', identifier);

@@ -32,8 +32,8 @@ class Schedule(models.Model):
     """
     cron = models.CharField(max_length=50, blank=True)
     done = models.BooleanField(default=False)
-    action = models.ForeignKey(Action)
-    date_added  = models.DateTimeField(auto_now_add=True, blank=True)
+    date_modified  = models.DateTimeField(auto_now=True, blank=True)
+    date_added     = models.DateTimeField(auto_now_add=True, blank=True)
 
 class NodeCategory(models.Model):
     """

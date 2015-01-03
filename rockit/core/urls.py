@@ -13,6 +13,7 @@ router.register('associations',  views.AssociationViewSet)
 router.register('categories',  views.NodeCategoryViewSet)
 router.register('nodes',  views.NodeViewSet)
 router.register('settings', views.SettingViewSet, base_name="setting")
+router.register('schedule', views.ScheduleViewSet)
 
 urlpatterns = patterns('',
     url('', include(router.urls)),

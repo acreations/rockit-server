@@ -6,6 +6,15 @@ from rest_framework.response import Response
 from rockit.core import models
 from rockit.core import holders
 from rockit.core import resolvers
+from rockit.core import serializers
+
+class ScheduleViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows actions to be view and set.
+
+    """
+    queryset = models.Schedule.objects.all()
+    serializer_class = serializers.ScheduleSerializer
 
 class MixesViewSet(viewsets.ViewSet):
     """
@@ -20,7 +29,7 @@ class MixesViewSet(viewsets.ViewSet):
         for a in models.Association.objects.all():
             task = send_task("%s.mixes" % a.entry, args=[holders.MixesHolder(a)])
             mixes = task.wait(timeout=10)
-            
+
             if mixes:
                 mixes = resolvers.MixesResolver().resolve(request, mixes)
                 result.extend(resolvers.MixesNameResolver().resolve(mixes) if mixes.should_resolve_names() else mixes)

@@ -9,7 +9,7 @@
   <div class="col-xs-12" data-ng-hide="when.data">
     {% include 'base/spinner.html' %}
   </div>
-  <div class="col-xs-2" data-ng-repeat="item in when.data">
+  <div class="col-xs-1" data-ng-repeat="item in when.data">
     <button type="button" class="btn btn-default"
       data-ng-click="toggle(when, item, 'when-selected')"
       data-ng-class="{ 'active': when.selected == item }">
@@ -31,5 +31,15 @@
 
 {# When criteria item that needs it data set #}
 <div id="when-criteria" class="row-fluid margin-top" data-ng-show="criteria.when">
-YEAH
+
+  <form class="form-horizontal" role="form">
+    <div class="form-group" data-ng-repeat="(key, a) in criteria.when.actions.POST">
+      {% verbatim %}
+      <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="a.label"></label>
+      <div class="col-sm-5">
+        <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
+      </div>
+      {% endverbatim %}
+    </div>
+  </form>
 </div>
