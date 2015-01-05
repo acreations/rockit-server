@@ -32,7 +32,7 @@ class Schedule(models.Model):
     """
     cron = models.CharField(max_length=50, blank=True)
     done = models.BooleanField(default=False)
-    date_next      = models.DateTimeField(auto_now=True, blank=True)
+    date_next      = models.DateTimeField(blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
 

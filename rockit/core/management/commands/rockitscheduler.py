@@ -23,9 +23,7 @@ class Command(BaseCommand):
         '''
         Handle it
         '''
-
-        tmzone = pytz.timezone(settings.TIME_ZONE)
-        schedules = models.Schedule.objects.filter(date_next__lte=self.tmzone.localize(datetime.now()))
+        schedules = models.Schedule.objects.filter(date_next__lte=datetime.now())
 
         for schedule in schedules:
 
@@ -35,6 +33,7 @@ class Command(BaseCommand):
 
             if node:
 
+                update_time = datetime.now()
                 update = send_task("%s.node.command.update.value" % node.association.entry, kwargs={
                     'identifier': node.aid,
                     'command_id': "devices.3.instances.0.commandClasses.37",
@@ -45,7 +44,12 @@ class Command(BaseCommand):
                 if value is not None:
                     self.logger.debug('Successful update value ... saving')
 
-                    # schedule.save()
+                    cron = croniter(schedule.cron, update_time)
+
+                    schedule.date_next = cron.get_next(datetime)
+                    schedule.save()
+
+                    self.logger.info('Updated next schedule to %s' % schedule.date_next)
                 else:
                     self.logger.warn('Failed to set value of node %s' % node.uuid)
 
