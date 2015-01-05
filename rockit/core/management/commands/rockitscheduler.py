@@ -69,10 +69,18 @@ class Command(BaseCommand):
         return value
 
     def set_action(self):
-        action, create = models.Action.objects.get_or_create(pk=1)
+        #action = models.Action.objects.get(pk=2)
 
-        action.name = "test2"
-        action.description = "test description2"
+        #action.name = "test2"
+        #action.description = "test description2"
 
-        action.save()
+        #action.save()
+
+        #node = models.Node.objects.get(pk=2)
+
+        #then, create = models.ActionThen.objects.get_or_create(target=node, holder=action)
+        #then.command = "devices.3.instances.0.commandClasses.37"
+        #then.value = "true"
+
+        #then.save()
 
