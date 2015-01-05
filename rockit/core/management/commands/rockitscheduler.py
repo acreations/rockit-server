@@ -25,6 +25,8 @@ class Command(BaseCommand):
         '''
         schedules = models.Schedule.objects.filter(date_next__lte=datetime.now())
 
+        self.set_action()
+
         for schedule in schedules:
 
             self.logger.info('Run action for this schedule')
@@ -65,3 +67,11 @@ class Command(BaseCommand):
             return bool(value)
 
         return value
+
+    def set_action(self):
+        action = models.Action.objects.get_or_create(pk=1)
+
+        action.name = "test"
+        action.description = "test description"
+
+        action.save()

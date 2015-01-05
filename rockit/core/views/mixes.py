@@ -8,14 +8,6 @@ from rockit.core import holders
 from rockit.core import resolvers
 from rockit.core import serializers
 
-class ScheduleViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows actions to be view and set.
-
-    """
-    queryset = models.Schedule.objects.all()
-    serializer_class = serializers.ScheduleSerializer
-
 class MixesViewSet(viewsets.ViewSet):
     """
     List all addable mix states in rockit server
