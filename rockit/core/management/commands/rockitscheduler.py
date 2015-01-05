@@ -2,6 +2,7 @@ import logging
 import pytz
 import requests
 
+from celery.execute import send_task
 from croniter import croniter
 from datetime import datetime
 from django.conf import settings
@@ -29,29 +30,34 @@ class Command(BaseCommand):
         for schedule in schedules:
 
             if self.has_triggered_schedule(schedule):
-                self.logger.info('Run action for this schedule')
+                self.logger.debug('Run action for this schedule')
 
-                cid = "devices.3.instances.0.commandClasses.37"
-                val = "on"
+                node = self.get_node("be174f43-c616-4b31-a64d-8beea39688bc")
 
-                node = models.Node.objects.filter(uuid="be174f43-c616-4b31-a64d-8beea39688bc")
+                if node:
 
-                print node.name
+                    update = send_task("%s.node.command.update.value" % node.association.entry, kwargs={
+                        'identifier': node.aid,
+                        'command_id': "devices.3.instances.0.commandClasses.37",
+                        'value': self.normalize_value("true")
+                        })
+                    value = update.wait(timeout=30)
 
-                #schedule.save()
+                    if value is not None:
+                        self.logger.debug('Successful update value ... saving')
 
+                        # schedule.save()
+                    else:
+                        self.logger.warn('Failed to set value of node %s' % node.uuid)
             else:
                 self.logger.info('Schedule has not been triggered yet')
 
-            #if schedule.date_modified < cron.get_next(datetime):
-            #    self.logger.info('Cron passed, trigger action')
-
-
-
-        print 'Check in database if some date has been passed'
-        print 'Get the action from db'
-        print 'Get the association for action'
-        print 'Trigger a celery task with action data'
+    def get_node(self, uuid):
+        try:
+            return models.Node.objects.get(uuid=uuid)
+        except:
+            self.logger.error('Could not find node with uuid %s' % uuid)
+        return None
 
     def has_triggered_schedule(self, schedule):
         '''
@@ -63,3 +69,9 @@ class Command(BaseCommand):
         now  = self.tmzone.localize(datetime.now())
 
         return now > next
+
+    def normalize_value(self, value):
+        if isinstance(value, bool):
+            return bool(value)
+
+        return value
