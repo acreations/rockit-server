@@ -9,7 +9,6 @@ class Action(models.Model):
     """
     name = models.CharField(max_length=200, default='undefined')
     description    = models.CharField(max_length=500, blank=True)
-    association    = models.ForeignKey(Association)
     favorite       = models.BooleanField(default=False)
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
