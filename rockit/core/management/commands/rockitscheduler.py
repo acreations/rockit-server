@@ -69,9 +69,10 @@ class Command(BaseCommand):
         return value
 
     def set_action(self):
-        action = models.Action.objects.get_or_create(pk=1)
+        action, create = models.Action.objects.get_or_create(pk=1)
 
-        action.name = "test"
-        action.description = "test description"
+        action.name = "test2"
+        action.description = "test description2"
 
         action.save()
+

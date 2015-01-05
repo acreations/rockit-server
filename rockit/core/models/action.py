@@ -17,6 +17,7 @@ class ActionThen(models.Model):
     """
     Action that take care of specific task (setter)
     """
+    holder  = models.ForeignKey(Action)
     target  = models.ForeignKey(Node)
     command = models.CharField(max_length=200)
     value   = models.CharField(max_length=100)
