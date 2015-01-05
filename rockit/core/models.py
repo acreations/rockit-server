@@ -48,7 +48,7 @@ class Node(models.Model):
     """
     Describes a node in the rockit network.
     """
-    uuid = models.CharField(max_length=36,  blank=True)
+    uuid = models.CharField(max_length=36,  blank=True, unique=True)
     name = models.CharField(max_length=200, default='undefined')
     category       = models.ForeignKey(NodeCategory, null=True, blank=True, default=None)
     association    = models.ForeignKey(Association)
