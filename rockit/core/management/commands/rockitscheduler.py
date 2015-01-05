@@ -25,35 +25,37 @@ class Command(BaseCommand):
         '''
         schedules = models.Schedule.objects.filter(date_next__lte=datetime.now())
 
-        self.set_action()
+        #self.set_action()
 
         for schedule in schedules:
+            self.logger.debug('Run then actions for this schedule %s' % schedule.id)
 
-            self.logger.info('Run action for this schedule')
+            actions = models.ActionThen.objects.filter(holder=schedule.action)
 
-            node = self.get_node("be174f43-c616-4b31-a64d-8beea39688bc")
+            # Get then actions associated with this action
+            for action in actions:
 
-            if node:
+                if action.target:
 
-                update_time = datetime.now()
-                update = send_task("%s.node.command.update.value" % node.association.entry, kwargs={
-                    'identifier': node.aid,
-                    'command_id': "devices.3.instances.0.commandClasses.37",
-                    'value': self.normalize_value("true")
-                    })
-                value = update.wait(timeout=30)
+                    update_time = datetime.now()
+                    update = send_task("%s.node.command.update.value" % action.target.association.entry, kwargs={
+                        'identifier': action.target.aid,
+                        'command_id': action.command,
+                        'value': self.normalize_value(action.value)
+                        })
+                    value = update.wait(timeout=30)
 
-                if value is not None:
-                    self.logger.debug('Successful update value ... saving')
+                    if value is not None:
+                        self.logger.debug('Successful update value ... saving')
 
-                    cron = croniter(schedule.cron, update_time)
+                        cron = croniter(schedule.cron, update_time)
 
-                    schedule.date_next = cron.get_next(datetime)
-                    schedule.save()
+                        schedule.date_next = cron.get_next(datetime)
+                        schedule.save()
 
-                    self.logger.info('Updated next schedule to %s' % schedule.date_next)
-                else:
-                    self.logger.warn('Failed to set value of node %s' % node.uuid)
+                        self.logger.info('Updated next schedule to %s' % schedule.date_next)
+                    else:
+                        self.logger.warn('Failed to set value of node %s' % node.uuid)
 
     def get_node(self, uuid):
         try:
@@ -69,18 +71,18 @@ class Command(BaseCommand):
         return value
 
     def set_action(self):
-        #action = models.Action.objects.get(pk=2)
+        action = models.Action.objects.get(pk=2)
 
-        #action.name = "test2"
-        #action.description = "test description2"
+        action.name = "test2"
+        action.description = "test description2"
 
-        #action.save()
+        action.save()
 
-        #node = models.Node.objects.get(pk=2)
+        node = models.Node.objects.get(pk=2)
 
-        #then, create = models.ActionThen.objects.get_or_create(target=node, holder=action)
-        #then.command = "devices.3.instances.0.commandClasses.37"
-        #then.value = "true"
+        then, create = models.ActionThen.objects.get_or_create(target=node, holder=action)
+        then.command = "devices.3.instances.0.commandClasses.37"
+        then.value = "true"
 
-        #then.save()
+        then.save()
 

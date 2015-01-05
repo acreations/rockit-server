@@ -18,7 +18,7 @@ define([], function () {
       );
     };
 
-    scope.onSelectedNode = function(node) {
+    scope.onSelectedNode = function (node) {
       if (node) {
         location.path('/nodes/' + node.uuid);
       } else {

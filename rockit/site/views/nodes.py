@@ -7,6 +7,12 @@ def home(request):
 def part_home(request):
     return render_to_response('partials/home.html', context_instance=RequestContext(request))
 
+def part_actions(request):
+    return render_to_response('partials/actions/actions.html', context_instance=RequestContext(request))
+
+def part_actions_details(request):
+    return render_to_response('partials/actions/details.html', context_instance=RequestContext(request))
+
 def part_mixes(request):
     return render_to_response('partials/mixes/mixes.html', context_instance=RequestContext(request))
 

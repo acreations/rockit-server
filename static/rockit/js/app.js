@@ -7,6 +7,7 @@ define([
   'services/translate',
   'services/notification',
   'services/anchorSmoothScroll',
+  'actions/module',
   'directives/module',
   'associations/module',
   'mixes/module',
@@ -17,6 +18,7 @@ define([
   return ng.module("rockit", [
     "ngRoute",
     "pascalprecht.translate",
+    "rockit.actions",
     "rockit.directives",
     "rockit.associations",
     "rockit.mixes",
