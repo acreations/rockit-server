@@ -4,7 +4,8 @@
 define(['angular',
   './input/editable',
   './navigation/breadcrumb',
-  './navigation/navbar'], function (ng, editable, breadcrumb, navbar) {
+  './navigation/navbar',
+  './window/filler'], function (ng, editable, breadcrumb, navbar, filler) {
   'use strict';
 
   var module = ng.module("rockit.directives", []);
@@ -12,6 +13,6 @@ define(['angular',
   return module
     .directive('breadcrumb', breadcrumb)
     .directive('editable', editable)
-    .directive('navbar', navbar);
-
+    .directive('navbar', navbar)
+    .directive('filler', filler);
 });

@@ -1,10 +1,10 @@
 
-class MixesExecutor(object): 
+class MixesExecutor(object):
 
     IDENTIFIER_BUTTON   = 'when-button'
     IDENTIFIER_SCHEDULE = 'when-schedule'
 
-    IDENTIFIER_MAILOUT  = 'finish-mailout' 
+    IDENTIFIER_MAILOUT  = 'finish-mailout'
 
     def __init__(self):
         self.details = {
@@ -43,7 +43,7 @@ class MixesExecutor(object):
             })
 
     def _generate_post(self, identifier, typed, label, required=False, max_length=None):
-        
+
         data = {
             'identifier': identifier,
             'type': typed,
@@ -59,7 +59,7 @@ class MixesExecutor(object):
     def _get_when_capabilities(self):
         result = list()
 
-        self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'Button')
+        #self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'Button')
         self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'Schedule')
 
         return result

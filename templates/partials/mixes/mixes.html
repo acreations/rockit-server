@@ -1,13 +1,20 @@
-<div class="page-header">
-  <h2>Mixes</h2>
+<div class="filler">
+  <div class="page-header">
+    <h2>Mixes</h2>
+  </div>
+
+  <p class="lead">
+  Create a own mix with current nodes in network. It could for e.g be that for a given time turn off devices.
+
+  </p>
+
+  <div class="row margin-top">
+    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="scrollTo('#mix-when')">Start mixing</button>
+    </div>
+  </div>
 </div>
 
 {% include 'base/mixes/when.html' %}
-
-<div class="page-header">
-  <h2>Then</h2>
-</div>
-
-<div class="page-header">
-  <h2>Finish</h2>
-</div>
+{% include 'base/mixes/then.html' %}
+{% include 'base/mixes/finish.html' %}

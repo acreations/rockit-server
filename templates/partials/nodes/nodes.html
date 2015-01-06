@@ -13,18 +13,21 @@
 </div>
 -->
 
-<div class="well selectable" data-ng-repeat="node in nodes" data-ng-click="onSelectedNode(node)">
+<div class="well" data-ng-repeat="node in nodes">
   <div class="row">
     <div class="col-md-2 col-sm-3">
       <img src="http://placehold.it/150">
     </div>
-    <div class="col-md-10 col-sm-9">
+    <div class="col-md-8 col-sm-7">
       <h4 data-ng-bind="::node.name"></h4>
       <p data-ng-bind="::node.association.description"></p>
       <hr />
       <div class="pull-right">
         <span class="label label-info" data-ng-bind="::node.association.name"></span>
       </div>
+    </div>
+    <div class="col-md-2 col-sm-3">
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="onSelectedNode(node)">Detail</button>
     </div>
   </div>
 </div>

@@ -58,7 +58,7 @@ class MixesHolder(Holder):
 
             if len(self.finish['items']) > 0:
                 self.append(self.finish, self.CONTAINER_FINISH)
-        
+
         return super(MixesHolder, self).get_content()
 
     def mark_resolve_names(self):
@@ -101,7 +101,7 @@ class MixesDetailsHolder(Holder):
         Add post update data
         """
         self._create_data('POST', **kwargs)
-        
+
     def add_update(self, **kwargs):
         self._create_data('PUT', **kwargs)
 
@@ -123,6 +123,7 @@ class MixesDetailsHolder(Holder):
         self.name = name
 
         data = {
+            'id': kwargs.get('identifier', 'UNKNOWN_IDENTIFIER'),
             'type': kwargs.get('type', ''),
             'required': kwargs.get('required', False),
             'label': kwargs.get('label', ''),

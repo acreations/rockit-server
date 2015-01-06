@@ -1,45 +1,55 @@
-<div class="page-header">
-  <h2>When</h2>
-  <p>Controll Rockit nodes behavior by given when it should start</p>
-  <i class="fa fa-home fa-6"></i>
-</div>
-
-{# When criteria groups #}
-<div id="when" class="row">
-  <div class="col-xs-12" data-ng-hide="when.data">
-    {% include 'base/spinner.html' %}
+<div id="mix-when" class="filler padding-top">
+  <div class="page-header">
+    <h2>When</h2>
   </div>
-  <div class="col-xs-1" data-ng-repeat="item in when.data">
-    <button type="button" class="btn btn-default"
-      data-ng-click="toggle(when, item, 'when-selected')"
-      data-ng-class="{ 'active': when.selected == item }">
-      <i class="icon-rockit icon-large"></i>
-    </button>
-    <span class="text-center" data-ng-bind="item.association.name"></span>
-  </div>
-</div>
 
-{# When criteria items in a group #}
-<div id="when-selected" class="row-fluid margin-top" data-ng-show="when.selected">
-  <button type="button" class="btn btn-default btn-lg btn-mixes"
-    data-ng-repeat="item in when.selected.items"
-    data-ng-click="onSelectWhen(item)"
-    data-ng-class="{ 'active': criteria.when == item }">
-    <span data-ng-bind="item.name"></span>
-  </button>
-</div>
+  <p class="lead">
+    Controll Rockit nodes behavior by given when it should start
+  </p>
 
-{# When criteria item that needs it data set #}
-<div id="when-criteria" class="row-fluid margin-top" data-ng-show="criteria.when">
-
-  <form class="form-horizontal" role="form">
-    <div class="form-group" data-ng-repeat="(key, a) in criteria.when.actions.POST">
-      {% verbatim %}
-      <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="a.label"></label>
-      <div class="col-sm-5">
-        <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
-      </div>
-      {% endverbatim %}
+  {# When criteria groups #}
+  <div class="row margin-top">
+    <div class="col-xs-12" data-ng-hide="when.data">
+      {% include 'base/spinner.html' %}
     </div>
-  </form>
+    <div class="col-xs-1" data-ng-repeat="item in when.data">
+      <button type="button" class="btn btn-default"
+        data-ng-click="toggle(when, item, 'when-selected')"
+        data-ng-class="{ 'active': when.selected == item }">
+        <span data-ng-bind="item.association.name"></span>
+      </button>
+    </div>
+  </div>
+
+  {# When criteria items in a group #}
+  <div id="when-selected" class="row-fluid margin-top" data-ng-show="when.selected">
+
+    <button type="button" class="btn btn-default btn-lg btn-mixes"
+      data-ng-repeat="item in when.selected.items"
+      data-ng-click="onSelectWhen(item)"
+      data-ng-class="{ 'active': criteria.when == item }">
+      <span data-ng-bind="item.name"></span>
+    </button>
+  </div>
+
+  {# When criteria item that needs it data set #}
+  <div id="when-criteria" class="row-fluid margin-top" data-ng-show="criteria.when">
+
+    <form class="form-horizontal" role="form">
+      <div class="form-group" data-ng-repeat="(key, a) in criteria.when.actions.POST">
+        {% verbatim %}
+        <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="a.label"></label>
+        <div class="col-sm-5">
+          <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
+        </div>
+        {% endverbatim %}
+      </div>
+    </form>
+  </div>
+
+  <div class="row margin-top">
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="scrollTo('#mix-then')">Continue</button>
+    </div>
+  </div>
 </div>

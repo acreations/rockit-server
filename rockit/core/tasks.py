@@ -63,7 +63,7 @@ def mixes(holder):
 def mixes_details(identifier, holder):
     return executors.MixesExecutor().collect_details(identifier, holder)
 
-@celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
+#@celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
 def scheduler():
     logger.debug("Check for some task to run")
     management.call_command('rockitscheduler')

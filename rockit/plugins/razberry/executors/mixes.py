@@ -2,7 +2,7 @@
 from rockit.plugins.razberry import models
 from rockit.plugins.razberry import services
 
-class MixesExecutor(object): 
+class MixesExecutor(object):
 
     def collect(self, holder):
         """
@@ -17,7 +17,7 @@ class MixesExecutor(object):
 
     def collect_details(self, identifier, holder):
         """
-        Collect details 
+        Collect details
         """
         instances = services.RazberryService().retrieve_instances(identifier)
 
@@ -36,7 +36,7 @@ class MixesExecutor(object):
             'identifier': identifier,
             'name': name
             })
-    
+
     def _append_command_details(self, identifier, holder, commandClasses):
 
         for key in commandClasses:
@@ -47,7 +47,7 @@ class MixesExecutor(object):
 
     def _generalize_switch_binary(self, holder, command):
         data = {
-            'identifier': command['name'],
+            'identifier': command['data']['name'].replace('.data',''),
             'type': 'radio',
             'required': True,
             'label': command['name'],
