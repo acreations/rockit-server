@@ -1,4 +1,4 @@
-<div id="mix-then" class="filler padding-top">
+<div id="mix-then" class="padding-top">
   <div class="page-header">
     <h2>Then</h2>
   </div>
@@ -6,6 +6,15 @@
   <p class="lead">
     Tell me what to do when it kicks in.
   </p>
+
+  {# Select one of the groups #}
+  {% include 'base/mixes/groups.html' with container='then' %}
+
+  {# Then show selected groups criterias #}
+  {% include 'base/mixes/selected.html' with container='then' %}
+
+  {# Configure the criterias value and save #}
+  {% include 'base/mixes/criteria.html' with container='then' %}
 
   <div class="row margin-top">
     <div class="col-md-2">

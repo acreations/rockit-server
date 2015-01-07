@@ -1,0 +1,22 @@
+<div id="{{container}}-selected" class="row margin-top" data-ng-show="{{container}}.selection.group">
+
+  <div class="col-xs-12">
+    <h3>Selected
+      <span data-ng-bind="{{container}}.selection.group.association.name"></span>
+    </h3>
+    <p class="lead">
+    Choose one of the following criteria
+    </p>
+  </div>
+
+  <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.selection.group.items">
+    <div class="well criteria-group selectable text-center" data-ng-click="onSelectCriteria({{container}}, item, '#{{container}}-criteria')">
+      <div data-ng-bind="item.name"></div>
+      <hr data-ng-class="{ 'active': {{container}}.selection.criteria == item }" />
+    </div>
+  </div>
+
+  <div class="col-xs-12" data-ng-show="{{container}}.loading.criteria">
+    {% include 'base/spinner.html' %}
+  </div>
+</div>

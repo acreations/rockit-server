@@ -1,0 +1,20 @@
+<div class="row margin-top">
+  <div class="col-xs-12" data-ng-show="loading">
+    {% include 'base/spinner.html' %}
+  </div>
+
+  <div class="col-xs-12">
+    <h3>Available plugins</h3>
+    <p class="lead">
+    Select one of the plugins that provides when criterias
+    </p>
+  </div>
+
+  <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.groups">
+    <div class="well criteria-group selectable text-center" data-ng-click="toggleGroup({{container}}, item, '#{{container}}-selected')">
+      <div class="fa fa-6 icon-rockit icon-large"></div>
+      <div data-ng-bind="item.association.name"></div>
+      <hr data-ng-class="{ 'active': {{container}}.selection.group == item }" />
+    </div>
+  </div>
+</div>

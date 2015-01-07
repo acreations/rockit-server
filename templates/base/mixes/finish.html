@@ -7,6 +7,15 @@
     Almost there ... some final touch before creating your newly mix. Hoorayy!
   </p>
 
+  {# Select one of the groups #}
+  {% include 'base/mixes/groups.html' with container='finish' %}
+
+  {# Then show selected groups criterias #}
+  {% include 'base/mixes/selected.html' with container='finish' %}
+
+  {# Configure the criterias value and save #}
+  {% include 'base/mixes/criteria.html' with container='finish' %}
+
   <div class="row margin-top">
     <div class="col-md-2">
       <button type="button" class="btn btn-primary btn-block" data-ng-click="save()">Save</button>

@@ -1,0 +1,19 @@
+<div id="{{container}}-criteria" class="row margin-top" data-ng-show="{{container}}.criteria">
+  <div class="col-xs-12">
+    <h3>Fill in</h3>
+    <p class="lead">
+    Fill in all necessary fields
+    </p>
+  </div>
+
+  <form class="form-horizontal" role="form">
+    <div class="form-group" data-ng-repeat="(key, a) in {{container}}.criteria.actions.POST">
+      {% verbatim %}
+      <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="a.label"></label>
+      <div class="col-sm-5">
+        <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
+      </div>
+      {% endverbatim %}
+    </div>
+  </form>
+</div>

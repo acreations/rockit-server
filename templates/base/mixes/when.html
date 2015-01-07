@@ -1,53 +1,22 @@
-<div id="mix-when" class="filler padding-top">
+<div id="mix-when" class="padding-top" data-ng-init="getCriterias()">
   <div class="page-header">
     <h2>When</h2>
   </div>
 
   <p class="lead">
-    Controll Rockit nodes behavior by given when it should start
+    Control Rockit nodes behavior by given when it should start
   </p>
 
-  {# When criteria groups #}
-  <div class="row margin-top">
-    <div class="col-xs-12" data-ng-hide="when.data">
-      {% include 'base/spinner.html' %}
-    </div>
-    <div class="col-xs-1" data-ng-repeat="item in when.data">
-      <button type="button" class="btn btn-default"
-        data-ng-click="toggle(when, item, 'when-selected')"
-        data-ng-class="{ 'active': when.selected == item }">
-        <span data-ng-bind="item.association.name"></span>
-      </button>
-    </div>
-  </div>
+  {# Select one of the groups #}
+  {% include 'base/mixes/groups.html' with container='when' %}
 
-  {# When criteria items in a group #}
-  <div id="when-selected" class="row-fluid margin-top" data-ng-show="when.selected">
+  {# Then show selected groups criterias #}
+  {% include 'base/mixes/selected.html' with container='when' %}
 
-    <button type="button" class="btn btn-default btn-lg btn-mixes"
-      data-ng-repeat="item in when.selected.items"
-      data-ng-click="onSelectWhen(item)"
-      data-ng-class="{ 'active': criteria.when == item }">
-      <span data-ng-bind="item.name"></span>
-    </button>
-  </div>
+  {# Configure the criterias value and save #}
+  {% include 'base/mixes/criteria.html' with container='when' %}
 
-  {# When criteria item that needs it data set #}
-  <div id="when-criteria" class="row-fluid margin-top" data-ng-show="criteria.when">
-
-    <form class="form-horizontal" role="form">
-      <div class="form-group" data-ng-repeat="(key, a) in criteria.when.actions.POST">
-        {% verbatim %}
-        <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="a.label"></label>
-        <div class="col-sm-5">
-          <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
-        </div>
-        {% endverbatim %}
-      </div>
-    </form>
-  </div>
-
-  <div class="row margin-top">
+  <div class="row margin-top" data-ng-show="when.selection.criteria">
     <div class="col-md-2">
       <button type="button" class="btn btn-primary btn-block" data-ng-click="scrollTo('#mix-then')">Continue</button>
     </div>
