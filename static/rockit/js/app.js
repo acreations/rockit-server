@@ -6,13 +6,12 @@ define([
   'services/rockit',
   'services/translate',
   'services/notification',
-  'services/anchorSmoothScroll',
   'actions/module',
   'directives/module',
   'associations/module',
   'mixes/module',
   'nodes/module',
-  'settings/module'], function (ng, constants, routes, translate, rockitService, translateService, notificationService, anchorScroll) {
+  'settings/module'], function (ng, constants, routes, translate, rockitService, translateService, notificationService) {
   'use strict';
 
   return ng.module("rockit", [
@@ -28,7 +27,6 @@ define([
     .service("RockitService", rockitService)
     .service("RockitTranslateService", translateService)
     .service("RockitNotifyService", notificationService)
-    .service("RockitAnchorScroll", anchorScroll)
     .config(translate)
     .config(routes);
 });

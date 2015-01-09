@@ -1,7 +1,9 @@
 define(['jquery'], function ($) {
   'use strict';
 
-  return ['$scope', '$log', '$timeout', 'MixesService', function (scope, log, timeout, service) {
+  return ['$scope', '$log', '$timeout', 'MixesService', 'RockitTranslateService', function (scope, log, timeout, service, translate) {
+
+    translate.addPart("mixes");
 
     scope.criteria = {};
 
