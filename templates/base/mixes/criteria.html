@@ -13,6 +13,9 @@
         <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="::a.label | translate"></label>
         <div class="col-sm-5">
           <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
+
+          <select ng-options="a.values.subItem as item.label for item in a.value track by item.id" ng-model="selected"></select>
+
         </div>
         {% endverbatim %}
       </div>

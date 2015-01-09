@@ -48,7 +48,7 @@ class MixesExecutor(object):
     def _generalize_switch_binary(self, holder, command):
         data = {
             'identifier': command['data']['name'].replace('.data',''),
-            'type': 'radio',
+            'type': 'select',
             'required': True,
             'label': command['name'],
             'value': ['$toggle',True,False]
