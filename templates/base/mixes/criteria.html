@@ -1,4 +1,4 @@
-<div id="{{container}}-criteria" class="row margin-top" data-ng-show="{{container}}.criteria">
+<div id="{{container}}-criteria" class="row margin-top" data-ng-show="{{container}}.criteria && !{{container}}.skipped">
   <div class="col-xs-12">
     <h3>Fill in</h3>
     <p class="lead">
@@ -7,15 +7,24 @@
   </div>
 
   <div class="col-xs-12">
-    <form class="form-horizontal" role="form">
-      <div class="form-group" data-ng-repeat="(key, a) in {{container}}.criteria.actions.POST">
+    <form class="form-horizontal" role="form" name="{{container}}">
+      <div class="form-group" data-ng-repeat="(key, criteria) in {{container}}.criteria.actions.POST"
+        data-ng-class="{ 'has-error has-feedback': criteria.error }">
         {% verbatim %}
-        <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="::a.label | translate"></label>
-        <div class="col-sm-5">
-          <input type="email" class="form-control" id="{{key}}" placeholder="{{a.label}}" data-ng-bind="a.value">
+        <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="::criteria.label | translate"></label>
+        <div class="col-sm-5" data-ng-switch="criteria.type">
+          <div ng-switch-when="select">
+            <select id="{{key}}" name="{{key}}" class="form-control selecter_basic" data-items="criteria.values"
+              data-ng-model="criteria.model"></select>
+          </div>
+          <div ng-switch-default>
+            <input id="{{key}}" name="{{key}}" class="form-control" type="text" placeholder="{{criteria.label}}"
+              data-ng-model="criteria.model"
+              data-ng-required="criteria.required"
+              data-ng-change="validateCriteria(criteria)" />
+          </div>
 
-          <select ng-options="a.values.subItem as item.label for item in a.value track by item.id" ng-model="selected"></select>
-
+          <span id="helpRequired" class="help-block" data-ng-if="criteria.required">This field is required</span>
         </div>
         {% endverbatim %}
       </div>

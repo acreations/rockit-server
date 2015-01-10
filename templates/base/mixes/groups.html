@@ -12,9 +12,24 @@
 
   <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.groups">
     <div class="well criteria-group selectable text-center" data-ng-click="toggleGroup({{container}}, item, '#{{container}}-selected')">
-      <div class="fa fa-6 icon-rockit icon-large"></div>
+      <div class="icon-large">
+        <i class="fa fa-6 icon-rockit"></i>
+      </div>
       <div data-ng-bind="item.association.name"></div>
-      <hr data-ng-class="{ 'active': {{container}}.selection.group == item }" />
+      <hr data-ng-class="{ 'active': {{container}}.selection.group == item && !{{container}}.skipped }" />
     </div>
   </div>
+
+  {% if skip_target %}
+  <div class="col-xs-6 col-xs-4 col-md-2">
+    <div class="well criteria-group selectable text-center" data-ng-click="skip({{container}}, '{{skip_target}}')">
+      <div class="icon-large">
+        <i class="fa fa-angle-double-down"></i>
+      </div>
+      <div>Skip it</div>
+      <hr data-ng-class="{ 'active': {{container}}.skipped }" />
+    </div>
+  </div>
+  {% endif %}
+
 </div>

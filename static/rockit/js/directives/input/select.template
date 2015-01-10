@@ -1,0 +1,1 @@
+<option data-ng-repeat="item in items" value="{{::item.id}}" data-ng-bind="::item.label" data-callback-on-repeat-done></option>

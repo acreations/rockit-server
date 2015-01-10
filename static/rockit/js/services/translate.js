@@ -6,6 +6,9 @@ define([], function () {
       addPart: function (resource) {
         loader.addPart(resource);
         translate.refresh();
+      },
+      t: function (text) {
+        return translate(text);
       }
     };
   }];

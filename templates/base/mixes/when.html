@@ -8,7 +8,7 @@
   </p>
 
   {# Select one of the groups #}
-  {% include 'base/mixes/groups.html' with container='when' %}
+  {% include 'base/mixes/groups.html' with container='when' skip_target='#mix-then' %}
 
   {# Then show selected groups criterias #}
   {% include 'base/mixes/selected.html' with container='when' %}
@@ -16,9 +16,9 @@
   {# Configure the criterias value and save #}
   {% include 'base/mixes/criteria.html' with container='when' %}
 
-  <div class="row margin-top" data-ng-show="when.selection.criteria">
+  <div class="row margin-top" data-ng-show="when.selection.criteria && !when.skipped">
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary btn-block" data-ng-click="scrollTo('#mix-then')">Continue</button>
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="next(when, '#mix-then')">Continue</button>
     </div>
   </div>
 </div>

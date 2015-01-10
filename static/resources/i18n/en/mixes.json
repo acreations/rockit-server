@@ -1,3 +1,6 @@
 {
-  "SwitchBinary": "Switch"
+  "SwitchBinary": "Switch",
+  "select-$toggle": "Toggle",
+  "select-true": "On",
+  "select-false": "Off"
 }

@@ -21,6 +21,7 @@ require.config({
     "angular-translate-loader": "/static/angular-translate-loader-partial/angular-translate-loader-partial.min",
     "jquery": "/static/jquery/dist/jquery.min",
     "domReady": "/static/requirejs-domready/domReady",
+    "selecter": "/static/Selecter/jquery.fs.selecter",
     "toastr": "/static/toastr/toastr.min",
   },
 
@@ -39,6 +40,9 @@ require.config({
     },
     'angular-route': {
       deps: ['angular']
+    },
+    'selecter': {
+      deps: ['jquery']
     },
     'toastr': {
       exports: "toastr"

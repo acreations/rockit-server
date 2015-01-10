@@ -1,4 +1,4 @@
-<div id="mix-finish" class="filler padding-top">
+<div id="mix-finish" class="filler padding-top" data-ng-if="then.saved">
   <div class="page-header">
     <h2>Finish</h2>
   </div>
@@ -8,7 +8,7 @@
   </p>
 
   {# Select one of the groups #}
-  {% include 'base/mixes/groups.html' with container='finish' %}
+  {% include 'base/mixes/groups.html' with container='finish' skip_target='#personalize' %}
 
   {# Then show selected groups criterias #}
   {% include 'base/mixes/selected.html' with container='finish' %}
@@ -16,9 +16,9 @@
   {# Configure the criterias value and save #}
   {% include 'base/mixes/criteria.html' with container='finish' %}
 
-  <div class="row margin-top">
+  <div class="row margin-top" data-ng-show="finish.selection.criteria && !finish.skipped">
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary btn-block" data-ng-click="save()">Save</button>
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="save()">Continue</button>
     </div>
     <div class="col-md-2">
       <button type="button" class="btn btn-block" data-ng-click="scrollTo('#mix-then')">Back</button>

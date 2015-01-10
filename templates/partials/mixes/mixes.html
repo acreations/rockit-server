@@ -18,6 +18,8 @@
 {% include 'base/mixes/when.html' %}
 <div class="filler" />
 {% include 'base/mixes/then.html' %}
-<div class="filler" />
+<div class="filler" data-ng-if="when.saved" />
 {% include 'base/mixes/finish.html' %}
-<div class="filler" />
+<div class="filler" data-ng-if="then.saved" />
+{% include 'base/mixes/personalize.html' %}
+<div class="filler" data-ng-if="finish.saved" />
