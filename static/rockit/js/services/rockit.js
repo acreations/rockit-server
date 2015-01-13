@@ -38,6 +38,15 @@ define([], function () {
         });
 
         return deferred.promise;
+      },
+      save: function (resource, data) {
+        var deferred = q.defer();
+
+        http.post(resource, data).success(function (response) {
+          deferred.resolve(response);
+        });
+
+        return deferred.promise;
       }
     };
   }];

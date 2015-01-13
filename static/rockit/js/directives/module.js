@@ -7,7 +7,8 @@ define(['angular',
   './input/select',
   './navigation/breadcrumb',
   './navigation/navbar',
-  './window/filler'], function (ng, repeatDone, editable, select, breadcrumb, navbar, filler) {
+  './window/filler',
+  './window/modal'], function (ng, repeatDone, editable, select, breadcrumb, navbar, filler, modal) {
   'use strict';
 
   var module = ng.module("rockit.directives", []);
@@ -18,5 +19,6 @@ define(['angular',
     .directive('navbar', navbar)
     .directive('filler', filler)
     .directive('callbackOnRepeatDone', repeatDone)
+    .directive('modal', modal)
     .directive('select', select);
 });

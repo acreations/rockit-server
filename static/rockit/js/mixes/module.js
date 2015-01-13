@@ -7,7 +7,7 @@ define(['angular', './controller', './service', './routes'], function (ng, contr
   var module = ng.module("rockit.mixes", ['rockit']);
 
   return module
-    .service('MixesService', service)
+    .service('MixResource', service)
     .controller('MixesController', controller)
     .config(routes);
 });

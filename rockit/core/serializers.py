@@ -12,6 +12,7 @@ class ActionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model  = models.Action
+        fields = ('url', 'id', 'name', 'description', 'date_added')
 
 class NodeCategorySerializer(serializers.HyperlinkedModelSerializer):
 
@@ -28,3 +29,8 @@ class NodeSerializer(serializers.HyperlinkedModelSerializer):
         model  = models.Node
         read_only_fields = ('uuid','date_added', 'date_modified')
         fields = ('url', 'uuid', 'name', 'association')
+
+class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model  = models.Schedule

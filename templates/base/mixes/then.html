@@ -1,4 +1,4 @@
-<div id="mix-then" class="padding-top" data-ng-if="when.saved">
+<div id="mix-then" class="padding-top" data-ng-show="when.saved">
   <div class="page-header">
     <h2>Then</h2>
   </div>
@@ -18,7 +18,7 @@
 
   <div class="row margin-top" data-ng-show="then.selection.criteria">
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary btn-block" data-ng-click="scrollTo('#mix-finish')">Continue</button>
+      <button type="button" class="btn btn-primary btn-block" data-ng-click="next(then, '#mix-finish')">Continue</button>
     </div>
     <div class="col-md-2">
       <button type="button" class="btn btn-block" data-ng-click="scrollTo('#mix-when')">Back</button>

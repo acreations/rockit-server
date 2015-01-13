@@ -12,6 +12,7 @@ class MixesViewSet(viewsets.ViewSet):
     """
     List all addable mix states in rockit server
     """
+
     def list(self, request):
         """
         Return a list of all addables.
@@ -40,3 +41,20 @@ class MixesViewSet(viewsets.ViewSet):
         mixes = task.wait(timeout=10)
 
         return Response(mixes.get_content())
+
+    def create(self, request):
+        """
+        Create a new mix
+        """
+
+        holder = request.DATA
+
+        action = models.Action.objects.create(name=holder['name'], description=holder['description'])
+
+        for criteria in holder['then']:
+            node = models.Node.objects.get(pk=criteria['id'])
+
+            for command in criteria['values']:
+                models.ActionThen.objects.create(holder=action, target=node, command=command['id'], value=command['value'])
+
+        return Response({'success':True})

@@ -4,3 +4,4 @@ from commands import *
 from mixes import *
 from nodes import *
 from settings import *
+from schedule import *

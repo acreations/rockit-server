@@ -37,7 +37,14 @@ def node_command_update_value(identifier, command_id, value):
 
     if command:
         updateTime = command['data']['updateTime']
-        service.update(command_id, value)
+        updateValue = value
+
+        if updateValue == '$toggle' and command['data']['level']['type'] == 'bool':
+            updateValue = str(not bool(command['data']['level']['value']))
+
+        print updateValue
+
+        service.update(command_id, updateValue)
 
         data = service.data(updateTime)
 

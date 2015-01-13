@@ -1,7 +1,7 @@
 define(['jquery'], function ($) {
   'use strict';
 
-  return ['$scope', '$log', '$timeout', 'MixesService', 'RockitTranslateService', function (scope, log, timeout, service, translate) {
+  return ['$scope', '$log', '$timeout', 'MixResource', 'RockitTranslateService', function (scope, log, timeout, Mix, translate) {
 
     translate.addPart("mixes");
 
@@ -14,11 +14,17 @@ define(['jquery'], function ($) {
       }
 
       if (!container.skipped && container.criteria.actions.POST) {
+        var values = [];
         angular.forEach(container.criteria.actions.POST, function (criteria) {
-          _holder.push({
+          values.push({
             id: criteria.id,
             value: criteria.model
           });
+        });
+
+        _holder.push({
+          id: container.selection.criteria.identifier,
+          values: values
         });
       }
     };
@@ -40,13 +46,17 @@ define(['jquery'], function ($) {
       };
 
       scope.loading = true;
-      service.list().then(
+      Mix.get().then(
         function (data) {
           log.debug('Successful retrieved mixes criteria', data);
 
           scope.when = createContainer('when', data.when);
           scope.then = createContainer('then', data.then);
           scope.finish = createContainer('finish', data.finish);
+          scope.personalize = {
+            'name': '',
+            'description': ''
+          };
         },
         function () {
           log.error('Exception when trying to get associations');
@@ -88,7 +98,7 @@ define(['jquery'], function ($) {
       log.debug('Trying to get detailed info about', container.selection.criteria.identifier);
 
       container.loading.criteria = true;
-      service.getCriterias(item.url).then(
+      Mix.criteria(item.url).then(
         function (data) {
           log.debug('Successfully retrieved detailed info', data);
 
@@ -134,6 +144,14 @@ define(['jquery'], function ($) {
       collectCriterias(post, scope.finish);
 
       log.debug('Trying to save action', post);
+      Mix.save(post).then(
+        function (data) {
+          log.debug('Successfully saved mix', data);
+        },
+        function () {
+          log.error('Failed to save mix');
+        }
+      );
     };
 
     scope.skip = function (container, anchorID) {

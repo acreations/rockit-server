@@ -1,9 +1,9 @@
-define(['angular'], function (angular) {
+define(['angular', 'jquery'], function (angular, $) {
   'use strict';
 
-  return ['$q', '$log', 'RockitConfigs', 'RockitService', 'RockitTranslateService', function (q, log, configs, service, translate) {
+  return ['$q', '$resource', 'RockitConfigs', 'RockitTranslateService', function (q, resource, configs, translate) {
 
-    var serviceUrl = configs.serverUrl + '/mixes';
+    var resourceUrl = configs.serverUrl + '/mixes/';
 
     var _normalizeSelect = function (criteria) {
       var values = [];
@@ -17,7 +17,7 @@ define(['angular'], function (angular) {
               label: translated
             });
 
-            if (values.length == 1) {
+            if (values.length === 1) {
               criteria.model = key;
             }
           });
@@ -34,16 +34,10 @@ define(['angular'], function (angular) {
     translate.addPart("mixes");
 
     return {
-      list: function () {
-        return service.list(serviceUrl);
-      },
-      get: function (resource) {
-        return service.get(resource);
-      },
-      getCriterias: function (resource) {
+      criteria: function (url) {
         var deferred = q.defer();
 
-        service.get(resource).then(
+        resource(url).get().$promise.then(
           function (data) {
 
             if (data.actions.POST) {
@@ -63,6 +57,14 @@ define(['angular'], function (angular) {
 
         return deferred.promise;
       },
+      get: function () {
+        return resource(resourceUrl).get().$promise;
+      },
+      save: function (data) {
+        var Mix = resource(resourceUrl, {}, {}, { stripTrailingSlashes: false });
+
+        return new Mix(data).$save();
+      }
     };
   }];
 });

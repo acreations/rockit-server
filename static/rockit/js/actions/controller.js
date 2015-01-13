@@ -1,31 +1,48 @@
 define([], function () {
   'use strict';
 
-  return ['$scope', '$location', '$routeParams', '$log', 'ActionsService',
-    function (scope, location, routeParams, log, service) {
+  return ['$scope', '$window', '$location', '$routeParams', '$log', 'ActionResource',
+    function (scope, window, location, routeParams, log, Action) {
 
-      scope.getSelectedAction = function () {
-        log.debug('Trying to get selected action', routeParams.url);
+      // Holder for removing action
+      scope.showConfirmRemoveModal = false;
 
-        if(routeParams.url) {
-          service.get(routeParams.url).then(
+      scope.confirmRemove = function (confirmName) {
+        if (confirmName === scope.removeAction.name) {
+          log.debug('Trying to remove action', scope.removeAction);
+
+          Action.delete(scope.removeAction.url).then(
             function (data) {
-              log.debug('Successful retrieved action', data);
+              log.debug('Successful delete action', data);
 
-              scope.selected = data;
+              window.location.reload();
             },
             function () {
-              log.error('Exception when trying to get action');
+              log.error('Exception when trying to delete action');
             }
           );
         } else {
-          log.error('None action url provided');
-          scope.exception = true;
+          log.error('Could not confirm removal', confirmName);
         }
       };
 
+      scope.getSelectedAction = function () {
+        log.debug('Trying to get selected action');
+
+        Action.get(routeParams.url).then(
+          function (data) {
+            log.debug('Successful retrieved action', data);
+
+            scope.selected = data;
+          },
+          function () {
+            log.error('Exception when trying to get action');
+          }
+        );
+      };
+
       scope.listActions = function () {
-        service.list().then(
+        Action.query().then(
           function (data) {
             log.debug('Successful retrieved actions', data);
 
@@ -41,5 +58,21 @@ define([], function () {
         location.path('/actions/' + action.url);
       };
 
+      scope.remove = function (action) {
+        scope.removeAction = action;
+        scope.showConfirmRemoveModal = true;
+      };
+
+      scope.run = function (action) {
+        log.debug('Trying to run action', action);
+        Action.run(action.url).then(
+          function (data) {
+            log.debug('Successful run action', data);
+          },
+          function () {
+            log.error('Exception when trying to run action');
+          }
+        );
+      };
     }];
 });

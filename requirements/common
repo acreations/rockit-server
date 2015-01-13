@@ -6,6 +6,7 @@ PyYAML==3.11
 amqp==1.4.2
 celery==3.1.17
 django-celery==3.1.16
+django-compressor==1.4
 django-cors-headers==0.12
 django-filter==0.7
 django-supervisor==0.3.2

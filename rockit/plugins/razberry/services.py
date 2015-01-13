@@ -30,6 +30,8 @@ class RazberryService(object):
         if namespace and value:
             normalized_value = value
 
+            print value
+
             if bool(value):
                 normalized_value = str(value).lower()
 
@@ -62,7 +64,7 @@ class RazberryService(object):
 
     def _send_request(self, path):
         server_address = SettingsService().get(constants.SETTING_SERVER_ADDRRESS)
-        
+
         self.logger.debug("Razberry server address %s" % server_address)
         self.logger.debug("Request: %s"  % path)
 
@@ -76,7 +78,7 @@ class RazberryService(object):
 
 class SettingsService(object):
     """
-    Settings service is used to get all settings for Razberry plugin. 
+    Settings service is used to get all settings for Razberry plugin.
     Here will also be able to add caching, failsafe lookups etc
     """
 

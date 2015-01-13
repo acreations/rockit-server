@@ -16,6 +16,7 @@ define([
 
   return ng.module("rockit", [
     "ngRoute",
+    "ngResource",
     "pascalprecht.translate",
     "rockit.actions",
     "rockit.directives",

@@ -7,7 +7,7 @@ define(['angular', './controller', './service', './routes'], function (ng, contr
   var module = ng.module("rockit.actions", ['rockit']);
 
   return module
-    .service('ActionsService', service)
+    .service('ActionResource', service)
     .controller('ActionsController', controller)
     .config(routes);
 });
