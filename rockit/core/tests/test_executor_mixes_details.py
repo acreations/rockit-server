@@ -14,6 +14,10 @@ class MixesExecutorTestCase(TestCase):
         self.executor.collect_details('when-schedule', self.holder)
         self._has_following_in_response('rockit-schedule', 'schedule', 'schedule')
 
+    def test_it_should_collect_details_about_when_alarm(self):
+        self.executor.collect_details('when-alarm', self.holder)
+        self._has_following_in_response('rockit-alarm', 'alarm', 'alarm')
+
     def test_it_should_return_empty_action_when_trying_to_get_invalid(self):
         self.executor.collect_details('CRAPPY-FUNCTION', self.holder)
 
