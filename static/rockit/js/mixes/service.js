@@ -1,4 +1,4 @@
-define(['angular', 'jquery'], function (angular, $) {
+define(['angular'], function (angular) {
   'use strict';
 
   return ['$q', '$resource', 'RockitConfigs', 'RockitTranslateService', function (q, resource, configs, translate) {
@@ -27,7 +27,27 @@ define(['angular', 'jquery'], function (angular, $) {
       criteria.values = values;
     };
 
-    var normalize = {
+    var icons = {
+      'when-alarm': 'fa-clock-o',
+      'when-schedule': 'fa-calendar-o'
+    };
+
+    var _normalize = function (containers) {
+      angular.forEach(containers, function (container) {
+        angular.forEach(container, function (group) {
+
+          angular.forEach(group.items, function (item) {
+            item.parent = group;
+            item.icon = icons.hasOwnProperty(item.identifier) ?
+              icons[item.identifier] : 'icon-rockit';
+          });
+        });
+      });
+
+      return containers;
+    };
+
+    var normalizeCriterias = {
       'select': _normalizeSelect,
     };
 
@@ -42,8 +62,8 @@ define(['angular', 'jquery'], function (angular, $) {
 
             if (data.actions.POST) {
               angular.forEach(data.actions.POST, function (criteria) {
-                if (normalize.hasOwnProperty(criteria.type)) {
-                  normalize[criteria.type](criteria);
+                if (normalizeCriterias.hasOwnProperty(criteria.type)) {
+                  normalizeCriterias[criteria.type](criteria);
                 }
               });
             }
@@ -58,7 +78,20 @@ define(['angular', 'jquery'], function (angular, $) {
         return deferred.promise;
       },
       get: function () {
-        return resource(resourceUrl).get().$promise;
+        var deferred = q.defer();
+
+        resource(resourceUrl).get().$promise.then(
+          function (data) {
+
+            deferred.resolve(_normalize(data));
+
+          },
+          function (error) {
+            deferred.reject(error);
+          }
+        );
+
+        return deferred.promise;
       },
       save: function (data) {
         var Mix = resource(resourceUrl, {}, {}, { stripTrailingSlashes: false });

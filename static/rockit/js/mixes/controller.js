@@ -48,7 +48,6 @@ define(['jquery'], function ($) {
 
         angular.forEach(result.groups, function (group) {
           angular.forEach(group.items, function (item) {
-            item.parent = group;
             items.push(item);
           });
         });
@@ -106,7 +105,8 @@ define(['jquery'], function ($) {
     };
 
     scope.onSelectCriteria = function (container, item, anchorID) {
-      container.selection.group = item.parent;
+      scope.toggleGroup(container, item, null);
+
       container.selection.criteria = item;
 
       log.debug('Trying to get detailed info about', container.selection.criteria.identifier);
@@ -117,8 +117,6 @@ define(['jquery'], function ($) {
           log.debug('Successfully retrieved detailed info', data);
 
           container.criteria = data;
-
-          console.log(container);
 
           scope.scrollTo(anchorID);
         },
@@ -140,8 +138,10 @@ define(['jquery'], function ($) {
       // Either select it or toggle it
       container.selection.group = container.selection.group === item ? null : item;
 
-      // Scroll to anchor
-      scope.scrollTo(anchorID);
+      // Scroll to anchor if provided
+      if (anchorID) {
+        scope.scrollTo(anchorID);
+      }
     };
 
     scope.save = function () {
