@@ -10,13 +10,13 @@
     </p>
   </div>
 
-  <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.groups">
-    <div class="well criteria-group selectable text-center" data-ng-click="toggleGroup({{container}}, item, '#{{container}}-selected')">
+  <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.items">
+    <div class="well criteria-group selectable text-center" data-ng-click="onSelectCriteria({{container}}, item, '#{{container}}-criteria')">
       <div class="icon-large">
         <i class="fa fa-6 icon-rockit"></i>
       </div>
-      <div data-ng-bind="item.association.name"></div>
-      <hr data-ng-class="{ 'active': {{container}}.selection.group == item && !{{container}}.skipped }" />
+      <div data-ng-bind="item.name"></div>
+      <hr data-ng-class="{ 'active': {{container}}.selection.criteria == item }" />
     </div>
   </div>
 

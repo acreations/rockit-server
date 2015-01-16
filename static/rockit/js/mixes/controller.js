@@ -37,12 +37,25 @@ define(['jquery'], function ($) {
     scope.getCriterias = function () {
 
       var createContainer = function (id, groups) {
-        return {
+        var result = {
           id: id,
           groups: groups,
           selection: {},
           loading: {}
         };
+
+        var items = [];
+
+        angular.forEach(result.groups, function (group) {
+          angular.forEach(group.items, function (item) {
+            item.parent = group;
+            items.push(item);
+          });
+        });
+
+        result.items = items;
+
+        return result;
       };
 
       scope.loading = true;
@@ -93,6 +106,7 @@ define(['jquery'], function ($) {
     };
 
     scope.onSelectCriteria = function (container, item, anchorID) {
+      container.selection.group = item.parent;
       container.selection.criteria = item;
 
       log.debug('Trying to get detailed info about', container.selection.criteria.identifier);
