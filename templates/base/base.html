@@ -26,6 +26,7 @@
           <link rel="stylesheet" href="/static/Bootflat/bootflat/css/bootflat.min.css">
           <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.css">
           <link rel="stylesheet" href="/static/toastr/toastr.min.css">
+          <link rel="stylesheet" href="/static/clockpicker/dist/bootstrap-clockpicker.min.css">
         {% endblock %}
         {% block internal_css %}
           {% compress css %}
@@ -36,7 +37,7 @@
 
       {% block header_js %}
       <script src="/static/modernizer/modernizr.js"></script>
-      <script src="/static/requirejs/require.js" data-main="{% static 'rockit/js/main.js' %}"></script>
+
       {% endblock %}
   </head>
   <body>
@@ -65,12 +66,6 @@
       </div>
     </div> <!-- /container -->
 
-    {% block js %}
-        <script src="/static/jquery/dist/jquery.min.js"></script>
-      {% block js_bootstrap %}
-        <script src="/static/Bootflat/js/bootstrap.min.js"></script>
-      {% endblock %}
-      {% block js_inline %}{% endblock %}
-    {% endblock %}
+    <script src="/static/requirejs/require.js" data-main="{% static 'rockit/js/main.js' %}"></script>
   </body>
 </html>

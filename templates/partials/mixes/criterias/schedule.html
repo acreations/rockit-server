@@ -1,0 +1,12 @@
+{% verbatim %}
+
+<div class="form-group">
+  <label for="{{key}}" class="label-control">
+    Time
+  </label>
+
+  <div id="{{key}}" class="input-group clockpicker" data-ng-model="criteria.model"></div>
+  <span id="helpRequired" class="text-right help-block" data-ng-if="criteria.required && criteria.error">This field is required</span>
+</div>
+
+{% endverbatim %}

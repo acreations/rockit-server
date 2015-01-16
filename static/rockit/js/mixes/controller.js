@@ -95,11 +95,10 @@ define(['jquery'], function ($) {
 
       container.criteria.hasError = hasError;
 
-      container.saved = true;
-
       log.debug('Container has errors', hasError);
 
       if (!hasError) {
+        container.saved = true;
         scope.scrollTo(anchorID);
       }
     };

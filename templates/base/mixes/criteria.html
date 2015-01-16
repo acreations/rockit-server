@@ -7,26 +7,21 @@
   </div>
 
   <div class="col-xs-12">
-    <form class="form-horizontal" role="form" name="{{container}}">
-      <div class="form-group" data-ng-repeat="(key, criteria) in {{container}}.criteria.actions.POST"
+    <form class="form-inline form-criteria" role="form" name="{{container}}">
+      <div class="well" data-ng-repeat="(key, criteria) in {{container}}.criteria.actions.POST"
         data-ng-class="{ 'has-error has-feedback': criteria.error }">
-        {% verbatim %}
-        <label for="{{key}}" class="col-sm-2 control-label" data-ng-bind="::criteria.label | translate"></label>
-        <div class="col-sm-5" data-ng-switch="criteria.type">
-          <div ng-switch-when="select">
-            <select id="{{key}}" name="{{key}}" class="form-control selecter_basic" data-items="criteria.values"
-              data-ng-model="criteria.model"></select>
+        <p class="heading text-muted" data-ng-bind="::{{container}}.selection.criteria.name"></p>
+        <div data-ng-switch="criteria.type">
+          <div data-ng-switch-when="select">
+            {% include 'partials/mixes/criterias/select.html' %}
           </div>
-          <div ng-switch-default>
-            <input id="{{key}}" name="{{key}}" class="form-control" type="text" placeholder="{{criteria.label}}"
-              data-ng-model="criteria.model"
-              data-ng-required="criteria.required"
-              data-ng-change="validateCriteria(criteria)" />
+          <div data-ng-switch-when="schedule">
+            {% include 'partials/mixes/criterias/schedule.html' %}
           </div>
-
-          <span id="helpRequired" class="help-block" data-ng-if="criteria.required">This field is required</span>
+          <div data-ng-switch-default>
+          {% include 'partials/mixes/criterias/default.html' %}
+          </div>
         </div>
-        {% endverbatim %}
       </div>
     </form>
   </div>

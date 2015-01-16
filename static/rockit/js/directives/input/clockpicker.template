@@ -1,0 +1,4 @@
+<input id="clockpicker-value" type="text" class="form-control" size="5">
+<span class="input-group-addon">
+  <i class="fa fa-clock-o"></i>
+</span>

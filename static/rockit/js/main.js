@@ -20,6 +20,7 @@ require.config({
     "angular-resource": "/static/angular-resource/angular-resource.min",
     "angular-translate": "/static/angular-translate/angular-translate.min",
     "angular-translate-loader": "/static/angular-translate-loader-partial/angular-translate-loader-partial.min",
+    "clockpicker": "/static/clockpicker/dist/jquery-clockpicker.min",
     "jquery": "/static/jquery/dist/jquery.min",
     "domReady": "/static/requirejs-domready/domReady",
     "selecter": "/static/Selecter/jquery.fs.selecter",
@@ -41,6 +42,9 @@ require.config({
     },
     'angular-translate-loader': {
       deps: ['angular-translate']
+    },
+    'clockpicker': {
+      deps: ['jquery']
     },
     'jquery': {
       exports: "jquery"
