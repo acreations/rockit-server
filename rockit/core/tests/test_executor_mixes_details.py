@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rockit.core import executors 
+from rockit.core import executors
 from rockit.core import models
 from rockit.core import holders
 
@@ -10,15 +10,10 @@ class MixesExecutorTestCase(TestCase):
         self.holder = holders.MixesDetailsHolder()
         self.executor = executors.MixesExecutor()
 
-    def test_it_should_collect_details_about_when_button(self):
-        self.executor.collect_details('when-button', self.holder)
-        self._has_following_in_response('name', 'string', 'name')
-
     def test_it_should_collect_details_about_when_schedule(self):
         self.executor.collect_details('when-schedule', self.holder)
-        self._has_following_in_response('cron', 'cron', 'cron')
-        
-    
+        self._has_following_in_response('rockit-schedule', 'schedule', 'schedule')
+
     def test_it_should_return_empty_action_when_trying_to_get_invalid(self):
         self.executor.collect_details('CRAPPY-FUNCTION', self.holder)
 

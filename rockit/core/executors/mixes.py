@@ -1,6 +1,7 @@
 
 class MixesExecutor(object):
 
+    IDENTIFIER_ALARM    = 'when-alarm'
     IDENTIFIER_BUTTON   = 'when-button'
     IDENTIFIER_SCHEDULE = 'when-schedule'
 
@@ -8,6 +9,7 @@ class MixesExecutor(object):
 
     def __init__(self):
         self.details = {
+            self.IDENTIFIER_ALARM: lambda h: self._set_when_alarm_details(h),
             self.IDENTIFIER_BUTTON: lambda h: self._set_when_button_details(h),
             self.IDENTIFIER_SCHEDULE: lambda h: self._set_when_schedule_details(h)
         }
@@ -61,6 +63,7 @@ class MixesExecutor(object):
 
         #self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'Button')
         self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'Schedule')
+        self._add_capabilities(result, self.IDENTIFIER_ALARM, 'Alarm')
 
         return result
 
@@ -75,4 +78,9 @@ class MixesExecutor(object):
         holder.add_post(**self._generate_post('name', 'string', 'name', True, 100))
 
     def _set_when_schedule_details(self, holder):
-        holder.add_post(**self._generate_post('cron', 'cron', 'cron', True))
+        holder.add_post(**self._generate_post('rockit-schedule', 'schedule', 'schedule', True))
+
+    def _set_when_alarm_details(self, holder):
+        holder.add_post(**self._generate_post('rockit-alarm', 'alarm', 'alarm', True))
+
+

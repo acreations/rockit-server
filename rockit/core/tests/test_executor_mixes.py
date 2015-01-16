@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from rockit.core import executors 
+from rockit.core import executors
 from rockit.core import models
 from rockit.core import holders
 
@@ -17,10 +17,11 @@ class MixesExecutorTestCase(TestCase):
 
         self.assertEqual('my_node', when['association']['name'])
 
-        self.assertEqual('when-button', when['items'][0]['identifier'])
-        self.assertEqual('Button', when['items'][0]['name'])
-        self.assertEqual('when-schedule', when['items'][1]['identifier'])
-        self.assertEqual('Schedule', when['items'][1]['name'])
+        self.assertEqual('when-schedule', when['items'][0]['identifier'])
+        self.assertEqual('Schedule', when['items'][0]['name'])
+
+        self.assertEqual('when-alarm', when['items'][1]['identifier'])
+        self.assertEqual('Alarm', when['items'][1]['name'])
 
     def test_it_should_be_able_to_collect_then(self):
         then = self.holder.get_content()['then']

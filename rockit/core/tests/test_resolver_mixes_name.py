@@ -10,9 +10,9 @@ class MixesNameResolverTestCase(TestCase):
         self.association = models.Association.objects.create(name = 'my_node', namespace='test')
         self.holder = holders.MixesHolder(self.association)
 
-        models.Node.objects.create(association=self.association, aid=1, name='NODE_1')
-        models.Node.objects.create(association=self.association, aid=2, name='NODE_2')
-        models.Node.objects.create(association=self.association, aid=3, name='NODE_3')
+        models.Node.objects.create(association=self.association, aid=1, name='NODE_1', uuid="1111")
+        models.Node.objects.create(association=self.association, aid=2, name='NODE_2', uuid="2222")
+        models.Node.objects.create(association=self.association, aid=3, name='NODE_3', uuid="3333")
 
     def test_it_should_correctly_resolve_names_for_when(self):
 
