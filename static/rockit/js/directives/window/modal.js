@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery', 'bootflat'], function ($) {
   'use strict';
 
   return [function () {
@@ -21,17 +21,19 @@ define(['jquery'], function ($) {
       link: function postLink(scope, element, attrs) {
         scope.title = attrs.title;
 
+        var elem = $(element);
+
         scope.$watch(attrs.visible, function (value) {
-          $(element).modal(value === true ? 'show' : 'hide');
+          elem.modal(value === true ? 'show' : 'hide');
         });
 
-        $(element).on('shown.bs.modal', function () {
+        elem.on('shown.bs.modal', function () {
           scope.$apply(function () {
             scope.$parent[attrs.visible] = true;
           });
         });
 
-        $(element).on('hidden.bs.modal', function () {
+        elem.on('hidden.bs.modal', function () {
           scope.$apply(function () {
             scope.$parent[attrs.visible] = false;
           });

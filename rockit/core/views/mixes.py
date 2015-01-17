@@ -1,5 +1,7 @@
 from celery.execute import send_task
 
+from django.db import transaction
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -42,6 +44,7 @@ class MixesViewSet(viewsets.ViewSet):
 
         return Response(mixes.get_content())
 
+    @transaction.commit_on_success
     def create(self, request):
         """
         Create a new mix
