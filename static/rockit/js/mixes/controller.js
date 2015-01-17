@@ -23,7 +23,7 @@ define(['jquery'], function ($) {
         });
 
         _holder.push({
-          id: container.selection.criteria.identifier,
+          id: container.selection.criteria.identifier + '1',
           values: values
         });
       }

@@ -135,3 +135,20 @@ class MixesDetailsHolder(Holder):
 
         self.container[kwargs.get('identifier', 'UNKNOWN_IDENTIFIER')] = data
         self.dirty = True
+
+class MixesValidationHolder(Holder):
+    """
+    Mixes details holder
+    """
+    def __init__(self):
+        super(MixesValidationHolder, self).__init__()
+
+        self.errors = False;
+
+    def add_error(self, id, message):
+        self.errors = True;
+
+        self.append({ id: message })
+
+    def has_errors(self):
+        return self.errors
