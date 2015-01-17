@@ -16,10 +16,10 @@
 </div>
 
 {% include 'base/mixes/when.html' %}
-<div class="filler" />
+<div class="filler"></div>
 {% include 'base/mixes/then.html' %}
-<div class="filler" data-ng-if="when.saved" />
+<div class="filler" data-ng-show="when.saved"></div>
 {% include 'base/mixes/finish.html' %}
-<div class="filler" data-ng-if="then.saved" />
+<div class="filler" data-ng-show="then.saved"></div>
 {% include 'base/mixes/personalize.html' %}
-<div class="filler" data-ng-if="finish.saved" />
+<div class="filler" data-ng-show="finish.saved"></div>

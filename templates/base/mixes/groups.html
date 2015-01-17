@@ -6,11 +6,11 @@
   <div class="col-xs-12">
     <h3>Available criterias</h3>
     <p class="lead">
-    Select one of the plugins that provides when criterias
+    Select one of the item that you want to use
     </p>
   </div>
 
-  <div class="col-xs-6 col-xs-4 col-md-2" data-ng-repeat="item in {{container}}.items">
+  <div class="col-xs-6 col-sm-4 col-md-2" data-ng-repeat="item in {{container}}.items">
     <div class="well criteria-group selectable text-center" data-ng-click="onSelectCriteria({{container}}, item, '#{{container}}-criteria')">
       <div class="icon-large">
         <i class="fa fa-6" data-ng-class="item.icon"></i>
@@ -21,7 +21,7 @@
   </div>
 
   {% if skip_target %}
-  <div class="col-xs-6 col-xs-4 col-md-2">
+  <div class="col-xs-6 col-sm-4 col-md-2">
     <div class="well criteria-group selectable text-center" data-ng-click="skip({{container}}, '{{skip_target}}')">
       <div class="icon-large">
         <i class="fa fa-angle-double-down"></i>
