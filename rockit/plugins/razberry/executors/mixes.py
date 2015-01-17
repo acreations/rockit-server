@@ -4,6 +4,12 @@ from rockit.plugins.razberry import services
 
 class MixesExecutor(object):
 
+    def __init__(self):
+
+        self.supported = {
+            '37': lambda c: self._get_switch_binary_data(c),
+        }
+
     def collect(self, holder):
         """
         Collect capabilities of this executor
@@ -22,14 +28,27 @@ class MixesExecutor(object):
         instances = services.RazberryService().retrieve_instances(identifier)
 
         if instances:
-            self.supported = {
-                '37': lambda h, c: self._generalize_switch_binary(h, c),
-            }
 
             for key, instance in instances.items():
                 self._append_command_details(identifier, holder, instance['commandClasses'])
 
         return holder
+
+    def validate(self, criterias, validation):
+
+        for criteria in criterias:
+            instance = services.RazberryService().retrieve(criteria['id'])
+
+            if instance:
+                identifier = str(instance['id'])
+
+                if identifier in self.supported:
+                    data = self.supported[identifier](instance)
+
+                    if data['required'] and not criteria['value']:
+                        validation.add_error(criteria['id'], 'Criteria value cannot be empty')
+
+        return validation
 
     def _add_capabilities(self, container, identifier, name):
         container.append({
@@ -43,18 +62,16 @@ class MixesExecutor(object):
             command = commandClasses[key]
 
             if command['supported'] and key in self.supported:
-                self.supported[key](holder, command)
+                holder.add_post(**self.supported[key](command))
 
-    def _generalize_switch_binary(self, holder, command):
-        data = {
+    def _get_switch_binary_data(self, command):
+        return {
             'identifier': command['data']['name'].replace('.data',''),
             'type': 'select',
             'required': True,
             'label': command['name'],
             'value': ['$toggle',True,False]
         }
-
-        holder.add_post(**data)
 
     def _get_then_capabilities(self):
         result = list()

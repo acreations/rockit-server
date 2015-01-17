@@ -12,9 +12,20 @@ import uuid
 
 logger = get_task_logger(__name__)
 
+@task(name='rockit.register.action.then')
+def register_action_then(action_id, uuid, criterias):
+    logger.debug('Trying to register for then action')
+
+    action = models.Action.objects.get(pk=action_id)
+    node = models.Node.objects.get(uuid=uuid)
+
+    models.ActionThen.objects.create(holder=action, target=node, command='', value=criterias)
+
+    return True
+
 @task(name='rockit.register.node')
 def register(namespace, node_id):
-    logger.debug("Trying to register node (%s) to rockit network" % node_id)
+    logger.debug('Trying to register node (%s) to rockit network' % node_id)
 
     if namespace and node_id:
         association = models.Association.objects.get(namespace=namespace)
@@ -25,18 +36,18 @@ def register(namespace, node_id):
             node.uuid = uuid.uuid4()
             node.save()
 
-            logger.debug("Node (%s) successfully registered to rockit network" % node_id)
+            logger.debug('Node (%s) successfully registered to rockit network' % node_id)
             return True
         else:
-            logger.warn("Node (%s) has already been created" % node_id)
+            logger.warn('Node (%s) has already been created' % node_id)
     else:
-        logger.warn("Cannot register if assocation/node_id is empty")
+        logger.warn('Cannot register if assocation/node_id is empty')
 
     return False
 
 @task(name='rockit.unregister.node')
 def unregister(uuid):
-    logger.debug("Trying to unregister node (%s) from rockit network" % uuid)
+    logger.debug('Trying to unregister node (%s) from rockit network' % uuid)
 
     if uuid:
         try:
@@ -45,9 +56,9 @@ def unregister(uuid):
 
             return True
         except models.Node.DoesNotExist:
-            logger.warn("Unregister failed. Node (%s) not found" % uuid)
+            logger.warn('Unregister failed. Node (%s) not found' % uuid)
     else:
-        logger.warn("Cannot unregister node if uuid is empty")
+        logger.warn('Cannot unregister node if uuid is empty')
 
     return False
 
@@ -59,11 +70,15 @@ def settings(holder):
 def mixes(holder):
     return executors.MixesExecutor().collect(holder)
 
+@task(name='rockit.mixes.when.validate')
+def mixes_when_validate(identifier, criterias, holder):
+    return executors.MixesExecutor().validate(criterias, holder)
+
 @task(name='rockit.mixes.details')
 def mixes_details(identifier, holder):
     return executors.MixesExecutor().collect_details(identifier, holder)
 
 #@celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
 def scheduler():
-    logger.debug("Check for some task to run")
+    logger.debug('Check for some task to run')
     management.call_command('rockitscheduler')

@@ -143,12 +143,13 @@ class MixesValidationHolder(Holder):
     def __init__(self):
         super(MixesValidationHolder, self).__init__()
 
-        self.errors = False;
-
     def add_error(self, id, message):
-        self.errors = True;
-
         self.append({ id: message })
 
+    def get_errors(self):
+        if self.get_content():
+            return self.get_content()['items']
+        return [];
+
     def has_errors(self):
-        return self.errors
+        return len(self.get_errors()) > 0

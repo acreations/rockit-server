@@ -1,4 +1,6 @@
 
+import time
+
 class MixesExecutor(object):
 
     IDENTIFIER_ALARM    = 'when-alarm'
@@ -12,6 +14,10 @@ class MixesExecutor(object):
             self.IDENTIFIER_ALARM: lambda h: self._set_when_alarm_details(h),
             self.IDENTIFIER_BUTTON: lambda h: self._set_when_button_details(h),
             self.IDENTIFIER_SCHEDULE: lambda h: self._set_when_schedule_details(h)
+        }
+
+        self.validation = {
+            'rockit-alarm': lambda c,h: self._validate_alarm_criteria(c,h)
         }
 
     def collect(self, holder):
@@ -37,6 +43,14 @@ class MixesExecutor(object):
             self.details[identifier](holder)
 
         return holder
+
+    def validate(self, criterias, validation):
+
+        for criteria in criterias:
+            if criteria['id'] in self.validation:
+                self.validation[criteria['id']](criteria, validation)
+
+        return validation
 
     def _add_capabilities(self, container, identifier, name):
         container.append({
@@ -74,6 +88,13 @@ class MixesExecutor(object):
 
         return result
 
+    def is_time_format(self, input):
+        try:
+            time.strptime(input, '%H:%M')
+            return True
+        except ValueError:
+            return False
+
     def _set_when_button_details(self, holder):
         holder.add_post(**self._generate_post('name', 'string', 'name', True, 100))
 
@@ -83,4 +104,8 @@ class MixesExecutor(object):
     def _set_when_alarm_details(self, holder):
         holder.add_post(**self._generate_post('rockit-alarm', 'alarm', 'alarm', True))
 
+    def _validate_alarm_criteria(self, criteria, holder):
+
+        if not self.is_time_format(criteria['value']):
+            holder.add_error(criteria['id'], 'Criteria value does not have a time format')
 

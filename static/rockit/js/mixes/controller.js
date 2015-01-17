@@ -23,8 +23,9 @@ define(['jquery'], function ($) {
         });
 
         _holder.push({
-          id: container.selection.criteria.identifier + '1',
-          values: values
+          id: container.selection.criteria.identifier,
+          entry: container.selection.criteria.parent.association.entry,
+          criterias: values
         });
       }
     };
@@ -156,13 +157,17 @@ define(['jquery'], function ($) {
       collectCriterias(post, scope.then);
       collectCriterias(post, scope.finish);
 
+      scope.errors = false;
+
       log.debug('Trying to save action', post);
       Mix.save(post).then(
         function (data) {
           log.debug('Successfully saved mix', data);
         },
-        function () {
-          log.error('Failed to save mix');
+        function (response) {
+          log.error('Failed to save mix', response);
+
+          scope.errors = response.data;
         }
       );
     };

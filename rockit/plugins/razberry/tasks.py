@@ -1,4 +1,5 @@
 from celery import task
+from celery.execute import send_task
 
 from rockit.plugins.razberry import actions
 from rockit.plugins.razberry import executors
@@ -89,6 +90,15 @@ def settings(holder):
 @task(name='razberry.mixes')
 def mixes(holder):
     return executors.MixesExecutor().collect(holder)
+
+@task(name='razberry.mixes.then.create')
+def mixes_then_create(action_id, identifier, criterias):
+    task  = send_task("rockit.register.action.then", args=[action_id, identifier, criterias])
+    return task.wait(timeout=10)
+
+@task(name='razberry.mixes.then.validate')
+def mixes_then_validate(identifier, criterias, holder):
+    return executors.MixesExecutor().validate(criterias, holder)
 
 @task(name='razberry.mixes.details')
 def mixes_details(identifier, holder):

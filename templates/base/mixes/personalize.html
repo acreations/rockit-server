@@ -29,5 +29,17 @@
     <div class="col-md-2">
       <button type="button" class="btn btn-primary btn-block" data-ng-click="save()" data-ng-disabled="!personalize.name">Save</button>
     </div>
+    <div class="col-xs-12" data-ng-show="errors">
+      <div class="alert alert-danger margin-top" role="alert">
+        <strong>Error when trying to save mix</strong>
+        <ul>
+          <li data-ng-repeat="(idx, error) in errors.detail">
+            <div data-ng-repeat="(key, message) in error">
+              <strong data-ng-bind="::key"></strong> - <span data-ng-bind="::message"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
