@@ -1,3 +1,7 @@
+"""
+Holders are used for communication between tasks/apps
+"""
+
 from holder import *
 from commands import *
 from details import *

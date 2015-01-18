@@ -1,19 +1,14 @@
+
 class Holder(object):
     """
-    A holder is used to encapsulate messages between Rockit and its plugins. It creates a standard way of communication.
+    A holder is used to encapsulate messages between Rockit and its plugins.
+    It creates a standard way of communication.
 
     This object contains common functionality for all holders.
     """
 
     def __init__(self):
         self._content = dict()
-
-    def create_group(self, group):
-        '''
-        Create a new group in content dict
-        '''
-        if group not in self._content:
-            self.reset_group(group)
 
     def append(self, item, group='items', override=False):
         """
@@ -40,6 +35,13 @@ class Holder(object):
         self.reset()
 
         return result
+
+    def create_group(self, group):
+        """
+        Create a new group in content dict
+        """
+        if group not in self._content:
+            self.reset_group(group)
 
     def extend(self, holder):
         """
