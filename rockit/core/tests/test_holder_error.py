@@ -2,10 +2,10 @@ from django.test import TestCase
 
 from rockit.core import holders
 
-class MixesValidationHolderTestCase(TestCase):
+class ErrrorHolderTestCase(TestCase):
 
     def setUp(self):
-        self.holder = holders.MixesValidationHolder()
+        self.holder = holders.ErrorHolder()
 
     def test_it_should_be_able_to_add_error(self):
         self.holder.add_error('error_code', 'error_message');

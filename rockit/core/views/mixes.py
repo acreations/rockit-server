@@ -53,7 +53,7 @@ class MixesViewSet(viewsets.ViewSet):
 
         holder = request.DATA
 
-        validation = holders.MixesValidationHolder()
+        validation = holders.ErrorHolder()
 
         if not self._validate_common(holder, validation):
 
