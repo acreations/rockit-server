@@ -124,6 +124,7 @@ TEMPLATE_DIRS = (
 )
 
 JENKINS_TASKS = ('django_jenkins.tasks.django_tests',)
+TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 PROJECT_APPS = [appname for appname in INSTALLED_APPS if appname.startswith('rockit')]
 
 LOGGING = {
