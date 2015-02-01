@@ -15,6 +15,6 @@ export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
 test -d $LOGDIR || mkdir -p $LOGDIR
-exec /usr/local/bin/gunicorn_django -w $NUM_WORKERS \
-  --user=$USER --group=$GROUP --log-level=debug \
-  --log-file=$LOGFILE -b 0.0.0.0:8001 2>>$LOGFILE
+exec /usr/local/bin/gunicorn -w $NUM_WORKERS \
+  --user=$USER --group=$GROUP --log-level=error \
+  --log-file=$LOGFILE -b 0.0.0.0:8001 2>>$LOGFILE rockit.wsgi:application
