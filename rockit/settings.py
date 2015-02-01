@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djcelery',
     'django_jenkins',
+    'djangobower',
     'corsheaders',
     'rest_framework',
     'compressor',
