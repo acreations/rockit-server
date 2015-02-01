@@ -12,6 +12,6 @@ django-filter==0.7
 django-supervisor==0.3.2
 djangorestframework==2.3.12
 grunt==0.1.1
-gunicorn==18.0
+gunicorn==19.2
 requests==2.2.1
 croniter==0.3.4
