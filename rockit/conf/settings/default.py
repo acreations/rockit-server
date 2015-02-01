@@ -2,7 +2,7 @@ import os
 import datetime
 
 # Base directory
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 # Default security key
 
@@ -25,7 +25,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'compressor',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,17 +34,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djcelery',
     'django_jenkins',
-    'djangobower',
-    'corsheaders',
     'rest_framework',
-    'rockit.core',
-    'rockit.plugins.mailout',
-    'rockit.plugins.picamera',
-    'rockit.plugins.razberry',
-    'rockit.plugins.astral',
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -52,15 +46,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
-)
-
-COMPRESS_PRECOMPILERS = (
-   ('text/less', 'lessc {infile} {outfile}'),
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
@@ -78,9 +67,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, "rockit.sqlite3"),
+        'NAME': os.path.join(BASE_DIR, 'rockit.sqlite3'),
     }
 }
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
@@ -88,17 +78,13 @@ DATABASES = {
 STATIC_URL  = '/static/'
 
 STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "bower_components"),
+    os.path.join(BASE_DIR, 'static'),
 )
-
-COMPRESS_ROOT = 'static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
@@ -132,3 +118,50 @@ LOGGING = {
         }
     }
 }
+
+# Rockit apps
+
+INSTALLED_APPS += (
+    'rockit.core',
+    'rockit.plugins.mailout',
+    'rockit.plugins.picamera',
+    'rockit.plugins.razberry',
+    'rockit.plugins.astral',
+)
+
+# Django bower
+# https://django-bower.readthedocs.org/en/latest
+
+INSTALLED_APPS += (
+    'djangobower',
+)
+
+STATICFILES_FINDERS += (
+    'djangobower.finders.BowerFinder',
+)
+
+BOWER_COMPONENTS_ROOT = BASE_DIR
+
+BOWER_INSTALLED_APPS = ()
+
+# Compressor
+# http://django-compressor.readthedocs.org/en/latest/
+
+INSTALLED_APPS += (
+    'compressor',
+)
+
+STATICFILES_FINDERS += (
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+   ('text/less', 'lessc {infile} {outfile}'),
+)
+
+COMPRESS_ROOT = 'static/'
+
+
+
+
+

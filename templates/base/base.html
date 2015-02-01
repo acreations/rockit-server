@@ -1,5 +1,6 @@
-{% load staticfiles %}
 {% load compress %}
+{% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -21,12 +22,13 @@
                 padding-bottom: 20px;
             }
           </style>
-          <link rel="stylesheet" href="/static/Selecter/jquery.fs.selecter.min.css">
-          <link rel="stylesheet" href="/static/Bootflat/css/bootstrap.min.css">
-          <link rel="stylesheet" href="/static/Bootflat/bootflat/css/bootflat.min.css">
-          <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.css">
-          <link rel="stylesheet" href="/static/toastr/toastr.min.css">
-          <link rel="stylesheet" href="/static/clockpicker/dist/bootstrap-clockpicker.min.css">
+
+          <link rel="stylesheet" href="{% static 'Selecter/jquery.fs.selecter.min.css' %}">
+          <link rel="stylesheet" href="{% static 'Bootflat/css/bootstrap.min.css' %}">
+          <link rel="stylesheet" href="{% static 'Bootflat/bootflat/css/bootflat.min.css' %}">
+          <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+          <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %}">
+          <link rel="stylesheet" href="{% static 'clockpicker/dist/bootstrap-clockpicker.min.css' %}">
         {% endblock %}
         {% block internal_css %}
           {% compress css %}
