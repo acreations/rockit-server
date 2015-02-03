@@ -37,13 +37,14 @@ def register(namespace, node_id):
             node.save()
 
             logger.debug('Node (%s) successfully registered to rockit network' % node_id)
-            return True
+
+            return node.uuid
         else:
             logger.warn('Node (%s) has already been created' % node_id)
     else:
         logger.warn('Cannot register if assocation/node_id is empty')
 
-    return False
+    return None
 
 @task(name='rockit.unregister.node')
 def unregister(uuid):

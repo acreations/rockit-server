@@ -21,14 +21,11 @@ class ActionViewSet(viewsets.ModelViewSet):
 
       then = models.ActionThen.objects.filter(holder=action)
 
-      for criteria in then:
-        node = criteria.target
-
-        update = send_task("%s.node.command.update.value" % node.association.entry, kwargs={
-            'identifier': node.aid,
-            'command_id': criteria.command,
-            'value': criteria.value
+      for item in then:
+        node = item.target
+        task = send_task("%s.mixes.then.run" % node.association.entry, kwargs={
+            'identifier': item.identifier,
             })
-        value = update.wait(timeout=30)
+        value = task.wait(timeout=30)
 
       return Response({'success':True})

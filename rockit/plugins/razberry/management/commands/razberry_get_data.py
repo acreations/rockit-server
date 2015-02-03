@@ -26,5 +26,9 @@ class Command(BaseCommand):
         for device_id in ids:
             node = models.Node.objects.get(device_id=device_id)
 
-            create = send_task("rockit.register.node", args=['rockit.plugins.razberry', node.device_id])
-            result = create.wait(timeout=10)
+            task = send_task("rockit.register.node", args=['rockit.plugins.razberry', node.device_id])
+            uuid = task.wait(timeout=10)
+
+            if uuid:
+                node.uuid = uuid
+                node.save()

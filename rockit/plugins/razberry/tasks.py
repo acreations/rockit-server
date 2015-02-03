@@ -92,9 +92,26 @@ def mixes(holder):
     return executors.MixesExecutor().collect(holder)
 
 @task(name='razberry.mixes.then.create')
-def mixes_then_create(action_id, identifier, criterias):
-    task  = send_task("rockit.register.action.then", args=[action_id, identifier, criterias])
-    return task.wait(timeout=10)
+def mixes_then_create(uuid, criterias):
+
+    if criterias:
+        criteria = criterias[0]
+
+        node = models.Node.objects.get(uuid=uuid)
+        then = models.ActionThen.objects.create(target=node, command=criteria['id'], value=criteria['value'])
+
+        return then.id
+    return None
+
+@task(name='razberry.mixes.then.run')
+def mixes_then_run(identifier):
+
+    then = models.ActionThen.objects.get(id=identifier)
+
+    node_command_update_value(then.target.device_id, then.command, then.value)
+
+    return True
+
 
 @task(name='razberry.mixes.then.validate')
 def mixes_then_validate(identifier, criterias, holder):

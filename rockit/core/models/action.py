@@ -19,8 +19,7 @@ class ActionThen(models.Model):
     """
     holder  = models.ForeignKey(Action)
     target  = models.ForeignKey(Node)
-    command = models.CharField(max_length=200)
-    value   = models.CharField(max_length=100)
+    identifier = models.CharField(max_length = 50)
 
 class Schedule(models.Model):
     """

@@ -1,7 +1,5 @@
 from celery.execute import send_task
 
-from django.db import transaction
-
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -45,7 +43,6 @@ class MixesViewSet(viewsets.ViewSet):
 
         return Response(mixes.get_content())
 
-    @transaction.commit_on_success
     def create(self, request):
         """
         Create a new mix
@@ -57,54 +54,49 @@ class MixesViewSet(viewsets.ViewSet):
 
         if not self._validate_common(holder, validation):
 
-            # Add action class
-            action = models.Action.objects.create(name=holder['name'], description=holder['description'])
-            action.save()
-
             validation = self._validate_container('when', holder['when'], validation)
             validation = self._validate_container('then', holder['then'], validation)
             validation = self._validate_container('finish', holder['finish'], validation)
 
-            # Validate when criterias
-            for container in holder['then']:
-                association = self._get_association(container['entry'], validation)
-
-                if association:
-                    entry = association.entry
-
-                    identifier = self._get_node_uuid(association, container['id'])
-
-                    task  = send_task("%s.mixes.%s.create" % (entry,'then'), args=[action.id, identifier, container['criterias']])
-                    task.wait(timeout=10)
-
-                #for command in criteria['values']:
-                #    models.ActionThen.objects.create(holder=action, target=node, command=command['id'], value=command['value'])
-
             if not validation.has_errors():
 
+                when = self._create_mix('when', holder['when'], validation)
+                then = self._create_mix('then', holder['then'], validation)
+                finish = self._create_mix('finish', holder['finish'], validation)
 
+                action = models.Action.objects.create(name=holder['name'], description=holder['description'])
+
+                for item in then:
+
+                    if item['id']:
+                        node = models.Node.objects.get(uuid=item['uuid'])
+
+                        models.ActionThen.objects.create(holder=action, target=node, identifier=item['id'])
 
                 return Response({'success':False}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({'success': False , "detail": validation.get_errors() }, status=status.HTTP_400_BAD_REQUEST)
 
-    def _create_mix(self, name, holder, action_id):
+    def _create_mix(self, name, holder, validation):
 
-        # Validate when criterias
+        result = []
+
+        # Create then action
         for container in holder:
             association = self._get_association(container['entry'], validation)
 
             if association:
                 entry = association.entry
 
-                identifier = container['id'];
+                uuid = self._get_node_uuid(association, container['id'])
 
-                # Trying lookup node in network, if found, use uuid instead of provided id
+                task  = send_task("%s.mixes.%s.create" % (entry, name), args=[uuid, container['criterias']])
+                result.append({
+                    'id': task.wait(timeout=10),
+                    'uuid': uuid
+                })
 
-                task  = send_task("%s.mixes.%s.create" % (entry,name), args=[action_id, container['id'], container['criterias']])
-
-                # Wait for return validation holder
-                return task.wait(timeout=10)
+        return result
 
     def _get_association(self, entry, validation):
         try:
@@ -122,7 +114,6 @@ class MixesViewSet(viewsets.ViewSet):
             return nodes[0].uuid
 
         return id
-
 
     def _validate_mixes(self, container, holder, validation):
 
@@ -184,8 +175,5 @@ class MixesViewSet(viewsets.ViewSet):
 
         if 'finish' not in holder:
             validation.add_error('finish', 'When container must be provided')
-
-
-
 
         return validation.has_errors()
