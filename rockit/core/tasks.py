@@ -12,17 +12,6 @@ import uuid
 
 logger = get_task_logger(__name__)
 
-@task(name='rockit.register.action.then')
-def register_action_then(action_id, uuid, criterias):
-    logger.debug('Trying to register for then action')
-
-    action = models.Action.objects.get(pk=action_id)
-    node = models.Node.objects.get(uuid=uuid)
-
-    models.ActionThen.objects.create(holder=action, target=node, command='', value=criterias)
-
-    return True
-
 @task(name='rockit.register.node')
 def register(namespace, node_id):
     logger.debug('Trying to register node (%s) to rockit network' % node_id)

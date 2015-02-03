@@ -13,9 +13,25 @@ class Action(models.Model):
     date_added     = models.DateTimeField(auto_now_add=True, blank=True)
     date_modified  = models.DateTimeField(auto_now=True, blank=True)
 
+class ActionFinish(models.Model):
+    """
+    Holder for finish action
+    """
+    holder  = models.ForeignKey(Action)
+    target  = models.ForeignKey(Node)
+    identifier = models.CharField(max_length = 50)
+
 class ActionThen(models.Model):
     """
-    Action that take care of specific task (setter)
+    Holder for then action
+    """
+    holder  = models.ForeignKey(Action)
+    target  = models.ForeignKey(Node)
+    identifier = models.CharField(max_length = 50)
+
+class ActionWhen(models.Model):
+    """
+    Holder for when action is triggered
     """
     holder  = models.ForeignKey(Action)
     target  = models.ForeignKey(Node)
