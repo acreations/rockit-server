@@ -22,8 +22,7 @@ class ActionViewSet(viewsets.ModelViewSet):
       then = models.ActionThen.objects.filter(holder=action)
 
       for item in then:
-        node = item.target
-        task = send_task("%s.mixes.then.run" % node.association.entry, kwargs={
+        task = send_task("%s.mixes.then.run" % item.target.entry, kwargs={
             'identifier': item.identifier,
             })
         value = task.wait(timeout=30)

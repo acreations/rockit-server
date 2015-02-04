@@ -125,10 +125,11 @@ LOGGING = {
 
 INSTALLED_APPS += (
     'rockit.core',
+    'rockit.plugins.alarm',
+    'rockit.plugins.astral',
     'rockit.plugins.mailout',
     'rockit.plugins.picamera',
     'rockit.plugins.razberry',
-    'rockit.plugins.astral',
 )
 
 # Django bower

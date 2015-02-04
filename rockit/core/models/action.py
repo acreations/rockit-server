@@ -18,7 +18,7 @@ class ActionFinish(models.Model):
     Holder for finish action
     """
     holder  = models.ForeignKey(Action)
-    target  = models.ForeignKey(Node)
+    target  = models.ForeignKey(Association)
     identifier = models.CharField(max_length = 50)
 
 class ActionThen(models.Model):
@@ -26,7 +26,7 @@ class ActionThen(models.Model):
     Holder for then action
     """
     holder  = models.ForeignKey(Action)
-    target  = models.ForeignKey(Node)
+    target  = models.ForeignKey(Association)
     identifier = models.CharField(max_length = 50)
 
 class ActionWhen(models.Model):
@@ -34,15 +34,5 @@ class ActionWhen(models.Model):
     Holder for when action is triggered
     """
     holder  = models.ForeignKey(Action)
-    target  = models.ForeignKey(Node)
+    target  = models.ForeignKey(Association)
     identifier = models.CharField(max_length = 50)
-
-class Schedule(models.Model):
-    """
-    Defines a time to tigger events/actions
-    """
-    cron   = models.CharField(max_length=50, blank=True)
-    action = models.ForeignKey(Action)
-    date_next      = models.DateTimeField(blank=True)
-    date_modified  = models.DateTimeField(auto_now=True, blank=True)
-    date_added     = models.DateTimeField(auto_now_add=True, blank=True)

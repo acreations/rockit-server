@@ -66,12 +66,9 @@ class MixesViewSet(viewsets.ViewSet):
 
                 action = models.Action.objects.create(name=holder['name'], description=holder['description'])
 
-                for item in then:
-
-                    if item['id']:
-                        node = models.Node.objects.get(uuid=item['uuid'])
-
-                        models.ActionThen.objects.create(holder=action, target=node, identifier=item['id'])
+                self._save_mix(models.ActionWhen, when)
+                self._save_mix(models.ActionThen, then)
+                self._save_mix(models.ActionFinish, finish)
 
                 return Response({'success':False}, status=status.HTTP_404_NOT_FOUND)
 
@@ -93,6 +90,7 @@ class MixesViewSet(viewsets.ViewSet):
                 task  = send_task("%s.mixes.%s.create" % (entry, name), args=[uuid, container['criterias']])
                 result.append({
                     'id': task.wait(timeout=10),
+                    'association': association,
                     'uuid': uuid
                 })
 
@@ -113,7 +111,15 @@ class MixesViewSet(viewsets.ViewSet):
         if nodes and len(nodes) is 1:
             return nodes[0].uuid
 
+        # Cannot find node with id, send it back
         return id
+
+    def _save_mix(self, model, items):
+
+        for item in items:
+
+            if item['id']:
+                model.objects.create(holder=action, target=item['association'], identifier=item['id'])
 
     def _validate_mixes(self, container, holder, validation):
 
