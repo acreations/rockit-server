@@ -14,12 +14,12 @@ define(['jquery'], function ($) {
       }
 
       if (!container.skipped && container.criteria.actions.POST) {
-        var values = [];
+        var values = {};
         angular.forEach(container.criteria.actions.POST, function (criteria) {
-          values.push({
+          values[criteria.id] = {
             id: criteria.id,
             value: criteria.model
-          });
+          };
         });
 
         _holder.push({

@@ -36,7 +36,7 @@ class MixesExecutor(object):
 
     def validate(self, criterias, validation):
 
-        for criteria in criterias:
+        for key, criteria in criterias.iteritems():
             instance = services.RazberryService().retrieve(criteria['id'])
 
             if instance:

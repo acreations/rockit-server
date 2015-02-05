@@ -7,6 +7,7 @@ from rest_framework import viewsets
 
 from rockit.core import models
 from rockit.core import serializers
+from rockit.core import tasks
 
 class ActionViewSet(viewsets.ModelViewSet):
     """
@@ -17,14 +18,12 @@ class ActionViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ActionSerializer
 
     def update(self, request, pk=None):
-      action = get_object_or_404(self.queryset, pk=pk)
+        action = get_object_or_404(self.queryset, pk=pk)
 
-      then = models.ActionThen.objects.filter(holder=action)
+        then = models.ActionThen.objects.filter(holder=action)
 
-      for item in then:
-        task = send_task("%s.mixes.then.run" % item.target.entry, kwargs={
-            'identifier': item.identifier,
-            })
-        value = task.wait(timeout=30)
+        for item in then:
+            t = send_task("%s.mixes.then.run" % item.target.entry, [item.identifier])
+            value = t.wait(timeout=15)
 
-      return Response({'success':True})
+        return Response({'success':True})

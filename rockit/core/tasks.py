@@ -1,13 +1,11 @@
-from celery import task
-from celery.utils.log import get_task_logger
 
-from django.core import management
+from celery import task
+from celery.execute import send_task
+from celery.utils.log import get_task_logger
 
 from rockit.core import models
 from rockit.core import executors
 
-import datetime
-import celery
 import uuid
 
 logger = get_task_logger(__name__)
@@ -68,7 +66,13 @@ def mixes_when_validate(identifier, criterias, holder):
 def mixes_details(identifier, holder):
     return executors.MixesExecutor().collect_details(identifier, holder)
 
-#@celery.decorators.periodic_task(run_every=datetime.timedelta(seconds=30), ignore_result=True)
-def scheduler():
-    logger.debug('Check for some task to run')
-    management.call_command('rockitscheduler')
+@task(name='rockit.notify.when', ignore_result=True)
+def notify_when(entry, identifier):
+
+    association = models.Association.objects.get(entry=entry)
+    when = models.ActionWhen.objects.get(target=association, identifier=identifier)
+
+    then = models.ActionThen.objects.filter(holder=when.holder)
+
+    for item in then:
+        send_task("%s.mixes.then.run" % item.target.entry, [item.identifier])

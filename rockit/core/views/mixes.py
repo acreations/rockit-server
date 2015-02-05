@@ -66,9 +66,9 @@ class MixesViewSet(viewsets.ViewSet):
 
                 action = models.Action.objects.create(name=holder['name'], description=holder['description'])
 
-                self._save_mix(models.ActionWhen, when)
-                self._save_mix(models.ActionThen, then)
-                self._save_mix(models.ActionFinish, finish)
+                self._save_mix(action, models.ActionWhen.objects, when)
+                self._save_mix(action, models.ActionThen.objects, then)
+                self._save_mix(action, models.ActionFinish.objects, finish)
 
                 return Response({'success':False}, status=status.HTTP_404_NOT_FOUND)
 
@@ -114,12 +114,12 @@ class MixesViewSet(viewsets.ViewSet):
         # Cannot find node with id, send it back
         return id
 
-    def _save_mix(self, model, items):
+    def _save_mix(self, action, model, items):
 
         for item in items:
 
             if item['id']:
-                model.objects.create(holder=action, target=item['association'], identifier=item['id'])
+                created = model.create(holder=action, target=item['association'], identifier=item['id'])
 
     def _validate_mixes(self, container, holder, validation):
 
@@ -151,7 +151,7 @@ class MixesViewSet(viewsets.ViewSet):
 
             if not self._validate_mixes(name, container, validation):
 
-                for criteria in container['criterias']:
+                for key, criteria in container['criterias'].iteritems():
                     self._validate_criteria(container['id'], criteria, validation)
 
                 if not validation.has_errors():

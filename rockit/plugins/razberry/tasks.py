@@ -95,18 +95,21 @@ def mixes(holder):
 def mixes_then_create(uuid, criterias):
 
     if criterias:
-        criteria = criterias[0]
 
-        node = models.Node.objects.get(uuid=uuid)
-        then = models.ActionThen.objects.create(target=node, command=criteria['id'], value=criteria['value'])
+        for key, criteria in criterias.iteritems():
 
-        return then.id
+            node = models.Node.objects.get(uuid=uuid)
+            then = models.ActionThen.objects.create(target=node, command=criteria['id'], value=criteria['value'])
+
+            return then.id
     return None
 
 @task(name='razberry.mixes.then.run')
 def mixes_then_run(identifier):
 
     then = models.ActionThen.objects.get(id=identifier)
+
+    print "Run command %s with value %s" % (then.command, then.value)
 
     node_command_update_value(then.target.device_id, then.command, then.value)
 

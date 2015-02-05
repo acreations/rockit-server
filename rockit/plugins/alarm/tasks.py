@@ -1,8 +1,21 @@
+import celery
+import datetime
 import time
 
 from celery import task
+from celery.execute import send_task
+from celery.utils.log import get_task_logger
 
-from rockit.plugins.alarm import executors
+from croniter import croniter
+
+from datetime import datetime
+from datetime import timedelta
+
+from django.core import management
+
+from rockit.plugins.alarm import models
+
+logger = get_task_logger(__name__)
 
 @task(name='alarm.settings')
 def settings(holder):
@@ -24,32 +37,66 @@ def mixes_details(identifier, holder):
         'required': True
     })
 
-    #holder.add_post(**{
-    #    'identifier': 'alarm-repeat',
-    #    'type': 'checkbox',
-    #    'label': 'Repeat',
-    #    'required': False,
-    #    'value': ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-    #})
+    holder.add_post(**{
+        'identifier': 'alarm-repeat',
+        'type': 'checkbox',
+        'label': 'Repeat',
+        'required': False,
+        'value': ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+    })
 
     return holder
+
+@task(name='alarm.mixes.when.create')
+def mixes_then_create(uuid, criterias):
+
+    if criterias:
+
+        if criterias['alarm']:
+
+            value = criterias['alarm']['value'].split(':')
+
+            hour = value[0]
+            minute = value[1]
+
+            text = "%s %s * * *" % (minute, hour)
+            cron = croniter(text, datetime.now())
+            alarm = models.Alarm.objects.create(cron=text, date_next=cron.get_next(datetime))
+
+        return alarm.id
+    return None
 
 @task(name='alarm.mixes.when.validate')
 def mixes_when_validate(identifier, criterias, holder):
 
     if criterias:
-        criteria = criterias[0]
 
-        if criteria['id'] == "alarm":
+        if criterias['alarm']:
             try:
-                time.strptime(criteria['value'], '%H:%M')
+                time.strptime(criterias['alarm']['value'], '%H:%M')
                 return holder
             except ValueError:
-                holder.add_error(criteria['id'], 'Criteria value does not have a time format')
-
+                holder.add_error(criterias['alarm']['id'], 'Criteria value does not have a time format')
         else:
-            holder.add_error(criteria['id'], 'Unknown id')
+            holder.add_error(criterias['alarm']['id'], 'Unknown id')
     else:
         holder.add_error('alarm', 'Value must be provided')
 
     return holder
+
+@task(ignored_result=True)
+def wakeup(identifier):
+
+    send_task("rockit.notify.when", ['alarm', identifier])
+
+    alarm = models.Alarm.objects.get(id=identifier)
+    cron = croniter(alarm.cron, alarm.date_next)
+
+    alarm.date_next = cron.get_next(datetime)
+    alarm.save()
+
+@celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True)
+def check_alarm():
+    logger.debug('Check for some task to run')
+
+    management.call_command('alarm')
