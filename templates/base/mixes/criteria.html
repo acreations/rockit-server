@@ -7,17 +7,16 @@
   </div>
 
   <div class="criteria col-xs-12" name="{{container}}">
-    <div class="well" data-ng-repeat="(key, criteria) in {{container}}.criteria.actions.POST"
-      data-ng-class="{ 'has-error has-feedback': criteria.error }">
+    <div class="well" data-ng-class="{ 'has-error has-feedback': criteria.error }">
       <div class="col-xs-12">
         <h4 class="text-muted" data-ng-bind="::{{container}}.selection.criteria.name"></h4>
       </div>
-      <div class="clearfix" data-ng-switch="criteria.type">
+      <div class="clearfix" data-ng-switch="::{{container}}.selection.criteria.parent.association.entry">
         <div data-ng-switch-when="alarm">
-          {% include 'partials/mixes/criterias/alarm.html' %}
+          {% include 'partials/mixes/criterias/alarm.html' with container=container %}
         </div>
-        <div data-ng-switch-when="select">
-          {% include 'partials/mixes/criterias/select.html' %}
+        <div data-ng-switch-when="razberry">
+          {% include 'partials/mixes/criterias/razberry.html' with container=container %}
         </div>
         <div data-ng-switch-when="schedule">
           {% include 'partials/mixes/criterias/schedule.html' %}

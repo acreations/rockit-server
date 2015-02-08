@@ -1,9 +1,16 @@
-{% verbatim %}
 
-<label for="{{key}}" class="control-label col-md-2 col-sm-3 col-xs-12">Time</label>
+<label for="{{container}}.criteria.actions.POST['alarm'].id" class="control-label col-md-2 col-sm-3 col-xs-12">Time</label>
 <div class="col-xs-6 col-sm-3 col-md-2">
-  <div id="{{key}}" class="input-group clockpicker" data-ng-model="criteria.model"></div>
-  <span id="helpRequired" class="text-right help-block" data-ng-if="criteria.required && criteria.error">This field is required</span>
+  <div id="{{container}}.criteria.actions.POST['alarm'].id" class="input-group clockpicker"
+    data-ng-model="{{container}}.criteria.actions.POST['alarm'].model"></div>
+  <span id="helpRequired" class="text-right help-block"
+    data-ng-if="{{container}}.criteria.actions.POST['alarm'].required && {{container}}.criteria.actions.POST['alarm']..error">
+      This field is required</span>
 </div>
 
-{% endverbatim %}
+<div class="col-xs-12 margin-top"></div>
+
+<label for="{{container}}.criteria.actions.POST['alarm-repeat'].id" class="control-label col-md-2 col-sm-3 col-xs-12">Repeat</label>
+<div class="col-xs-6 col-sm-3 col-md-2">
+REPEAT
+</div>

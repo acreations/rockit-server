@@ -28,7 +28,7 @@ define(['angular'], function (angular) {
     };
 
     var icons = {
-      'when-alarm': 'fa-clock-o',
+      'alarm': 'fa-clock-o',
       'when-schedule': 'fa-calendar-o'
     };
 

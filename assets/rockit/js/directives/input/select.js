@@ -17,7 +17,11 @@ define(['jquery', 'selecter'], function ($) {
           elem.value = scope.model;
 
           timeout(function () {
-            elem.selecter();
+            elem.selecter({
+              callback: function(value, index) {
+                scope.model = value;
+              }
+            });
           }, 0);
         })
       }

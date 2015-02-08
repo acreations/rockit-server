@@ -1,0 +1,12 @@
+<div data-ng-repeat="(key, criteria) in {{container}}.criteria.actions.POST">
+
+  <div class="clearfix" data-ng-switch="criteria.type">
+    <div data-ng-switch-when="select">
+      {% include 'partials/mixes/criterias/select.html' %}
+    </div>
+    <div data-ng-switch-default>
+      {% include 'partials/mixes/criterias/default.html' %}
+    </div>
+  </div>
+
+</div>
