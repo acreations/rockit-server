@@ -21,7 +21,7 @@ class Command(BaseCommand):
         '''
         Handle it
         '''
-        alarms = models.Alarm.objects.filter(date_next__lte=datetime.now() + timedelta(seconds=25))
+        alarms = models.Alarm.objects.filter(date_next__lte=(datetime.now() + timedelta(seconds=25)))
 
         for alarm in alarms:
             self.logger.debug('Run then actions for this alarm %s' % alarm.id)
