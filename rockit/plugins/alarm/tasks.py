@@ -95,6 +95,8 @@ def wakeup(identifier):
     alarm.date_next = cron.get_next(datetime)
     alarm.save()
 
+    print "Saved: %s" % alarm.date_next
+
 @celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True)
 def check_alarm():
     logger.debug('Check for some task to run')
