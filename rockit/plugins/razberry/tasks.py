@@ -124,7 +124,7 @@ def mixes_then_run(identifier):
     logger = mixes_then_create.get_logger()
 
     try:
-        logger.debug("Trying to run action %s" % instance)
+        logger.debug("Trying to run action %s" % identifier)
 
         instance = models.ActionThen.objects.get(id=identifier)
 
