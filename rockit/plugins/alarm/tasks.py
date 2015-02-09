@@ -84,19 +84,6 @@ def mixes_when_validate(identifier, criterias, holder):
 
     return holder
 
-@task(ignored_result=True)
-def wakeup(identifier):
-
-    send_task("rockit.notify.when", ['alarm', identifier])
-
-    alarm = models.Alarm.objects.get(id=identifier)
-    cron = croniter(alarm.cron, alarm.date_next)
-
-    alarm.date_next = cron.get_next(datetime)
-    alarm.save()
-
-    print "Saved: %s" % alarm.date_next
-
 @celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True)
 def check_alarm():
     logger.debug('Check for some task to run')
