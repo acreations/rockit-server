@@ -77,7 +77,7 @@ class MixesExecutor(object):
 
         #self._add_capabilities(result, self.IDENTIFIER_BUTTON, 'Button')
         self._add_capabilities(result, self.IDENTIFIER_SCHEDULE, 'Schedule')
-        self._add_capabilities(result, self.IDENTIFIER_ALARM, 'Alarm')
+        #self._add_capabilities(result, self.IDENTIFIER_ALARM, 'Alarm')
 
         return result
 
