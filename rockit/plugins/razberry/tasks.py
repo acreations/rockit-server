@@ -104,17 +104,38 @@ def mixes_then_create(uuid, criterias):
             return then.id
     return None
 
-@task(name='razberry.mixes.then.run')
-def mixes_then_run(identifier):
+@task(name='razberry.mixes.then.destroy')
+def mixes_then_destroy(identifier):
+    logger = mixes_then_destroy.get_logger()
 
-    then = models.ActionThen.objects.get(id=identifier)
+    try:
+        logger.debug("Trying to delete instance %s" % identifier)
 
-    print "Run command %s with value %s" % (then.command, then.value)
+        instance = models.ActionThen.objects.get(id=identifier)
+        instance.delete()
 
-    node_command_update_value(then.target.device_id, then.command, then.value)
+    except models.ActionThen.DoesNotExist:
+        logger.warn("Instance does not exist anymore %s" % identifier)
 
     return True
 
+@task(name='razberry.mixes.then.run')
+def mixes_then_run(identifier):
+    logger = mixes_then_create.get_logger()
+
+    try:
+        logger.debug("Trying to run action %s" % instance)
+
+        instance = models.ActionThen.objects.get(id=identifier)
+
+        logger.info("Run command %s with value %s" % (then.command, then.value))
+
+        node_command_update_value(then.target.device_id, then.command, then.value)
+
+    except models.ActionThen.DoesNotExist:
+        logger.warn("Instance does not exist %s" % identifier)
+
+    return True
 
 @task(name='razberry.mixes.then.validate')
 def mixes_then_validate(identifier, criterias, holder):
