@@ -24,9 +24,12 @@ class Command(BaseCommand):
         alarms = models.Alarm.objects.filter(date_next__lte=(datetime.now() + timedelta(seconds=25)))
 
         for alarm in alarms:
-            self.logger.debug('Run then actions for this alarm %s' % alarm.id)
+            self.logger.debug('Run then actions for this alarm %s' % alarm.date_next)
 
-            print alarm.date_next
+            send_task("rockit.notify.when", ['alarm', alarm.id])
 
-            tasks.wakeup.apply_async([alarm.id], eta=alarm.date_next)
+            cron = croniter(alarm.cron, alarm.date_next)
+
+            alarm.date_next = cron.get_next(datetime)
+            alarm.save()
 
