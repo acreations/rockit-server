@@ -128,9 +128,9 @@ def mixes_then_run(identifier):
 
         instance = models.ActionThen.objects.get(id=identifier)
 
-        logger.info("Run command %s with value %s" % (then.command, then.value))
+        logger.info("Run command %s with value %s" % (instance.command, instance.value))
 
-        node_command_update_value(then.target.device_id, then.command, then.value)
+        node_command_update_value(instance.target.device_id, instance.command, instance.value)
 
     except models.ActionThen.DoesNotExist:
         logger.warn("Instance does not exist %s" % identifier)
