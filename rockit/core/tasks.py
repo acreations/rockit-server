@@ -78,4 +78,4 @@ def notify_when(entry, identifier):
         for item in then:
             send_task("%s.mixes.then.run" % item.target.entry, [item.identifier])
     except models.ActionWhen.DoesNotExist:
-        models.ActionFailure.objects.get_or_create(target=association, identifier=identifier, 'when')
+        models.ActionFailure.objects.get_or_create(target=association, identifier=identifier, holder='when')
