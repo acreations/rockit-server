@@ -21,7 +21,7 @@ class Command(BaseCommand):
         '''
         Handle it
         '''
-        alarms = models.Alarm.objects.filter(date_next__lte=(datetime.now() + timedelta(seconds=25)))
+        alarms = models.Alarm.objects.all() #filter(date_next__lte=(datetime.now() + timedelta(seconds=25)))
 
         for alarm in alarms:
             self.logger.debug('Run then actions for this alarm %s' % alarm.date_next)
@@ -32,4 +32,3 @@ class Command(BaseCommand):
 
             alarm.date_next = cron.get_next(datetime)
             alarm.save()
-

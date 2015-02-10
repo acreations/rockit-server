@@ -66,13 +66,16 @@ def mixes_when_validate(identifier, criterias, holder):
 def mixes_details(identifier, holder):
     return executors.MixesExecutor().collect_details(identifier, holder)
 
-@task(name='rockit.notify.when', ignore_result=True)
+@task(name='rockit.notify.when')
 def notify_when(entry, identifier):
 
     association = models.Association.objects.get(entry=entry)
-    when = models.ActionWhen.objects.get(target=association, identifier=identifier)
 
-    then = models.ActionThen.objects.filter(holder=when.holder)
+    try:
+        when = models.ActionWhen.objects.get(target=association, identifier=identifier)
+        then = models.ActionThen.objects.filter(holder=when.holder)
 
-    for item in then:
-        send_task("%s.mixes.then.run" % item.target.entry, [item.identifier])
+        for item in then:
+            send_task("%s.mixes.then.run" % item.target.entry, [item.identifier])
+    except models.ActionWhen.DoesNotExist:
+        models.ActionFailure.objects.get_or_create(target=association, identifier=identifier, 'when')

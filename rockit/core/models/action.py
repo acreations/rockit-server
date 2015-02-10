@@ -36,3 +36,12 @@ class ActionWhen(models.Model):
     holder  = models.ForeignKey(Action)
     target  = models.ForeignKey(Association)
     identifier = models.CharField(max_length = 50)
+
+class ActionFailure(models.Model):
+    """
+    Collects all action that fails
+    """
+    target  = models.ForeignKey(Association)
+    holder  = models.CharField(max_length=200, default='undefined')
+    identifier = models.CharField(max_length = 50)
+    date_added = models.DateTimeField(auto_now_add=True, blank=True)

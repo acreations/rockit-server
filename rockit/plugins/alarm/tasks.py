@@ -23,7 +23,6 @@ def settings(holder):
 
 @task(name='alarm.mixes')
 def mixes(holder):
-
     holder.add_when(**{ 'identifier': 'alarm', 'name': 'Alarm' })
     return holder
 
@@ -84,8 +83,8 @@ def mixes_when_validate(identifier, criterias, holder):
 
     return holder
 
-@celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True)
-def check_alarm():
+@celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True, bind=True)
+def check_alarm(self):
     logger.debug('Check for some task to run')
 
     management.call_command('alarm')
