@@ -24,7 +24,7 @@ def mixes_when_validate(identifier, criterias, holder):
 
 @task(name='rockit.mixes.details')
 def mixes_details(identifier, holder):
-    return executors.MixesExecutor().collect_details(identifier, holder)
+    return None #executors.MixesExecutor().collect_details(identifier, holder)
 
 @task(name='rockit.notify.when')
 def notify_when(entry, identifier):
