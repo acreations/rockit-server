@@ -5,19 +5,48 @@ from rockit.core.models import Association
 
 class AssociationRegisterTestCase(TestCase):
 
-    def test_it_should_register_association(self):
+    def setUp(self):
 
-        data = {
+        self.data = {
             'name': 'test',
-            #'namespace': 'rockit.test',
-            #'entry': 'test'
+            'namespace': 'rockit.test',
+            'entry': 'test'
         }
 
-        register(**data);
+    def test_it_should_register_association(self):
 
-        association = Association.objects.filter(**data)
+        register(**self.data);
 
-        for a in Association.objects.all():
-            print a.namespace
+        association = Association.objects.filter(**self.data)
 
         self.assertEqual(len(association), 1)
+
+    def test_it_should_not_get_any_registration_since_validation_fail_with_no_name(self):
+
+        self.data.pop('name', None)
+
+        register(**self.data)
+
+        association = Association.objects.filter(**self.data)
+
+        self.assertEqual(len(association), 0)
+
+    def test_it_should_not_get_any_registration_since_validation_fail_with_no_namespace(self):
+
+        self.data.pop('namespace', None)
+
+        register(**self.data)
+
+        association = Association.objects.filter(**self.data)
+
+        self.assertEqual(len(association), 0)
+
+    def test_it_should_not_get_any_registration_since_validation_fail_with_no_entry(self):
+
+        self.data.pop('entry', None)
+
+        register(**self.data)
+
+        association = Association.objects.filter(**self.data)
+
+        self.assertEqual(len(association), 0)
