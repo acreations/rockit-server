@@ -9,12 +9,34 @@ import uuid
 def register(**kwargs):
     logger = register.get_logger()
 
-    association, created = models.Association.objects.get_or_create(**kwargs)
+    logger.debug("Trying to register association", kwargs)
 
-    return created
+    errors = dict()
 
+    validate(errors, kwargs, "name")
+    validate(errors, kwargs, "namespace")
+    validate(errors, kwargs, "entry")
+
+    # If no validation error then register
+    if not bool(errors):
+
+        association, created = models.Association.objects.get_or_create(**kwargs)
+
+        return {
+            'success': True,
+            'created': created
+        }
+
+    return {
+        'success': False,
+        'errors': errors
+    }
 
 
 @task(name='rockit.unregister.association')
 def unregister(uuid):
     logger = get_task_logger()
+
+def validate(errors, kwargs, key):
+    if key not in kwargs or not kwargs[key]:
+        errors[key] = "%s cannot be empty" % key
