@@ -1,10 +1,17 @@
+import smtplib
+
 from celery import task
 
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+
 from rockit.plugins.mailout import models
 from rockit.plugins.mailout import serializers
+
+from smtplib import SMTPException
 
 @task(name='mailout.settings')
 def settings(holder):
@@ -67,13 +74,39 @@ def mixes_create(uuid, criterias):
 
 @task(name='mailout.mixes.finish.run')
 def mixes_run(identifier):
+    logger = mixes_run.get_logger()
 
     mailout = models.Mailout.objects.get(id=identifier)
 
-    print mailout.subject
+    sender = "rockitserver@acreations.se"
 
-    return True
+    # Get all receivers
+    receivers = []
 
+    for recipient in models.MailoutRecipient.objects.filter(mailout=mailout):
+        receivers.append(recipient.recipient)
+
+    body = mailout.message.encode('utf-8')
+
+    message = MIMEMultipart()
+
+    message['From'] = sender
+    message['To']   = ','.join(receivers)
+    message['Subject'] = mailout.subject
+    message.attach(MIMEText(body, 'plain'))
+
+    try:
+        smtpObj = smtplib.SMTP("mailout.comhem.se:587")
+        smtpObj.sendmail(sender, receivers, message.as_string())
+        smtpObj.close()
+
+        logger.info("Successfully sent email")
+
+        return True
+    except SMTPException, e:
+        logger.error("Unable to send email %s", e)
+
+    return False
 
 @task(name='mailout.mixes.finish.validate')
 def mixes_validate(identifier, criterias, holder):
