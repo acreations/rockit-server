@@ -4,6 +4,7 @@ import time
 
 from celery import task
 from celery.execute import send_task
+from celery.signals import celeryd_init
 from celery.utils.log import get_task_logger
 
 from croniter import croniter
@@ -16,6 +17,12 @@ from django.core import management
 from rockit.plugins.alarm import models
 
 logger = get_task_logger(__name__)
+
+@celeryd_init.connect()
+def init(conf=None, **kwargs):
+    print 'test'
+
+    send_task("rockit.register.node")
 
 @task(name='alarm.settings')
 def settings(holder):

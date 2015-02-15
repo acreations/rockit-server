@@ -1,4 +1,5 @@
 {
   "RAZBERRY_SERVER": "Server",
-  "SERVICE_TIMEOUT": "Timeout"
+  "SERVICE_TIMEOUT": "Timeout",
+  "RPI_CAMERA_SERVER": "Raspberry PI camera server"
 }
