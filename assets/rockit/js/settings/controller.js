@@ -8,6 +8,7 @@ define([], function () {
 
       scope.onSelectSettings = function (setting) {
         scope.selected = setting;
+        scope.selected.snippet = '';
 
         // Settings has resource
         if (scope.selected.url) {
@@ -16,6 +17,7 @@ define([], function () {
               log.debug('Successful got selected settings', data);
 
               scope.selected.items = data.items;
+              scope.selected.snippet = '/partials/' + scope.selected.entry + '/settings';
             }
           );
         }

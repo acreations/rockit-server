@@ -17,14 +17,7 @@
 				<button type="button" class="btn btn-danger btn-xs pull-right">Disable</button>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal" role="form" data-ng-show="selected.items.length">
-					<div class="form-group" data-ng-repeat="item in selected.items">
-						<label class="col-sm-3 control-label" data-ng-bind="::item.name | translate"></label>
-						<div class="col-sm-8">
-							<p class="form-control-static" data-ng-bind="::item.value"></p>
-						</div>
-					</div>
-				</form>
+				<div data-ng-include="selected.snippet"></div>
 				<p data-ng-show="!selected.items.length">
 					No available settings found
 				</p>

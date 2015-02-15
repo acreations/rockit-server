@@ -1,3 +1,4 @@
+
 from celery.execute import send_task
 
 from django.shortcuts import get_object_or_404
@@ -22,6 +23,7 @@ class SettingViewSet(viewsets.ViewSet):
         for association in models.Association.objects.all():
             result.append({
                 'name': association.name,
+                'entry': association.entry,
                 'url':  reverse_lazy("setting-detail", kwargs={ 'pk': association.id }, request=request)
                 })
 
