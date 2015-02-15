@@ -15,11 +15,14 @@
         <div data-ng-switch-when="alarm">
           {% include 'partials/mixes/criterias/alarm.html' with container=container %}
         </div>
+        <div data-ng-switch-when="mailout">
+          {% include 'partials/mixes/criterias/mailout.html' with container=container %}
+        </div>
         <div data-ng-switch-when="razberry">
           {% include 'partials/mixes/criterias/razberry.html' with container=container %}
         </div>
         <div data-ng-switch-when="schedule">
-          {% include 'partials/mixes/criterias/schedule.html' %}
+          {% include 'partials/mixes/criterias/schedule.html' with container=container %}
         </div>
         <div data-ng-switch-default>
         {% include 'partials/mixes/criterias/default.html' %}

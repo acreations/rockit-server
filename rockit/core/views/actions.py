@@ -32,6 +32,7 @@ class ActionViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
 
         self._notify_plugins(models.ActionThen.objects, instance, 'mixes.then.run')
+        self._notify_plugins(models.ActionFinish.objects, instance, 'mixes.finish.run')
 
         return Response({'success': True})
 
