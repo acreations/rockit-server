@@ -5,6 +5,7 @@ import time
 from celery import task
 from celery.execute import send_task
 from celery.signals import celeryd_init
+from celery.signals import celeryd_after_setup
 from celery.utils.log import get_task_logger
 
 from croniter import croniter
@@ -18,11 +19,16 @@ from rockit.plugins.alarm import models
 
 logger = get_task_logger(__name__)
 
-@celeryd_init.connect()
-def init(conf=None, **kwargs):
-    print 'test'
+@celeryd_after_setup.connect
+def init(sender, instance, **kwargs):
+    send_task('rockit.hey', ['alarm'], countdown=5)
 
-    send_task("rockit.register.node")
+@task(ignore_result=True)
+def hey():
+    logger = hey.get_logger()
+
+    logger.debug('Received a hello back from rockit server')
+
 
 @task(name='alarm.settings')
 def settings(holder):
@@ -90,7 +96,7 @@ def mixes_when_validate(identifier, criterias, holder):
 
     return holder
 
-@celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True, bind=True)
+#@celery.decorators.periodic_task(run_every=timedelta(seconds=30), ignore_result=True, bind=True)
 def check_alarm(self):
     logger.debug('Check for some task to run')
 
