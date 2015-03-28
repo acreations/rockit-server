@@ -5,6 +5,7 @@ Markdown==2.3.1
 PyYAML==3.11
 amqp==1.4.2
 celery==3.1.17
+django-bower==5.0.2
 django-celery==3.1.16
 django-compressor==1.4
 django-cors-headers==0.12

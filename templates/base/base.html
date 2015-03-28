@@ -38,7 +38,6 @@
       {% endblock %}
 
       {% block header_js %}
-      <script src="/static/modernizer/modernizr.js"></script>
 
       {% endblock %}
   </head>
@@ -68,6 +67,8 @@
       </div>
     </div> <!-- /container -->
 
-    <script src="/static/requirejs/require.js" data-main="{% static 'rockit/js/main.js' %}"></script>
+    <script src="/static/modernizer/modernizr.js"></script>
+    <script src="/static/requirejs/require.js"></script>
+    <script src="{% static 'rockit/js/main.js' %}"></script>
   </body>
 </html>

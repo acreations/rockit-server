@@ -29,6 +29,14 @@ def hey():
 
     logger.debug('Received a hello back from rockit server')
 
+    logger.debug('Trying to register alarm')
+
+    send_task('rockit.register.association', kwargs={
+        'name': 'Alarm',
+        'namespace': 'rockit.plugins.alarm',
+        'description': 'Alarm functionality for mixes',
+        'entry': 'alarm'
+    })
 
 @task(name='alarm.settings')
 def settings(holder):

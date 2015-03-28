@@ -1,3 +1,4 @@
+(function() {
 /**
  * Module for handle settings
  */
@@ -11,3 +12,4 @@ define(['angular', './controller', './service', './routes'], function (ng, contr
     .controller('ActionsController', controller)
     .config(routes);
 });
+})();
