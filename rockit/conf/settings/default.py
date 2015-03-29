@@ -4,6 +4,9 @@ import datetime
 # Base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
+# Assign startup time
+STARTUP_TIME = datetime.datetime.now()
+
 # Default security key
 
 SECRET_KEY = 'e04#=m)0nv#^$0z+m#cf2+bm#4y^6se_e%!fm(k+_1#&wiqm2y'

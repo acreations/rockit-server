@@ -6,8 +6,6 @@ from celery.utils.log import get_task_logger
 from rockit.core import models
 from rockit.core import executors
 
-import uuid
-
 logger = get_task_logger(__name__)
 
 @task(name='rockit.settings')

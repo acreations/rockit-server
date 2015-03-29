@@ -3,24 +3,22 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 
-def register_to_rockit(apps, schema_editor):
-
-    Association = apps.get_model("core", "Association")
-
-    association = Association()
-    association.name        = "Alarm"
-    association.description = "Alarm functionality for mixes"
-    association.namespace   = "rockit.plugins.alarm"
-    association.entry       = "alarm"
-    association.addable     = True
-    association.save()
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-      ('core', '0001_initial'),
-    ]
-
     operations = [
-      migrations.RunPython(register_to_rockit),
+        migrations.CreateModel(
+            name='Alarm',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('cron', models.CharField(max_length=50, blank=True)),
+                ('repeat', models.BooleanField(default=False)),
+                ('date_next', models.DateTimeField(blank=True)),
+                ('date_modified', models.DateTimeField(auto_now=True)),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
     ]

@@ -21,7 +21,7 @@ logger = get_task_logger(__name__)
 
 @celeryd_after_setup.connect
 def init(sender, instance, **kwargs):
-    send_task('rockit.hey', ['alarm'], countdown=5)
+    send_task('rockit.hey', ['alarm'])
 
 @task(ignore_result=True)
 def hey():
